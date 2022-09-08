@@ -5,6 +5,7 @@ import '../../constant.dart';
 
 
 class LoginScreen extends StatelessWidget {
+  static String routeName = '/login-screen';
   const LoginScreen({super.key});
 
   @override
@@ -31,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('WT&P System',style: TextStyle(fontWeight: FontWeight.w600,color: Constant.lightColorScheme.primary),),
+                        // Text('WT&P Management System',style: TextStyle(fontWeight: FontWeight.w600,color: Constant.lightColorScheme.primary,  fontSize: 20,),),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 4,
                           child: Column(
@@ -43,12 +44,14 @@ class LoginScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 34, fontWeight: FontWeight.w600),
                               ),
-                              Text(
-                                'Sign in to continue!',
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w600,
-                                    color: Constant.lightColorScheme.tertiary),
+                              FittedBox(
+                                child: Text(
+                                  'WT&P Management System | Sign In',
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w600,
+                                      color: Constant.lightColorScheme.tertiary),
+                                ),
                               ),
                             ],
                           ),
@@ -124,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                                   vertical: 20, horizontal: 20),
                             ),
                             onPressed: () {},
-                            child: const Text('Login', style: TextStyle(color: Colors.white),),
+                            child: const Text('Sign In', style: TextStyle(color: Colors.white),),
                           ),
                         ),
 
