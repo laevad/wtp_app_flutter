@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../home/home_screen.dart';
 import '../../constant.dart';
 
 
@@ -126,7 +127,10 @@ class LoginScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 20),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, HomeScreen.routeName, (Route<dynamic> route) => false);
+                            },
                             child: const Text('Sign In', style: TextStyle(color: Colors.white),),
                           ),
                         ),
