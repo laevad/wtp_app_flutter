@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../constant.dart';
+import '/app/utils/constant.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home-screen';

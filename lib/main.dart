@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'screens/home/home_screen.dart';
-import 'screens/login/login_screen.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:provider/provider.dart';
+
+import '/app/screens/home/home_screen.dart';
+import '/app/screens/login/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,9 +15,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterCleanArchitecture.debugModeOn();
     return MultiProvider(
       providers:  [
-        ChangeNotifierProvider(create: (context) => null,)
+        ChangeNotifierProvider(create: (context) => null)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

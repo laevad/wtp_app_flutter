@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^3.0.1
   provider: ^6.0.3
   animated_bottom_navigation_bar: ^1.1.0
+  flutter_clean_architecture: ^5.0.3
 
 dev_dependencies:
   flutter_test:
