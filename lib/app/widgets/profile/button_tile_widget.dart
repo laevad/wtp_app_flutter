@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../utils/constant.dart';
 
 class ButtonTileWidget extends StatelessWidget {
-  final String title ;
+  final String title;
   final BuildContext context;
   final Function? onTap;
 
-    const ButtonTileWidget({Key? key, required  this.context, required this.title,  this.onTap }) : super(key: key);
+  const ButtonTileWidget(
+      {Key? key, required this.context, required this.title, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +20,32 @@ class ButtonTileWidget extends StatelessWidget {
         hoverColor: Constant.lightColorScheme.primaryContainer,
         focusColor: Constant.lightColorScheme.primaryContainer,
         highlightColor: Constant.lightColorScheme.primaryContainer,
-        onTap: onTap == null ? (){ debugPrint('null here (on tap)');} :()=>onTap!(),
+        onTap: onTap == null
+            ? () {
+                debugPrint('null here (on tap)');
+              }
+            : () => onTap!(),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
-              const Icon(Icons.arrow_forward_ios,color: Colors.grey,)
-            ],),
+              Text(
+                title,
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[600]),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey,
+              )
+            ],
+          ),
         ),
       ),
-    );;
+    );
+    ;
   }
 }

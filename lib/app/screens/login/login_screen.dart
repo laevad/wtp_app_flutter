@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../home/home_screen.dart';
 import '/app/utils/constant.dart';
-
-
+import '../home/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static String routeName = '/login-screen';
@@ -20,14 +18,15 @@ class LoginScreen extends StatelessWidget {
               bodyColor: const Color(0xFF383838)),
           useMaterial3: true),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
               physics: const ClampingScrollPhysics(
-                  parent: NeverScrollableScrollPhysics()),
+                parent: NeverScrollableScrollPhysics(),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
@@ -38,7 +37,6 @@ class LoginScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          // Text('WT&P Management System',style: TextStyle(fontWeight: FontWeight.w600,color: Constant.lightColorScheme.primary,  fontSize: 20,),),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 4,
                             child: Column(
@@ -48,15 +46,18 @@ class LoginScreen extends StatelessWidget {
                                 const Text(
                                   'Welcome,',
                                   style: TextStyle(
-                                      fontSize: 34, fontWeight: FontWeight.w600),
+                                    fontSize: 34,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                                 FittedBox(
                                   child: Text(
                                     'WT&P Management System | Sign In',
                                     style: TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.w600,
-                                        color: Constant.lightColorScheme.tertiary),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w600,
+                                      color: Constant.lightColorScheme.tertiary,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -69,13 +70,15 @@ class LoginScreen extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius:
-                                const BorderRadius.all(Radius.circular(14)),
+                                    const BorderRadius.all(Radius.circular(14)),
                                 borderSide: BorderSide(
-                                    color:
-                                    Theme.of(context).colorScheme.tertiary),
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 20),
+                                vertical: 20,
+                                horizontal: 20,
+                              ),
                               labelText: 'Username',
                             ),
                           ),
@@ -90,13 +93,15 @@ class LoginScreen extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius:
-                                const BorderRadius.all(Radius.circular(14)),
+                                    const BorderRadius.all(Radius.circular(14)),
                                 borderSide: BorderSide(
-                                    color:
-                                    Theme.of(context).colorScheme.tertiary),
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
                               ),
                               contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 20),
+                                vertical: 20,
+                                horizontal: 20,
+                              ),
                               labelText: 'Password',
                             ),
                           ),
@@ -118,28 +123,37 @@ class LoginScreen extends StatelessWidget {
                                   Color(0xFFFDA58E),
                                 ],
                               ),
-                              borderRadius: BorderRadius.all(Radius.circular(14)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(14)),
                             ),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
                                 shadowColor: Colors.transparent,
                                 textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 18),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    vertical: 20, horizontal: 20),
+                                  vertical: 20,
+                                  horizontal: 20,
+                                ),
                               ),
                               onPressed: () {
                                 Navigator.pushNamedAndRemoveUntil(
-                                    context, HomeScreen.routeName, (Route<dynamic> route) => false);
+                                    context,
+                                    HomeScreen.routeName,
+                                    (Route<dynamic> route) => false);
                               },
-                              child: const Text('Sign In', style: TextStyle(color: Colors.white),),
+                              child: const Text(
+                                'Sign In',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
-
                         ],
                       ),
                     ),

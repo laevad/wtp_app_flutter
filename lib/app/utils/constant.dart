@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:wtp_app/app/screens/profile/profile_screen.dart';
 
-class Constant{
-   static ColorScheme lightColorScheme = const ColorScheme(
+import '../screens/profile/profile_screen.dart';
+
+class Constant {
+  static ColorScheme lightColorScheme = const ColorScheme(
     brightness: Brightness.light,
     primary: Color(0xFFf4325c),
     onPrimary: Color(0xFFFFFFFF),
@@ -35,29 +35,45 @@ class Constant{
     shadow: Color(0xFF000000),
   );
 
-   static const List<GButton> _icons = [
-    GButton(icon: Icons.home_outlined, text: 'Home',),
-    GButton(icon: Icons.drive_eta_outlined, text: 'Deliveries',),
-    GButton(icon: Icons.history, text: 'History',),
-    GButton(icon: Icons.settings_outlined, text: 'Settings',),
-   ];
+  static const List<GButton> _icons = [
+    GButton(
+      icon: Icons.home_outlined,
+      text: 'Home',
+    ),
+    GButton(
+      icon: Icons.drive_eta_outlined,
+      text: 'Deliveries',
+    ),
+    GButton(
+      icon: Icons.history,
+      text: 'History',
+    ),
+    GButton(
+      icon: Icons.settings_outlined,
+      text: 'Settings',
+    ),
+  ];
 
-   static const List <Widget> _pages = [
-    Center(child: Text('Hello 1'),),
-    Center(child: Text('Hello 2'),),
-    Center(child: Text('Hello 3'),),
+  static const List<Widget> _pages = [
+    Center(
+      child: Text('Hello 1'),
+    ),
+    Center(
+      child: Text('Hello 2'),
+    ),
+    Center(
+      child: Text('Hello 3'),
+    ),
     ProfileScreen(),
-   ];
+  ];
 
+  static int _selectedIndex = 0;
 
-   static int _selectedIndex = 0 ;
+  static int get selectedIndex => _selectedIndex;
 
-   static int get selectedIndex => _selectedIndex;
+  static List<GButton> get icons => _icons;
 
-   static List<GButton> get icons => _icons;
+  static set setSelectedIndex(int selected) => _selectedIndex = selected;
 
-   static  set setSelectedIndex(int selected) => _selectedIndex = selected;
-
-   static List<Widget> get pages => _pages;
-
+  static List<Widget> get pages => _pages;
 }

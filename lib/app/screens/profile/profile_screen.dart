@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wtp_app/app/screens/profile/profile_controller.dart';
 
 import '../../utils/constant.dart';
 import '../../widgets/profile/button_tile_widget.dart';
+import 'profile_controller.dart';
 
 class ProfileScreen extends View {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -31,28 +31,47 @@ class ProfileScreenState extends ViewState<ProfileScreen, ProfileController> {
           padding: const EdgeInsets.only(left: 16, top: 50, right: 16),
           child: ControlledWidgetBuilder<ProfileController>(
               builder: (context, controller) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // mainAxisSize: MainAxisSize.min,
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisSize: MainAxisSize.min,
+              children: [
+                Column(
                   children: [
-                    Column(children: [
-                      Row(children:  const [
-                        Icon(Icons.person, color: Color(0xFFFB578E),),
-                        SizedBox(width: 8,),
-                        Text('Account', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                      ],),
-                      const Divider(height: 15,thickness: 2,),
-                      ButtonTileWidget(context: context, title: 'Profile'),
-                      ButtonTileWidget(context: context, title: 'Logout',onTap: ()=> controller.logout(),),
-                    ],),
-
+                    Row(
+                      children: const [
+                        Icon(
+                          Icons.person,
+                          color: Color(0xFFFB578E),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          'Account',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      height: 15,
+                      thickness: 2,
+                    ),
+                    ButtonTileWidget(context: context, title: 'Profile'),
+                    ButtonTileWidget(
+                      context: context,
+                      title: 'Logout',
+                      onTap: () => controller.logout(),
+                    ),
                   ],
-                );
-              }
-          ),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );
   }
-
 }

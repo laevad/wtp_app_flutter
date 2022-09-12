@@ -17,22 +17,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterCleanArchitecture.debugModeOn();
     return MultiProvider(
-      providers:  [
-        ChangeNotifierProvider(create: (context) => null)
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => null)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'WT&P Management System',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         initialRoute: LoginScreen.routeName,
         routes: {
-          LoginScreen.routeName : (context) => const LoginScreen(),
-          HomeScreen.routeName : (context) => const HomeScreen(),
+          LoginScreen.routeName: (context) => const LoginScreen(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
         },
       ),
-    ) ;
+    );
   }
 }
-

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:wtp_app/app/screens/home/home_controller.dart';
 
 import '/app/utils/constant.dart';
+import 'home_controller.dart';
 
 class HomeScreen extends View {
   static String routeName = '/home-screen';
@@ -21,13 +21,14 @@ class HomeScreenState extends ViewState<HomeScreen, HomeController> {
   Widget get view {
     return Theme(
       data: ThemeData(
-          colorScheme: Constant.lightColorScheme,
-          textTheme: GoogleFonts.openSansTextTheme().apply(
-              displayColor: const Color(0xFF383838),
-              bodyColor: const Color(0xFF383838)),
-          useMaterial3: true,
+        colorScheme: Constant.lightColorScheme,
+        textTheme: GoogleFonts.openSansTextTheme().apply(
+            displayColor: const Color(0xFF383838),
+            bodyColor: const Color(0xFF383838)),
+        useMaterial3: true,
       ),
-      child:  ControlledWidgetBuilder<HomeController>(builder: (context, controller) {
+      child: ControlledWidgetBuilder<HomeController>(
+        builder: (context, controller) {
           return Scaffold(
             body: Constant.pages[Constant.selectedIndex],
             bottomNavigationBar: Container(
@@ -44,29 +45,31 @@ class HomeScreenState extends ViewState<HomeScreen, HomeController> {
                     Color(0xFFFDA58E),
                   ],
                 ),
-                borderRadius: BorderRadius.only(topRight: Radius.circular(18), topLeft: Radius.circular(18)),
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(18),
+                    topLeft: Radius.circular(18)),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: GNav(
-                  onTabChange: (index){
+                  onTabChange: (index) {
                     debugPrint("selected tab: ${index.toString()}");
                     controller.navigateBottomBar(index);
                   },
                   gap: 8,
                   padding: const EdgeInsets.all(14),
                   backgroundColor: Colors.transparent,
-                  color: Colors.white ,
+                  color: Colors.white,
                   activeColor: Colors.white,
                   tabBackgroundColor: Colors.white38,
-                  tabs:Constant.icons,
+                  tabs: Constant.icons,
                 ),
               ),
             ),
           );
-        },),
-
+        },
+      ),
     );
   }
 }
-
