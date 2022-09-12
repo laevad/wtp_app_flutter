@@ -69,8 +69,9 @@ class LoginScreen extends StatelessWidget {
                             },
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(14)),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(14),
+                                ),
                                 borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.tertiary,
                                 ),
@@ -92,8 +93,9 @@ class LoginScreen extends StatelessWidget {
                             obscureText: true,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(14)),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(14),
+                                ),
                                 borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.tertiary,
                                 ),

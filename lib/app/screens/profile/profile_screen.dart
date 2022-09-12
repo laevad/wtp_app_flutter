@@ -59,7 +59,11 @@ class ProfileScreenState extends ViewState<ProfileScreen, ProfileController> {
                       height: 15,
                       thickness: 2,
                     ),
-                    ButtonTileWidget(context: context, title: 'Profile'),
+                    ButtonTileWidget(
+                      context: context,
+                      title: 'Profile',
+                      onTap: () => controller.editProfile(),
+                    ),
                     ButtonTileWidget(
                       context: context,
                       title: 'Logout',
