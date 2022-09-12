@@ -29,7 +29,7 @@ class HomeScreenState extends ViewState<HomeScreen, HomeController> {
       ),
       child:  ControlledWidgetBuilder<HomeController>(builder: (context, controller) {
           return Scaffold(
-            body: controller.pages[controller.selectedIndex],
+            body: Constant.pages[Constant.selectedIndex],
             bottomNavigationBar: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -44,7 +44,7 @@ class HomeScreenState extends ViewState<HomeScreen, HomeController> {
                     Color(0xFFFDA58E),
                   ],
                 ),
-                borderRadius: BorderRadius.only(topRight: Radius.circular(14), topLeft: Radius.circular(14)),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(18), topLeft: Radius.circular(18)),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -54,17 +54,12 @@ class HomeScreenState extends ViewState<HomeScreen, HomeController> {
                     controller.navigateBottomBar(index);
                   },
                   gap: 8,
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(14),
                   backgroundColor: Colors.transparent,
                   color: Colors.white ,
                   activeColor: Colors.white,
                   tabBackgroundColor: Colors.white38,
-                  tabs: const [
-                    GButton(icon: Icons.home, text: 'Home',),
-                    GButton(icon: Icons.favorite_border, text: 'Likes',),
-                    GButton(icon: Icons.search, text: 'Search',),
-                    GButton(icon: Icons.settings, text: 'Settings',),
-                  ],
+                  tabs:Constant.icons,
                 ),
               ),
             ),
