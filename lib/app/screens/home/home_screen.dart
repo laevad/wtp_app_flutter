@@ -61,7 +61,7 @@ class HomeScreenState extends ViewState<HomeScreen, HomeController> {
                   padding: const EdgeInsets.all(14),
                   backgroundColor: Colors.transparent,
                   color: Colors.white,
-                  activeColor: Colors.white,
+                  activeColor: Colors.black54,
                   tabBackgroundColor: Colors.white38,
                   tabs: Constant.icons,
                 ),

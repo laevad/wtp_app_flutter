@@ -13,7 +13,7 @@ class EditCustomInput extends StatefulWidget {
     this.labelText,
     this.hintText,
     this.isPass = false,
-    required this.showPass,
+    this.showPass = false,
   }) : super(key: key);
 
   @override
@@ -25,37 +25,65 @@ class _EditCustomInputState extends State<EditCustomInput> {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(10),
-      elevation: 3.0, // Set here what you wish!
+      elevation: 1.0, // Set here what you wish!
       shadowColor: Colors.grey,
       child: TextFormField(
+        obscureText: widget.isPass! ? widget.showPass : false,
         autocorrect: false,
         style: TextStyle(color: Constant.lightColorScheme.primary),
         decoration: InputDecoration(
+          suffixIcon: widget.isPass!
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.showPass = !widget.showPass;
+                    });
+                  },
+                  icon: widget.showPass
+                      ? const Icon(Icons.remove_red_eye_outlined)
+                      : const Icon(Icons.remove_red_eye_rounded),
+                  color: Colors.grey,
+                )
+              : null,
           fillColor: Colors.white,
           border: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               Radius.circular(10.0),
             ),
-            borderSide: BorderSide(color: Constant.lightColorScheme.primary),
+            borderSide: BorderSide(
+              color: Constant.lightColorScheme.primaryContainer,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: const BorderRadius.all(
               Radius.circular(10.0),
             ),
-            borderSide: BorderSide(color: Constant.lightColorScheme.primary),
+            borderSide: BorderSide(
+              color: Constant.lightColorScheme.primaryContainer,
+            ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-            borderSide: BorderSide(color: Constant.lightColorScheme.primary),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(5.0),
+            ),
+            borderSide: BorderSide(
+              color: Constant.lightColorScheme.primary,
+            ),
           ),
           filled: true,
-          contentPadding:
-              const EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+          contentPadding: const EdgeInsets.only(
+            bottom: 10.0,
+            left: 10.0,
+            right: 10.0,
+          ),
           labelText: widget.labelText,
           hintText: widget.hintText,
-          labelStyle: TextStyle(color: Constant.lightColorScheme.primary),
+          labelStyle: TextStyle(
+            color: Constant.lightColorScheme.primary.withOpacity(0.7),
+          ),
           hintStyle: TextStyle(
-              color: Constant.lightColorScheme.primary.withOpacity(0.5)),
+            color: Constant.lightColorScheme.primary.withOpacity(0.5),
+          ),
         ),
       ),
     );
