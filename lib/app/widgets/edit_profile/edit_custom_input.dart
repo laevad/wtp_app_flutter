@@ -21,23 +21,6 @@ class EditCustomInput extends StatefulWidget {
 }
 
 class _EditCustomInputState extends State<EditCustomInput> {
-  final _focusNode = FocusNode();
-  _focusListener() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    _focusNode.addListener(_focusListener);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _focusNode.removeListener(_focusListener);
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -46,7 +29,6 @@ class _EditCustomInputState extends State<EditCustomInput> {
       shadowColor: Colors.grey,
       child: TextFormField(
         autocorrect: false,
-        focusNode: _focusNode,
         style: TextStyle(color: Constant.lightColorScheme.primary),
         decoration: InputDecoration(
           fillColor: Colors.white,
