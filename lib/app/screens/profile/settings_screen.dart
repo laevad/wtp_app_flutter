@@ -3,18 +3,19 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/constant.dart';
+import '../../widgets/global_custom/custom_center_appbar.dart';
 import '../../widgets/profile/button_tile_widget.dart';
-import 'profile_controller.dart';
+import 'settings_controller.dart';
 
-class ProfileScreen extends View {
-  const ProfileScreen({Key? key}) : super(key: key);
+class SettingsScreen extends View {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
 }
 
-class ProfileScreenState extends ViewState<ProfileScreen, ProfileController> {
-  ProfileScreenState() : super(ProfileController());
+class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
+  ProfileScreenState() : super(SettingsController());
 
   @override
   Widget get view {
@@ -26,22 +27,14 @@ class ProfileScreenState extends ViewState<ProfileScreen, ProfileController> {
               bodyColor: const Color(0xFF383838)),
           useMaterial3: true),
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 1,
-          centerTitle: true,
-          title: const Text(
-            'Settings',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        appBar: const CustomCenterApp(
+          title: 'Settings',
         ),
         key: globalKey,
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(20),
-            child: ControlledWidgetBuilder<ProfileController>(
+            child: ControlledWidgetBuilder<SettingsController>(
                 builder: (context, controller) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

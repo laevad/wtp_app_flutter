@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:wtp_app/app/screens/history/history_view.dart';
+import 'package:wtp_app/app/screens/home/home_view.dart';
+import 'package:wtp_app/app/screens/my_trip/my_trip_view.dart';
 
-import '../screens/profile/profile_screen.dart';
+import '../screens/profile/settings_screen.dart';
 
 class Constant {
   static ColorScheme lightColorScheme = const ColorScheme(
@@ -42,7 +45,7 @@ class Constant {
     ),
     GButton(
       icon: Icons.drive_eta_outlined,
-      text: 'Deliveries',
+      text: 'My Trips',
     ),
     GButton(
       icon: Icons.history,
@@ -55,16 +58,10 @@ class Constant {
   ];
 
   static const List<Widget> _pages = [
-    Center(
-      child: Text('Hello 1'),
-    ),
-    Center(
-      child: Text('Hello 2'),
-    ),
-    Center(
-      child: Text('Hello 3'),
-    ),
-    ProfileScreen(),
+    HomeView(),
+    MyTripView(),
+    HistoryView(),
+    SettingsScreen(),
   ];
 
   static int _selectedIndex = 0;

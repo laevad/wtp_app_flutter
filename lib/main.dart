@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:provider/provider.dart';
 
-import '/app/screens/edit_profile/edit_profile_view.dart';
-import '/app/screens/home/home_screen.dart';
-import '/app/screens/login/login_screen.dart';
+import 'app/screens/bottom_nav/bottom_nav_view.dart';
+import 'app/screens/edit_profile/edit_profile_view.dart';
+import 'app/screens/history/history_view.dart';
+import 'app/screens/home/home_view.dart';
+import 'app/screens/login/login_screen.dart';
+import 'app/screens/my_trip/my_trip_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +33,11 @@ class MyApp extends StatelessWidget {
         initialRoute: LoginScreen.routeName,
         routes: {
           LoginScreen.routeName: (context) => const LoginScreen(),
-          HomeScreen.routeName: (context) => const HomeScreen(),
+          BottomNavView.routeName: (context) => const BottomNavView(),
           EditProfileView.routeName: (context) => const EditProfileView(),
+          MyTripView.routeName: (context) => const MyTripView(),
+          HistoryView.routeName: (context) => const HistoryView(),
+          HomeView.routeName: (context) => const HomeView(),
         },
       ),
     );

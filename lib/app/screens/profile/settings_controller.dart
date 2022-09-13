@@ -5,7 +5,7 @@ import '../../utils/constant.dart';
 import '../edit_profile/edit_profile_view.dart';
 import '../login/login_screen.dart';
 
-class ProfileController extends Controller {
+class SettingsController extends Controller {
   void logout() {
     Constant.setSelectedIndex = 0;
     Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);

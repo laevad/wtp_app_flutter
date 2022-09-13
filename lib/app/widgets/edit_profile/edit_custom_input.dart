@@ -40,8 +40,8 @@ class _EditCustomInputState extends State<EditCustomInput> {
                     });
                   },
                   icon: widget.showPass
-                      ? const Icon(Icons.remove_red_eye_outlined)
-                      : const Icon(Icons.remove_red_eye_rounded),
+                      ? const Icon(Icons.remove_red_eye_rounded)
+                      : const Icon(Icons.remove_red_eye_outlined),
                   color: Colors.grey,
                 )
               : null,

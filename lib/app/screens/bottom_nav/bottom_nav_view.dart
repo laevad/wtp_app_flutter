@@ -4,18 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '/app/utils/constant.dart';
-import 'home_controller.dart';
+import 'bottom_nav_controller.dart';
 
-class HomeScreen extends View {
-  static String routeName = '/home-screen';
-  const HomeScreen({Key? key}) : super(key: key);
+class BottomNavView extends View {
+  static String routeName = '/bottom-nav-view';
+  const BottomNavView({Key? key}) : super(key: key);
 
   @override
-  HomeScreenState createState() => HomeScreenState();
+  BottomNavViewState createState() => BottomNavViewState();
 }
 
-class HomeScreenState extends ViewState<HomeScreen, HomeController> {
-  HomeScreenState() : super(HomeController());
+class BottomNavViewState extends ViewState<BottomNavView, HomeController> {
+  BottomNavViewState() : super(HomeController());
 
   @override
   Widget get view {

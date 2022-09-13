@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '/app/utils/constant.dart';
-import '../home/home_screen.dart';
+import '../bottom_nav/bottom_nav_view.dart';
 
 class LoginScreen extends StatelessWidget {
   static String routeName = '/login-screen';
@@ -147,7 +147,7 @@ class LoginScreen extends StatelessWidget {
                               onPressed: () {
                                 Navigator.pushNamedAndRemoveUntil(
                                     context,
-                                    HomeScreen.routeName,
+                                    BottomNavView.routeName,
                                     (Route<dynamic> route) => false);
                               },
                               child: const Text(
