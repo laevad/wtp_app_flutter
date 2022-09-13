@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CustomExpandTile extends StatelessWidget {
+class HistoryCustomExpandTile extends StatelessWidget {
   final String? index;
-  const CustomExpandTile({Key? key, this.index}) : super(key: key);
+  const HistoryCustomExpandTile({Key? key, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
         collapsedTextColor: Colors.red,
-        title: Text('sample $index'),
+        title: Text('sample history $index'),
         children: const [
           ListTile(
             leading: CircleAvatar(

@@ -32,54 +32,57 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
         ),
         key: globalKey,
         body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            child: ControlledWidgetBuilder<SettingsController>(
-                builder: (context, controller) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // mainAxisSize: MainAxisSize.min,
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            Icons.person,
-                            color: Color(0xFFFB578E),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Account',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+          child: ControlledWidgetBuilder<SettingsController>(
+              builder: (context, controller) {
+            return Card(
+              elevation: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          children: const [
+                            Icon(
+                              Icons.person,
+                              color: Color(0xFFFB578E),
                             ),
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        height: 15,
-                        thickness: 2,
-                      ),
-                      ButtonTileWidget(
-                        context: context,
-                        title: 'Profile',
-                        onTap: () => controller.editProfile(),
-                      ),
-                      ButtonTileWidget(
-                        context: context,
-                        title: 'Logout',
-                        onTap: () => controller.logout(),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            }),
-          ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              'Account',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
+                        ButtonTileWidget(
+                          context: context,
+                          title: 'Profile',
+                          onTap: () => controller.editProfile(),
+                        ),
+                        ButtonTileWidget(
+                          context: context,
+                          title: 'Logout',
+                          onTap: () => controller.logout(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );

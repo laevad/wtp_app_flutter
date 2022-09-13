@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wtp_app/app/widgets/my_trip/custom_expand_tile.dart';
+import 'package:wtp_app/app/widgets/my_trip/trip_custom_expand_tile.dart';
 
 import '../../utils/constant.dart';
 import '../../widgets/global_custom/custom_center_appbar.dart';
@@ -41,7 +41,7 @@ class MyTripViewState extends ViewState<MyTripView, MyTripController> {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    return CustomExpandTile(index: (index + 1).toString());
+                    return TripCustomExpandTile(index: (index + 1).toString());
                   },
                 ),
               ),

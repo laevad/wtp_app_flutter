@@ -35,11 +35,11 @@ class ButtonTileWidget extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.grey[600]),
+                    color: Constant.lightColorScheme.primary.withOpacity(0.9)),
               ),
-              const Icon(
+              Icon(
                 Icons.arrow_forward_ios,
-                color: Colors.grey,
+                color: Constant.lightColorScheme.primary.withOpacity(0.7),
               )
             ],
           ),
