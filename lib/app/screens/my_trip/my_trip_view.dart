@@ -36,7 +36,7 @@ class MyTripViewState extends ViewState<MyTripView, MyTripController> {
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 1),
                 child: ListView.builder(
-                  itemCount: 12,
+                  itemCount: 1,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
