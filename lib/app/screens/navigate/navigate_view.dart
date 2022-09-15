@@ -35,13 +35,13 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
               body: SingleChildScrollView(
                 child: Column(children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.6,
+                    height: MediaQuery.of(context).size.height / 1.7,
                     child: Container(
                       color: Colors.red,
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 4.3,
+                    height: MediaQuery.of(context).size.height / 3.9,
                     child: const Padding(
                       padding: EdgeInsets.only(
                         top: 10,
