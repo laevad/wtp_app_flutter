@@ -27,54 +27,51 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
           useMaterial3: true),
       child: Scaffold(
         key: globalKey,
+        appBar: AppBar(
+          backgroundColor: Constant.lightColorScheme.primaryContainer,
+          title: Row(
+            children: const [
+              Icon(
+                Icons.person,
+                color: Color(0xFFFB578E),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                'Account',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
         body: SafeArea(
           child: ControlledWidgetBuilder<SettingsController>(
               builder: (context, controller) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Icon(
-                              Icons.person,
-                              color: Color(0xFFFB578E),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Account',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        ButtonTileWidget(
-                          context: context,
-                          title: 'Profile',
-                          onTap: () => controller.editProfile(),
-                        ),
-                        ButtonTileWidget(
-                          context: context,
-                          title: 'Logout',
-                          onTap: () => controller.logout(),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    children: [
+                      ButtonTileWidget(
+                        context: context,
+                        title: 'Profile',
+                        onTap: () => controller.editProfile(),
+                      ),
+                      ButtonTileWidget(
+                        context: context,
+                        title: 'Logout',
+                        onTap: () => controller.logout(),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             );
           }),

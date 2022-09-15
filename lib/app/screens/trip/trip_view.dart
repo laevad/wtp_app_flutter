@@ -36,8 +36,7 @@ class TripViewState extends ViewState<TripView, MyTripController> {
                   body: Column(
                     children: [
                       TabBar(
-                        indicatorColor:
-                            Constant.lightColorScheme.inversePrimary,
+                        indicatorColor: Constant.lightColorScheme.primary,
                         tabs: [
                           Tab(
                             icon: Icon(
@@ -71,7 +70,7 @@ class TripViewState extends ViewState<TripView, MyTripController> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 1),
                             child: ListView.builder(
-                              itemCount: 12,
+                              itemCount: 1,
                               physics: const BouncingScrollPhysics(),
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
