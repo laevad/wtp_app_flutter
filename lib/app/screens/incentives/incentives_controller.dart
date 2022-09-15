@@ -1,6 +1,6 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
-class HistoryController extends Controller {
+class IncentivesController extends Controller {
   @override
   void initListeners() {
     // TODO: implement initListeners

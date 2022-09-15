@@ -59,8 +59,9 @@ class TripCustomExpandTile extends StatelessWidget {
               child: NavRouteWidget(
                 onPressed: () => myTripController.navigate(),
                 btnText: 'Navigate',
-                destination: 'Davao',
-                source: 'CDO',
+                destination:
+                    'Panabo City Seawall and Park, 1, Bunawan, Panabo, Davao del Norte',
+                source: 'Corrales Avenue, Cagayan de Oro, Misamis Oriental',
               ),
             ),
           ]),

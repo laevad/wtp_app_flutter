@@ -36,7 +36,7 @@ class NavRouteWidget extends StatelessWidget {
                   dashLength: 5,
                   lineThickness: 3,
                   direction: Axis.vertical,
-                  lineLength: 70,
+                  lineLength: 100,
                   dashColor: Constant.lightColorScheme.primary,
                 ),
                 Padding(
@@ -63,10 +63,10 @@ class NavRouteWidget extends StatelessWidget {
                           Text(
                             destination!,
                             softWrap: true,
-                            maxLines: 2,
+                            maxLines: 3,
                             style: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              fontSize: 16,
+                              fontSize: 14,
                               color: Constant.lightColorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.bold,
                             ),
@@ -94,10 +94,10 @@ class NavRouteWidget extends StatelessWidget {
                           Text(
                             source!,
                             softWrap: true,
-                            maxLines: 2,
+                            maxLines: 3,
                             style: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              fontSize: 16,
+                              fontSize: 14,
                               color: Constant.lightColorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.bold,
                             ),

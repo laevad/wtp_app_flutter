@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:wtp_app/app/screens/history/history_view.dart';
 import 'package:wtp_app/app/screens/home/home_view.dart';
+import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
 import '../screens/profile/settings_screen.dart';
 import '../screens/trip/trip_view.dart';
@@ -48,8 +48,8 @@ class Constant {
       text: 'Trips',
     ),
     GButton(
-      icon: Icons.history,
-      text: 'History',
+      icon: Icons.monetization_on_outlined,
+      text: 'Incentives',
     ),
     GButton(
       icon: Icons.settings_outlined,
@@ -60,7 +60,7 @@ class Constant {
   static const List<Widget> _pages = [
     HomeView(),
     TripView(),
-    HistoryView(),
+    IncentivesView(),
     SettingsScreen(),
   ];
 

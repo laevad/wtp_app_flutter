@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:provider/provider.dart';
+import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
 import 'app/screens/bottom_nav/bottom_nav_view.dart';
 import 'app/screens/edit_profile/edit_profile_view.dart';
-import 'app/screens/history/history_view.dart';
 import 'app/screens/home/home_view.dart';
 import 'app/screens/login/login_screen.dart';
 import 'app/screens/navigate/navigate_view.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           BottomNavView.routeName: (context) => const BottomNavView(),
           EditProfileView.routeName: (context) => const EditProfileView(),
           TripView.routeName: (context) => const TripView(),
-          HistoryView.routeName: (context) => const HistoryView(),
+          IncentivesView.routeName: (context) => const IncentivesView(),
           HomeView.routeName: (context) => const HomeView(),
           NavigateView.routeName: (context) => const NavigateView(),
         },

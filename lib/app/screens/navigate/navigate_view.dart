@@ -35,21 +35,23 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
               body: SingleChildScrollView(
                 child: Column(children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.5,
+                    height: MediaQuery.of(context).size.height / 1.6,
                     child: Container(
                       color: Colors.red,
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 4.7,
+                    height: MediaQuery.of(context).size.height / 4.3,
                     child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                      child: NavRouteWidget(
-                        btnText: 'Finish',
-                        destination: 'Davao',
-                        source: 'CDO',
+                      padding: EdgeInsets.only(
+                        top: 10,
                       ),
+                      child: NavRouteWidget(
+                          btnText: 'Finish',
+                          destination:
+                              'Panabo City Seawall and Park, 1, Bunawan, Panabo, Davao del Norte',
+                          source:
+                              'Corrales Avenue, Cagayan de Oro, Misamis Oriental'),
                     ),
                   ),
                 ]),

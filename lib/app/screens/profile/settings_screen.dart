@@ -31,7 +31,6 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
           child: ControlledWidgetBuilder<SettingsController>(
               builder: (context, controller) {
             return Card(
-              elevation: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
