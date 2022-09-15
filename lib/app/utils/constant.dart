@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:wtp_app/app/screens/history/history_view.dart';
 import 'package:wtp_app/app/screens/home/home_view.dart';
-import 'package:wtp_app/app/screens/my_trip/my_trip_view.dart';
 
 import '../screens/profile/settings_screen.dart';
+import '../screens/trip/trip_view.dart';
 
 class Constant {
   static ColorScheme lightColorScheme = const ColorScheme(
@@ -45,7 +45,7 @@ class Constant {
     ),
     GButton(
       icon: Icons.drive_eta_outlined,
-      text: 'My Trips',
+      text: 'Trips',
     ),
     GButton(
       icon: Icons.history,
@@ -59,7 +59,7 @@ class Constant {
 
   static const List<Widget> _pages = [
     HomeView(),
-    MyTripView(),
+    TripView(),
     HistoryView(),
     SettingsScreen(),
   ];

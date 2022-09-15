@@ -33,13 +33,14 @@ class ButtonTileWidget extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Constant.lightColorScheme.primary.withOpacity(0.9)),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Constant.lightColorScheme.onSurfaceVariant,
+                ),
               ),
               Icon(
                 Icons.arrow_forward_ios,
-                color: Constant.lightColorScheme.primary.withOpacity(0.7),
+                color: Constant.lightColorScheme.onSurfaceVariant,
               )
             ],
           ),

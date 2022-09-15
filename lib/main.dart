@@ -7,7 +7,8 @@ import 'app/screens/edit_profile/edit_profile_view.dart';
 import 'app/screens/history/history_view.dart';
 import 'app/screens/home/home_view.dart';
 import 'app/screens/login/login_screen.dart';
-import 'app/screens/my_trip/my_trip_view.dart';
+import 'app/screens/navigate/navigate_view.dart';
+import 'app/screens/trip/trip_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,9 +36,10 @@ class MyApp extends StatelessWidget {
           LoginScreen.routeName: (context) => const LoginScreen(),
           BottomNavView.routeName: (context) => const BottomNavView(),
           EditProfileView.routeName: (context) => const EditProfileView(),
-          MyTripView.routeName: (context) => const MyTripView(),
+          TripView.routeName: (context) => const TripView(),
           HistoryView.routeName: (context) => const HistoryView(),
           HomeView.routeName: (context) => const HomeView(),
+          NavigateView.routeName: (context) => const NavigateView(),
         },
       ),
     );

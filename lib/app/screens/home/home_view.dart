@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wtp_app/app/screens/home/home_controller.dart';
 
 import '../../utils/constant.dart';
-import '../../widgets/global_custom/custom_center_appbar.dart';
 
 class HomeView extends View {
   static String routeName = '/Home';
@@ -29,9 +28,6 @@ class HomeViewState extends ViewState<HomeView, HomeController> {
                 useMaterial3: true),
             child: Scaffold(
               key: globalKey,
-              appBar: const CustomCenterApp(
-                title: 'Home',
-              ),
             ),
           );
         },

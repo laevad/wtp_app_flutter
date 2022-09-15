@@ -1,6 +1,9 @@
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:wtp_app/app/utils/constant.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
+import '../../screens/trip/trip_controller.dart';
+import '../../utils/constant.dart';
+import '../global_custom/nav_route_widget.dart';
 
 class TripCustomExpandTile extends StatelessWidget {
   final String? index;
@@ -8,10 +11,11 @@ class TripCustomExpandTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyTripController myTripController =
+        FlutterCleanArchitecture.getController<MyTripController>(context);
     return Card(
       child: ExpansionTile(
           // initiallyExpanded: true,
-          collapsedTextColor: Colors.red,
           title: Container(
             width: 50,
             height: 50,
@@ -24,75 +28,40 @@ class TripCustomExpandTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: const [
-                    CircleAvatar(
+                  children: [
+                    const CircleAvatar(
                       backgroundImage: NetworkImage(
                           'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 18),
-                      child: Text('John Client'),
+                      padding: const EdgeInsets.only(left: 18),
+                      child: Text(
+                        'John Client',
+                        style: TextStyle(
+                            color: Constant.lightColorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w500),
+                      ),
                     )
                   ],
                 ),
-                const Text('47km'),
+                Text(
+                  '47km',
+                  style: TextStyle(
+                    color: Constant.lightColorScheme.onSurfaceVariant,
+                  ),
+                ),
               ],
             ),
           ),
           children: [
-            ListTile(
-              leading: FittedBox(
-                child: Text(
-                  'CDO',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Constant.lightColorScheme.primary,
-                  ),
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: NavRouteWidget(
+                onPressed: () => myTripController.navigate(),
+                btnText: 'Navigate',
+                destination: 'Davao',
+                source: 'CDO',
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20),
-              child: Align(
-                alignment: AlignmentDirectional.topStart,
-                child: DottedLine(
-                  dashLength: 5,
-                  lineThickness: 3,
-                  direction: Axis.vertical,
-                  lineLength: 30,
-                  dashColor: Constant.lightColorScheme.primary,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: FittedBox(
-                child: Text(
-                  'Iligan',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Constant.lightColorScheme.primary,
-                  ),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Constant.lightColorScheme.inversePrimary),
-                  ),
-                  child: Text(
-                    'Navigate',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constant.lightColorScheme.onPrimaryContainer,
-                    ),
-                  ),
-                )
-              ],
             ),
           ]),
     );

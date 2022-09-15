@@ -3,7 +3,6 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/constant.dart';
-import '../../widgets/global_custom/custom_center_appbar.dart';
 import '../../widgets/profile/button_tile_widget.dart';
 import 'settings_controller.dart';
 
@@ -27,9 +26,6 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
               bodyColor: const Color(0xFF383838)),
           useMaterial3: true),
       child: Scaffold(
-        appBar: const CustomCenterApp(
-          title: 'Settings',
-        ),
         key: globalKey,
         body: SafeArea(
           child: ControlledWidgetBuilder<SettingsController>(

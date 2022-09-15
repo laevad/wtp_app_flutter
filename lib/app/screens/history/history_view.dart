@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wtp_app/app/widgets/global_custom/custom_center_appbar.dart';
 import 'package:wtp_app/app/widgets/history/history_custom_expand_tile.dart';
 
 import '../../utils/constant.dart';
@@ -30,20 +29,19 @@ class HistoryViewState extends ViewState<HistoryView, HistoryController> {
                 useMaterial3: true),
             child: Scaffold(
               key: globalKey,
-              appBar: const CustomCenterApp(
-                title: 'History',
-              ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 1),
-                child: ListView.builder(
-                  itemCount: 12,
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return HistoryCustomExpandTile(
-                        index: (index + 1).toString());
-                  },
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 1),
+                  child: ListView.builder(
+                    itemCount: 12,
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      return HistoryCustomExpandTile(
+                          index: (index + 1).toString());
+                    },
+                  ),
                 ),
               ),
             ),
