@@ -7,8 +7,30 @@ import '../login/login_screen.dart';
 
 class SettingsController extends Controller {
   void logout() {
-    Constant.setSelectedIndex = 0;
-    Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);
+    showDialog(
+      context: getContext(),
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content:
+              const Text('Would you really want to log out from this page?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(getContext());
+                },
+                child: const Text('Cancel')),
+            TextButton(
+                onPressed: () {
+                  Constant.setSelectedIndex = 0;
+                  Navigator.pushReplacementNamed(
+                      getContext(), LoginScreen.routeName);
+                },
+                child: const Text('Log out')),
+          ],
+        );
+      },
+    );
   }
 
   void editProfile() {
