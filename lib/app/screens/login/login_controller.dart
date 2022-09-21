@@ -5,7 +5,9 @@ import 'login_presenter.dart';
 
 class LoginController extends Controller {
   LoginPresenter? loginPresenter;
+  bool? _isAuth;
   AuthToken? _authToken;
+
   AuthToken? get getAuthToken => _authToken;
 
   LoginController(loginDetailsRepository)
@@ -14,6 +16,7 @@ class LoginController extends Controller {
 
   @override
   void initListeners() {
+    loginPresenter?.isAuth();
     loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) {
       print("auth on next");
       _authToken = loginDetails;
@@ -27,10 +30,28 @@ class LoginController extends Controller {
       print("auth on error");
       print(e);
     };
+
+    loginPresenter!.isAuthOnNext = (bool result) async {
+      print("isAUTH on next");
+      _isAuth = result;
+      print(result);
+      refreshUI();
+    };
+    loginPresenter!.isAuthOnComplete = () {
+      print("is-auth on error");
+    };
+    loginPresenter!.isAuthOnError = (e) {
+      print("is auth on error");
+      print(e);
+    };
     refreshUI();
   }
 
   login({required String? email, required String? pass}) async {
     loginPresenter!.login(email: email, password: pass);
+  }
+
+  isAuth() async {
+    loginPresenter?.isAuth();
   }
 }

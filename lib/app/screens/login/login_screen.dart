@@ -15,7 +15,7 @@ class LoginScreen extends View {
 }
 
 class LoginScreenState extends ViewState<LoginScreen, LoginController> {
-  LoginScreenState() : super(LoginController(DataLoginDetailsRepository()));
+  LoginScreenState() : super(LoginController(DataAuthRepository()));
 
   @override
   Widget get view => ControlledWidgetBuilder<LoginController>(
@@ -174,6 +174,10 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {},
+                                  child: const Text("is auth"),
                                 ),
                               ],
                             ),

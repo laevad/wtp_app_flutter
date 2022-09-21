@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:provider/provider.dart';
 import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
 import 'app/screens/bottom_nav/bottom_nav_view.dart';
@@ -21,26 +20,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterCleanArchitecture.debugModeOn();
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => null)],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'WT&P Management System',
-        theme: ThemeData(
-          primaryColor: Colors.redAccent,
-          primaryColorDark: Colors.red,
-        ),
-        initialRoute: LoginScreen.routeName,
-        routes: {
-          LoginScreen.routeName: (context) => const LoginScreen(),
-          BottomNavView.routeName: (context) => const BottomNavView(),
-          EditProfileView.routeName: (context) => const EditProfileView(),
-          TripView.routeName: (context) => const TripView(),
-          IncentivesView.routeName: (context) => const IncentivesView(),
-          HomeView.routeName: (context) => const HomeView(),
-          NavigateView.routeName: (context) => const NavigateView(),
-        },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'WT&P Management System',
+      theme: ThemeData(
+        primaryColor: Colors.redAccent,
+        primaryColorDark: Colors.red,
       ),
+      initialRoute: LoginScreen.routeName,
+      routes: {
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        BottomNavView.routeName: (context) => const BottomNavView(),
+        EditProfileView.routeName: (context) => const EditProfileView(),
+        TripView.routeName: (context) => const TripView(),
+        IncentivesView.routeName: (context) => const IncentivesView(),
+        HomeView.routeName: (context) => const HomeView(),
+        NavigateView.routeName: (context) => const NavigateView(),
+      },
     );
   }
 }
