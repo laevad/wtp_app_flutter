@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsFlutterBinding.ensureInitialized();
     FlutterCleanArchitecture.debugModeOn();
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => null)],
