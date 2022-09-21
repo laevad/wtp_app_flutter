@@ -24,6 +24,7 @@ class LoginController extends Controller {
     };
 
     loginPresenter!.getAuthTokenOnError = (e) {
+      print("auth on error");
       print(e);
     };
     refreshUI();

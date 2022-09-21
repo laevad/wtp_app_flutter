@@ -17,7 +17,7 @@ class DataLoginDetailsRepository extends AuthRepository {
     if (response.statusCode == 200 || response.statusCode == 401) {
       return AuthToken.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception("Error Occurred");
+      throw Exception;
     }
   }
 }
