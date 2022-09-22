@@ -175,10 +175,6 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                     ),
                                   ),
                                 ),
-                                ElevatedButton(
-                                  onPressed: () async {},
-                                  child: const Text("is auth"),
-                                ),
                               ],
                             ),
                           ),

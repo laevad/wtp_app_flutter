@@ -45,9 +45,6 @@ class BottomNavViewState extends ViewState<BottomNavView, HomeController> {
                     Color(0xFFFDA58E),
                   ],
                 ),
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(18),
-                    topLeft: Radius.circular(18)),
               ),
               child: Padding(
                 padding:
