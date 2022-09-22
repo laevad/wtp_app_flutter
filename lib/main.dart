@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'app/screens/bottom_nav/bottom_nav_view.dart';
 import 'app/screens/edit_profile/edit_profile_view.dart';
@@ -27,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     FlutterCleanArchitecture.debugModeOn();
     return MaterialApp(
+      builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
       title: 'WT&P Management System',
       theme: ThemeData(

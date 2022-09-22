@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:wtp_app/app/screens/settings/setting_presenter.dart';
 
+import '../../utils/constant.dart';
 import '../edit_profile/edit_profile_view.dart';
 import '../login/login_screen.dart';
 
@@ -25,6 +27,7 @@ class SettingsController extends Controller {
                 child: const Text('Cancel')),
             TextButton(
                 onPressed: () async {
+                  EasyLoading.show(status: 'loading...');
                   presenter.logout();
                 },
                 child: const Text('Log out')),
@@ -40,13 +43,16 @@ class SettingsController extends Controller {
 
   @override
   void initListeners() {
+    Constant.configLoading();
     presenter.logoutOnNext = () {
       print("logout on next");
       refreshUI();
     };
     presenter.logoutOnComplete = () {
-      Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);
       print("logout on complete");
+      EasyLoading.dismiss();
+      Constant.setSelectedIndex = 0;
+      Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);
     };
     presenter.logoutOnError = (e) {
       print("logout on error");
@@ -55,7 +61,9 @@ class SettingsController extends Controller {
       ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
       ScaffoldMessenger.of(getContext()).showSnackBar(
           SnackBar(content: Text("Error: ${e.toString()}, Please try again")));
+      EasyLoading.dismiss();
     };
+
     refreshUI();
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:wtp_app/app/screens/home/home_view.dart';
 import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
@@ -73,4 +74,21 @@ class Constant {
   static set setSelectedIndex(int selected) => _selectedIndex = selected;
 
   static List<Widget> get pages => _pages;
+
+  static void configLoading() {
+    EasyLoading.instance
+      ..displayDuration = const Duration(milliseconds: 900)
+      ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..indicatorSize = 45.0
+      ..radius = 10.0
+      ..progressColor = Constant.lightColorScheme.onPrimaryContainer
+      ..backgroundColor = Constant.lightColorScheme.primary
+      ..indicatorColor = Colors.white
+      ..textColor = Colors.white
+      ..maskColor = Constant.lightColorScheme.primary.withOpacity(0.5)
+      ..userInteractions = false
+      ..dismissOnTap = false;
+    // ..customAnimation = CustomAnimation();
+  }
 }

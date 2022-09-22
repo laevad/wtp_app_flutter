@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../domain/entities/auth_token.dart';
+import '../../utils/constant.dart';
 import '../bottom_nav/bottom_nav_view.dart';
 import 'login_presenter.dart';
 
@@ -21,6 +23,7 @@ class LoginController extends Controller {
 
   @override
   void initListeners() {
+    Constant.configLoading();
     loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) {
       print("auth on next");
       _authToken = loginDetails;
@@ -28,6 +31,7 @@ class LoginController extends Controller {
     };
     loginPresenter!.getAuthTokenOnComplete = () {
       print("auth on complete");
+      EasyLoading.dismiss();
       Navigator.pushNamedAndRemoveUntil(getContext(), BottomNavView.routeName,
           (Route<dynamic> route) => false);
     };
@@ -39,13 +43,13 @@ class LoginController extends Controller {
         ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
         ScaffoldMessenger.of(getContext()).showSnackBar(
             const SnackBar(content: Text('Email & Pass field is required')));
-      }
-      if (emailController.text.isEmpty && passwordController.text.isNotEmpty) {
+      } else if (emailController.text.isEmpty &&
+          passwordController.text.isNotEmpty) {
         ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
         ScaffoldMessenger.of(getContext()).showSnackBar(
             const SnackBar(content: Text('Email field is required')));
-      }
-      if (passwordController.text.isEmpty && emailController.text.isNotEmpty) {
+      } else if (passwordController.text.isEmpty &&
+          emailController.text.isNotEmpty) {
         ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
         ScaffoldMessenger.of(getContext()).showSnackBar(
             const SnackBar(content: Text('Password field is required')));
@@ -54,12 +58,14 @@ class LoginController extends Controller {
         ScaffoldMessenger.of(getContext()).showSnackBar(const SnackBar(
             content: Text('Invalid credentials, please check your input')));
       }
+      EasyLoading.dismiss();
     };
 
     refreshUI();
   }
 
   login() async {
+    EasyLoading.show(status: 'loading...');
     loginPresenter!.login(
       email: emailController.text,
       password: passwordController.text,
