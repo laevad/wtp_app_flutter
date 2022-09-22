@@ -32,6 +32,7 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                 FocusScope.of(context).unfocus();
               },
               child: Scaffold(
+                key: globalKey,
                 body: SafeArea(
                   child: SingleChildScrollView(
                     physics: const ClampingScrollPhysics(
@@ -77,6 +78,7 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                   ),
                                 ),
                                 TextFormField(
+                                  controller: controller.emailController,
                                   validator: (val) {
                                     return null;
                                   },
@@ -102,6 +104,7 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                   height: 25,
                                 ),
                                 TextFormField(
+                                  controller: controller.passwordController,
                                   validator: (val) {
                                     return null;
                                   },
@@ -162,12 +165,7 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                       ),
                                     ),
                                     onPressed: () async {
-                                      // Navigator.pushNamedAndRemoveUntil(
-                                      //     context,
-                                      //     BottomNavView.routeName,
-                                      //     (Route<dynamic> route) => false);
-                                      controller.login(
-                                          email: "a@a.a", pass: "1234");
+                                      await controller.login();
                                     },
                                     child: const Text(
                                       'Sign In',

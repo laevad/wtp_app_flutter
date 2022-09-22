@@ -52,6 +52,7 @@ class SettingsController extends Controller {
       print("logout on error");
       print(e);
       Navigator.of(getContext()).pop();
+      ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
       ScaffoldMessenger.of(getContext()).showSnackBar(
           SnackBar(content: Text("Error: ${e.toString()}, Please try again")));
     };
