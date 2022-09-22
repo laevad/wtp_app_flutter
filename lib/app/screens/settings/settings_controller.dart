@@ -48,11 +48,15 @@ class SettingsController extends Controller {
       print("logout on next");
       refreshUI();
     };
-    presenter.logoutOnComplete = () {
+    presenter.logoutOnComplete = () async {
       print("logout on complete");
-      EasyLoading.dismiss();
-      Constant.setSelectedIndex = 0;
-      Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);
+      Navigator.of(getContext()).pop();
+      Future.delayed(const Duration(milliseconds: 499)).then((value) {});
+      await EasyLoading.showSuccess('User was successfully logout!');
+      Future.delayed(const Duration(milliseconds: 2250)).then((value) {
+        Constant.setSelectedIndex = 0;
+        Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);
+      });
     };
     presenter.logoutOnError = (e) {
       print("logout on error");

@@ -77,7 +77,7 @@ class Constant {
 
   static void configLoading() {
     EasyLoading.instance
-      ..displayDuration = const Duration(milliseconds: 900)
+      ..displayDuration = const Duration(seconds: 2)
       ..indicatorType = EasyLoadingIndicatorType.fadingCircle
       ..loadingStyle = EasyLoadingStyle.custom
       ..indicatorSize = 45.0

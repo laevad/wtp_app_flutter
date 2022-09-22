@@ -29,11 +29,13 @@ class LoginController extends Controller {
       _authToken = loginDetails;
       refreshUI();
     };
-    loginPresenter!.getAuthTokenOnComplete = () {
+    loginPresenter!.getAuthTokenOnComplete = () async {
       print("auth on complete");
-      EasyLoading.dismiss();
-      Navigator.pushNamedAndRemoveUntil(getContext(), BottomNavView.routeName,
-          (Route<dynamic> route) => false);
+      await EasyLoading.showSuccess('User was successfully login!');
+      Future.delayed(const Duration(milliseconds: 2250)).then((value) {
+        Navigator.pushNamedAndRemoveUntil(getContext(), BottomNavView.routeName,
+            (Route<dynamic> route) => false);
+      });
     };
 
     loginPresenter!.getAuthTokenOnError = (e) {
@@ -65,6 +67,7 @@ class LoginController extends Controller {
   }
 
   login() async {
+    FocusScope.of(getContext()).unfocus();
     EasyLoading.show(status: 'loading...');
     loginPresenter!.login(
       email: emailController.text,
