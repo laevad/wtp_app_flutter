@@ -82,11 +82,11 @@ class Constant {
       ..loadingStyle = EasyLoadingStyle.custom
       ..indicatorSize = 45.0
       ..radius = 10.0
-      ..progressColor = Constant.lightColorScheme.onPrimaryContainer
-      ..backgroundColor = Constant.lightColorScheme.primary
+      ..progressColor = Constant.lightColorScheme.primaryContainer
+      ..backgroundColor = Constant.lightColorScheme.primary.withOpacity(0.8)
       ..indicatorColor = Colors.white
       ..textColor = Colors.white
-      ..maskColor = Constant.lightColorScheme.primary.withOpacity(0.5)
+      ..maskColor = Constant.lightColorScheme.primaryContainer
       ..userInteractions = false
       ..dismissOnTap = false;
     // ..customAnimation = CustomAnimation();

@@ -1,0 +1,29 @@
+import 'dart:async';
+
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:wtp_app/domain/entities/user.dart';
+import 'package:wtp_app/domain/repositories/login_details/user_repository.dart';
+
+class GetUserUseCase extends UseCase<GetUserUseCaseResponse, void> {
+  final UserRepository userRepository;
+  GetUserUseCase(this.userRepository);
+  @override
+  Future<Stream<GetUserUseCaseResponse?>> buildUseCaseStream(params) async {
+    final controller = StreamController<GetUserUseCaseResponse>();
+    try {
+      final user = await userRepository.getUser();
+      controller.add(GetUserUseCaseResponse(user));
+      controller.close();
+      logger.finest('GetUserUseCase successful');
+    } catch (e) {
+      logger.severe('GetUserUseCase unsuccessful');
+      controller.addError(e);
+    }
+    return controller.stream;
+  }
+}
+
+class GetUserUseCaseResponse {
+  final User user;
+  GetUserUseCaseResponse(this.user);
+}

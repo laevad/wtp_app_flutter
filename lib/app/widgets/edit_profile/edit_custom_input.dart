@@ -6,10 +6,12 @@ import '../../utils/constant.dart';
 class EditCustomInput extends StatefulWidget {
   final String? labelText, hintText;
   final bool? isPass;
+  final TextEditingController? textEditingController;
   bool showPass;
 
   EditCustomInput({
     Key? key,
+    this.textEditingController,
     this.labelText,
     this.hintText,
     this.isPass = false,
@@ -28,6 +30,7 @@ class _EditCustomInputState extends State<EditCustomInput> {
       elevation: 1.0, // Set here what you wish!
       shadowColor: Colors.grey,
       child: TextFormField(
+        controller: widget.textEditingController,
         obscureText: widget.isPass! ? widget.showPass : false,
         autocorrect: false,
         style: TextStyle(color: Constant.lightColorScheme.primary),
@@ -79,7 +82,7 @@ class _EditCustomInputState extends State<EditCustomInput> {
           labelText: widget.labelText,
           hintText: widget.hintText,
           labelStyle: TextStyle(
-            color: Constant.lightColorScheme.primary.withOpacity(0.7),
+            color: Constant.lightColorScheme.primary,
           ),
           hintStyle: TextStyle(
             color: Constant.lightColorScheme.primary.withOpacity(0.5),

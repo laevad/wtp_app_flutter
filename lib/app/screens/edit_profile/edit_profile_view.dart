@@ -3,7 +3,9 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wtp_app/app/utils/constant.dart';
 import 'package:wtp_app/app/widgets/edit_profile/edit_custom_input.dart';
+import 'package:wtp_app/data/repository/user/data_user_repository.dart';
 
+import '../../widgets/global_custom/custom_image.dart';
 import 'edit_profile_controller.dart';
 
 class EditProfileView extends View {
@@ -16,7 +18,7 @@ class EditProfileView extends View {
 
 class EditProfileViewState
     extends ViewState<EditProfileView, EditProfileController> {
-  EditProfileViewState() : super(EditProfileController());
+  EditProfileViewState() : super(EditProfileController(DataUserRepository()));
 
   @override
   Widget get view {
@@ -80,14 +82,12 @@ class EditProfileViewState
                                   ),
                                 ],
                                 shape: BoxShape.circle,
-                                image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                    "https://images.pexels.com/photos/220453/"
-                                    "pexels-photo-220453.jpeg?auto=compress&"
-                                    "cs=tinysrgb&w=1260&h=750&dpr=1",
-                                  ),
-                                ),
+                              ),
+                              child: CustomImage(
+                                assetImage: controller.avatarController!.text
+                                    .toString(),
+                                imageUrl: controller.avatarUrlController!.text
+                                    .toString(),
                               ),
                             ),
                             Positioned(
@@ -116,28 +116,32 @@ class EditProfileViewState
                         ),
                         const SizedBox(height: 20),
                         EditCustomInput(
+                          textEditingController: controller.nameController,
                           labelText: 'Name',
                           hintText: 'John Doe',
                         ),
                         const SizedBox(height: 20),
                         EditCustomInput(
+                          textEditingController: controller.emailController,
                           labelText: 'Email',
                           hintText: 'johndoe@example.com',
                         ),
                         const SizedBox(height: 20),
                         EditCustomInput(
-                          labelText: 'Mobile Number',
-                          hintText: '+639',
-                        ),
-                        const SizedBox(height: 20),
-                        EditCustomInput(
-                          labelText: 'Age',
-                          hintText: '20',
+                          showPass: true,
+                          labelText: 'Current Password',
+                          isPass: true,
                         ),
                         const SizedBox(height: 20),
                         EditCustomInput(
                           showPass: true,
-                          labelText: 'Password',
+                          labelText: 'New Password',
+                          isPass: true,
+                        ),
+                        const SizedBox(height: 20),
+                        EditCustomInput(
+                          showPass: true,
+                          labelText: 'Confirm New Password',
                           isPass: true,
                         ),
                         const SizedBox(height: 25),
