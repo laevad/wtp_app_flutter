@@ -18,6 +18,7 @@ class GetAuthTokenUseCase
       final loginDetails = await loginDetailsRepository.getAuthToken(
           params!.email!, params.password!);
       controller.add(GetAuthTokenUseCaseResponse(loginDetails));
+      controller.close();
     } catch (e) {
       controller.addError(e);
       logger.severe('GetUserUseCase unsuccessful.');

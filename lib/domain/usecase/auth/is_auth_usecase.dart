@@ -16,6 +16,7 @@ class IsAuthUseCase extends UseCase<IsAuthUseCaseResponse, void> {
       bool isAuth = await DataAuthRepository().isAuthenticated();
       controller.add(IsAuthUseCaseResponse(isAuth));
       logger.finest('Is Authenticated successful.');
+      controller.close();
     } catch (e) {
       logger.severe('Is Authenticated fail.');
       controller.addError(e);
