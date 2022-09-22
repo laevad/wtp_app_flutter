@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:wtp_app/app/screens/home/home_view.dart';
 import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
-import '../screens/profile/settings_screen.dart';
+import '../screens/settings/settings_screen.dart';
 import '../screens/trip/trip_view.dart';
 
 class Constant {

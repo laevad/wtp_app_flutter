@@ -31,10 +31,6 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
           backgroundColor: Constant.lightColorScheme.primaryContainer,
           title: Row(
             children: const [
-              Icon(
-                Icons.person,
-                color: Color(0xFFFB578E),
-              ),
               SizedBox(
                 width: 8,
               ),
@@ -60,11 +56,13 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
                   Column(
                     children: [
                       ButtonTileWidget(
+                        iconData: Icons.person,
                         context: context,
                         title: 'Profile',
                         onTap: () => controller.editProfile(),
                       ),
                       ButtonTileWidget(
+                        iconData: Icons.exit_to_app,
                         context: context,
                         title: 'Logout',
                         onTap: () => controller.logout(),

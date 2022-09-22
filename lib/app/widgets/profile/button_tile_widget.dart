@@ -6,9 +6,14 @@ class ButtonTileWidget extends StatelessWidget {
   final String title;
   final BuildContext context;
   final Function? onTap;
+  final IconData? iconData;
 
   const ButtonTileWidget(
-      {Key? key, required this.context, required this.title, this.onTap})
+      {Key? key,
+      required this.context,
+      required this.title,
+      required this.iconData,
+      this.onTap})
       : super(key: key);
 
   @override
@@ -30,12 +35,25 @@ class ButtonTileWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Constant.lightColorScheme.onSurfaceVariant,
+              Expanded(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Icon(
+                        iconData,
+                        color: const Color(0xFFFB578E),
+                      ),
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Constant.lightColorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Icon(
