@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wtp_app/app/screens/edit_profile/edit_profile_presenter.dart';
 
 import '../../../domain/entities/user.dart';
@@ -8,6 +13,8 @@ import '../../utils/constant.dart';
 
 class EditProfileController extends Controller {
   final EditProfilePresenter presenter;
+  File? _image;
+  File? get image => _image;
 
   final TextEditingController? _nameController;
   final TextEditingController? _emailController;
@@ -50,11 +57,41 @@ class EditProfileController extends Controller {
     refreshUI();
   }
 
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      File? img = File(image.path);
+      img = await _cropImage(imageFile: img);
+      _image = img;
+      print("dfddddddddddddddddfffffffffffffffffffffffffffffffffffff");
+      print(img);
+      // Navigator.of(getContext()).pop();
+      refreshUI();
+    } on PlatformException catch (e) {
+      print(e);
+      // Navigator.of(getContext()).pop();
+    }
+    refreshUI();
+  }
+
+  Future<File?> _cropImage({required File imageFile}) async {
+    CroppedFile? croppedImage = await ImageCropper().cropImage(
+      sourcePath: imageFile.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+      ],
+    );
+    if (croppedImage == null) return null;
+    return File(croppedImage.path);
+  }
+
   @override
   void onDisposed() {
     presenter.dispose();
     _nameController!.dispose();
-
+    _avatarUrlController!.dispose();
+    _avatarController!.dispose();
     _emailController!.dispose();
     super.onDisposed();
   }

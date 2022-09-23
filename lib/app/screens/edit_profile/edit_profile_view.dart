@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wtp_app/app/utils/constant.dart';
 import 'package:wtp_app/app/widgets/edit_profile/edit_custom_input.dart';
 import 'package:wtp_app/data/repository/user/data_user_repository.dart';
@@ -83,32 +84,44 @@ class EditProfileViewState
                                 ],
                                 shape: BoxShape.circle,
                               ),
-                              child: CustomImage(
-                                assetImage: controller.avatarController!.text
-                                    .toString(),
-                                imageUrl: controller.avatarUrlController!.text
-                                    .toString(),
-                              ),
+                              child: controller.image?.path == null
+                                  ? CustomImage(
+                                      assetImage: controller
+                                          .avatarController!.text
+                                          .toString(),
+                                      imageUrl: controller
+                                          .avatarUrlController!.text
+                                          .toString(),
+                                    )
+                                  : CircleAvatar(
+                                      backgroundImage:
+                                          FileImage(controller.image!),
+                                      radius: 200.0,
+                                    ),
                             ),
                             Positioned(
                               right: 0,
                               bottom: 0,
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 4,
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
+                              child: GestureDetector(
+                                onTap: () =>
+                                    controller.pickImage(ImageSource.gallery),
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 4,
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                    ),
+                                    shape: BoxShape.circle,
+                                    color: Constant.lightColorScheme.primary,
                                   ),
-                                  shape: BoxShape.circle,
-                                  color: Constant.lightColorScheme.primary,
-                                ),
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 15,
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
                                 ),
                               ),
                             ),
