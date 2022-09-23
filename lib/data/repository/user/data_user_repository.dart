@@ -5,7 +5,7 @@ import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
 import 'package:wtp_app/domain/entities/user.dart';
 import 'package:wtp_app/domain/repositories/login_details/user_repository.dart';
 
-import '../../constants.dart';
+import '../../data_constants.dart';
 
 class DataUserRepository extends UserRepository {
   @override

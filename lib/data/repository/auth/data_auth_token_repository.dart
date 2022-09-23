@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../domain/entities/auth_token.dart';
 import '../../../domain/repositories/login_details/auth_repository.dart';
-import '../../constants.dart';
+import '../../data_constants.dart';
 import '../helpers/auth/is_auth.dart';
 
 class DataAuthRepository extends AuthRepository {
@@ -13,11 +13,23 @@ class DataAuthRepository extends AuthRepository {
     Map<String, dynamic> body = {"email": email, 'password': pass};
     var response =
         await http.post(Uri.parse("$siteURL/auth/login"), body: body);
-    if (response.statusCode == 200 || response.statusCode == 401) {
-      AuthToken authToken = AuthToken.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 422) {
+      return AuthToken.fromJsonErrorMsg(
+        jsonDecode(response.body),
+        response.statusCode,
+      );
+    }
+    if (response.statusCode == 401) {
+      return AuthToken.fromJsonInvalidMsg(
+        jsonDecode(response.body),
+        response.statusCode,
+      );
+    }
+    if (response.statusCode == 200) {
+      AuthToken authToken =
+          AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
       await IsAuth.setToken(key: 'token', value: authToken.token!);
-
-      return AuthToken.fromJson(jsonDecode(response.body));
+      return AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
     } else {
       throw Exception;
     }

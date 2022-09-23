@@ -25,8 +25,8 @@ class SplashViewState extends ViewState<SplashView, SplashController> {
         builder: (context, controller) {
           return AnimatedSplashScreen.withScreenFunction(
             splash: 'assets/images/play_store_512.png',
-            animationDuration: const Duration(seconds: 3),
-            duration: 3,
+            animationDuration: const Duration(seconds: 1),
+            duration: 1,
             screenFunction: () async {
               return controller.isAuth == false
                   ? const LoginScreen()

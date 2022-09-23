@@ -24,42 +24,32 @@ class LoginController extends Controller {
   @override
   void initListeners() {
     Constant.configLoading();
-    loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) {
-      print("auth on next");
+    loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) async {
       _authToken = loginDetails;
-      refreshUI();
+      if (loginDetails.statusCode == 401) {
+        EasyLoading.showError(loginDetails.invalidCred.toString());
+      }
+      if (loginDetails.statusCode == 200) {
+        Future.delayed(const Duration(milliseconds: 10)).then((value) async {
+          EasyLoading.showSuccess('User was successfully login!');
+        });
+
+        Future.delayed(const Duration(milliseconds: 2250)).then((value) async {
+          Navigator.pushNamedAndRemoveUntil(getContext(),
+              BottomNavView.routeName, (Route<dynamic> route) => false);
+        });
+      }
+
+      EasyLoading.dismiss();
     };
     loginPresenter!.getAuthTokenOnComplete = () async {
       print("auth on complete");
-      await EasyLoading.showSuccess('User was successfully login!');
-      Future.delayed(const Duration(milliseconds: 2250)).then((value) {
-        Navigator.pushNamedAndRemoveUntil(getContext(), BottomNavView.routeName,
-            (Route<dynamic> route) => false);
-      });
+      refreshUI();
     };
 
     loginPresenter!.getAuthTokenOnError = (e) {
       print("auth on error");
       print(e);
-      if (emailController.text.isEmpty && passwordController.text.isEmpty) {
-        ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
-        ScaffoldMessenger.of(getContext()).showSnackBar(
-            const SnackBar(content: Text('Email & Pass field is required')));
-      } else if (emailController.text.isEmpty &&
-          passwordController.text.isNotEmpty) {
-        ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
-        ScaffoldMessenger.of(getContext()).showSnackBar(
-            const SnackBar(content: Text('Email field is required')));
-      } else if (passwordController.text.isEmpty &&
-          emailController.text.isNotEmpty) {
-        ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
-        ScaffoldMessenger.of(getContext()).showSnackBar(
-            const SnackBar(content: Text('Password field is required')));
-      } else {
-        ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
-        ScaffoldMessenger.of(getContext()).showSnackBar(const SnackBar(
-            content: Text('Invalid credentials, please check your input')));
-      }
       EasyLoading.dismiss();
     };
 

@@ -83,10 +83,10 @@ class Constant {
       ..indicatorSize = 45.0
       ..radius = 10.0
       ..progressColor = Constant.lightColorScheme.primaryContainer
-      ..backgroundColor = Constant.lightColorScheme.primary.withOpacity(0.8)
+      ..backgroundColor = Constant.lightColorScheme.primary.withOpacity(0.7)
       ..indicatorColor = Colors.white
       ..textColor = Colors.white
-      ..maskColor = Constant.lightColorScheme.primaryContainer
+      ..maskColor = Constant.lightColorScheme.primaryContainer.withOpacity(0.7)
       ..userInteractions = false
       ..dismissOnTap = false;
     // ..customAnimation = CustomAnimation();

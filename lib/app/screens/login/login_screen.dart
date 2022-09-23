@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '/app/utils/constant.dart';
 import '../../../data/repository/auth/data_auth_token_repository.dart';
+import '../../widgets/global_custom/custom_textfield.dart';
+import '../../widgets/login/login_custom_btn.dart';
 import 'login_controller.dart';
 
 class LoginScreen extends View {
@@ -77,101 +79,26 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                     ],
                                   ),
                                 ),
-                                TextFormField(
-                                  controller: controller.emailController,
-                                  validator: (val) {
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(14),
-                                      ),
-                                      borderSide: BorderSide(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .tertiary,
-                                      ),
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 20,
-                                      horizontal: 20,
-                                    ),
-                                    labelText: 'Username',
-                                  ),
-                                ),
+                                CustomTextField(
+                                    labelText: 'Email',
+                                    controller: controller.emailController,
+                                    errorMsg:
+                                        controller.getAuthToken?.emailMsg),
                                 const SizedBox(
                                   height: 25,
                                 ),
-                                TextFormField(
+                                CustomTextField(
+                                  labelText: 'Password',
+                                  isObscure: true,
                                   controller: controller.passwordController,
-                                  validator: (val) {
-                                    return null;
-                                  },
-                                  obscureText: true,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(14),
-                                      ),
-                                      borderSide: BorderSide(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .tertiary,
-                                      ),
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 20,
-                                      horizontal: 20,
-                                    ),
-                                    labelText: 'Password',
-                                  ),
+                                  errorMsg:
+                                      controller.getAuthToken?.passwordMsg,
                                 ),
                                 const SizedBox(
                                   height: 25,
                                 ),
-                                Container(
-                                  width: double.infinity,
-                                  decoration: const BoxDecoration(
-                                    gradient: LinearGradient(
-                                      stops: [
-                                        0.20,
-                                        0.90,
-                                      ],
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        Color(0xFFFB578E),
-                                        Color(0xFFFDA58E),
-                                      ],
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(14)),
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      shadowColor: Colors.transparent,
-                                      textStyle: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(14),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 20,
-                                        horizontal: 20,
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      await controller.login();
-                                    },
-                                    child: const Text(
-                                      'Sign In',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
+                                LoginCustomBtn(
+                                  onPressed: controller.login,
                                 ),
                               ],
                             ),
