@@ -13,13 +13,18 @@ import '../../utils/constant.dart';
 
 class EditProfileController extends Controller {
   final EditProfilePresenter presenter;
+  User? _user;
   File? _image;
+  User? get user => _user;
   File? get image => _image;
 
   final TextEditingController? _nameController;
   final TextEditingController? _emailController;
   final TextEditingController? _avatarController;
   final TextEditingController? _avatarUrlController;
+  TextEditingController? currPassController;
+  TextEditingController? newPassController;
+  TextEditingController? conPassPassController;
 
   TextEditingController? get nameController => _nameController;
   TextEditingController? get emailController => _emailController;
@@ -32,6 +37,9 @@ class EditProfileController extends Controller {
         _emailController = TextEditingController(),
         _avatarController = TextEditingController(),
         _avatarUrlController = TextEditingController(),
+        currPassController = TextEditingController(),
+        newPassController = TextEditingController(),
+        conPassPassController = TextEditingController(),
         super();
   @override
   void initListeners() {
@@ -54,7 +62,22 @@ class EditProfileController extends Controller {
       EasyLoading.dismiss();
       refreshUI();
     };
-    refreshUI();
+
+    //  ========================== update profile
+    presenter.getUpdateUserOnError = (e) {
+      print("Error on update profile");
+      print(e.toString());
+    };
+
+    presenter.getUpdateUserOnNext = (User user) {
+      _user = user;
+      print("next on update profile");
+      refreshUI();
+    };
+    presenter.getUpdateUserOnComplete = () {
+      print("complete on update profile");
+      EasyLoading.dismiss();
+    };
   }
 
   Future pickImage(ImageSource source) async {
@@ -64,8 +87,6 @@ class EditProfileController extends Controller {
       File? img = File(image.path);
       img = await _cropImage(imageFile: img);
       _image = img;
-      print("dfddddddddddddddddfffffffffffffffffffffffffffffffffffff");
-      print(img);
       // Navigator.of(getContext()).pop();
       refreshUI();
     } on PlatformException catch (e) {
@@ -84,6 +105,17 @@ class EditProfileController extends Controller {
     );
     if (croppedImage == null) return null;
     return File(croppedImage.path);
+  }
+
+  void update() async {
+    EasyLoading.show(status: 'loading...');
+    await presenter.updateProfile(
+        _nameController!.text,
+        _emailController!.text,
+        currPassController!.text,
+        newPassController!.text,
+        conPassPassController!.text,
+        'okay');
   }
 
   @override

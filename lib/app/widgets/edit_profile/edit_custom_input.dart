@@ -6,16 +6,18 @@ import '../../utils/constant.dart';
 class EditCustomInput extends StatefulWidget {
   final String? labelText, hintText;
   final bool? isPass;
-  final TextEditingController? textEditingController;
-  bool showPass;
+  final TextEditingController? controller;
+  final String? errorMsg;
+  bool isShowPass;
 
   EditCustomInput({
     Key? key,
-    this.textEditingController,
+    this.controller,
     this.labelText,
     this.hintText,
+    this.errorMsg,
     this.isPass = false,
-    this.showPass = false,
+    this.isShowPass = false,
   }) : super(key: key);
 
   @override
@@ -30,19 +32,26 @@ class _EditCustomInputState extends State<EditCustomInput> {
       elevation: 1.0, // Set here what you wish!
       shadowColor: Colors.grey,
       child: TextFormField(
-        controller: widget.textEditingController,
-        obscureText: widget.isPass! ? widget.showPass : false,
+        controller: widget.controller,
+        obscureText: widget.isPass! ? widget.isShowPass : false,
         autocorrect: false,
         style: TextStyle(color: Constant.lightColorScheme.primary),
         decoration: InputDecoration(
+          errorText: widget.errorMsg == '' ? null : widget.errorMsg,
+          errorMaxLines: 2,
+          errorStyle: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              decoration: TextDecoration.lineThrough),
           suffixIcon: widget.isPass!
               ? IconButton(
                   onPressed: () {
                     setState(() {
-                      widget.showPass = !widget.showPass;
+                      widget.isShowPass = !widget.isShowPass;
                     });
                   },
-                  icon: widget.showPass
+                  icon: widget.isShowPass
                       ? const Icon(Icons.remove_red_eye_rounded)
                       : const Icon(Icons.remove_red_eye_outlined),
                   color: Colors.grey,

@@ -17,8 +17,7 @@ class SettingsController extends Controller {
       builder: (context) {
         return AlertDialog(
           title: const Text('Logout'),
-          content:
-              const Text('Would you really want to log out from this page?'),
+          content: const Text('Are you really want to logout?'),
           actions: [
             TextButton(
                 onPressed: () {
