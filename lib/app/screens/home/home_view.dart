@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wtp_app/app/screens/home/home_controller.dart';
 
 import '../../utils/constant.dart';
@@ -28,6 +29,25 @@ class HomeViewState extends ViewState<HomeView, HomeController> {
                 useMaterial3: true),
             child: Scaffold(
               key: globalKey,
+              body: GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition:
+                    CameraPosition(target: controller.currentLatLng, zoom: 11),
+                onMapCreated: (GoogleMapController controller1) {
+                  controller.controller1.complete(controller1);
+                },
+                markers: <Marker>{
+                  Marker(
+                    draggable: true,
+                    markerId: const MarkerId("1"),
+                    position: controller.currentLatLng,
+                    icon: BitmapDescriptor.defaultMarker,
+                    infoWindow: const InfoWindow(
+                      title: 'My Location',
+                    ),
+                  )
+                },
+              ),
             ),
           );
         },
