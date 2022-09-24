@@ -29,7 +29,7 @@ class _EditCustomInputState extends State<EditCustomInput> {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(10),
-      elevation: 1.0, // Set here what you wish!
+      elevation: 0,
       shadowColor: Colors.grey,
       child: TextFormField(
         controller: widget.controller,
@@ -43,7 +43,7 @@ class _EditCustomInputState extends State<EditCustomInput> {
               fontSize: 12,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,
-              decoration: TextDecoration.lineThrough),
+              decoration: TextDecoration.none),
           suffixIcon: widget.isPass!
               ? IconButton(
                   onPressed: () {
