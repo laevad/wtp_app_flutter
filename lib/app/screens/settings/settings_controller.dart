@@ -58,7 +58,7 @@ class SettingsController extends Controller {
       Future.delayed(const Duration(milliseconds: 499)).then((value) {});
       await EasyLoading.showSuccess('User was successfully logout!');
       Future.delayed(const Duration(milliseconds: 2250)).then((value) {
-        Constant.setSelectedIndex = 0;
+        Constant.setSelectedIndex = 1;
         Navigator.pushReplacementNamed(getContext(), LoginScreen.routeName);
       });
     };

@@ -65,7 +65,7 @@ class Constant {
     SettingsScreen(),
   ];
 
-  static int _selectedIndex = 0;
+  static int _selectedIndex = 1;
 
   static int get selectedIndex => _selectedIndex;
 

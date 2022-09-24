@@ -14,6 +14,7 @@ import 'app/screens/trip/trip_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterCleanArchitecture.debugModeOn();
   runApp(const MyApp());
 }
 
@@ -27,7 +28,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    FlutterCleanArchitecture.debugModeOn();
     return MaterialApp(
       builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
