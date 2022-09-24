@@ -64,19 +64,24 @@ class EditProfileController extends Controller {
     };
 
     //  ========================== update profile
-    presenter.getUpdateUserOnError = (e) {
+    presenter.getUpdateUserOnError = (e) async {
       print("Error on update profile");
       print(e.toString());
     };
 
-    presenter.getUpdateUserOnNext = (User user) {
+    presenter.getUpdateUserOnNext = (User user) async {
       _user = user;
       print("next on update profile");
       refreshUI();
     };
-    presenter.getUpdateUserOnComplete = () {
+    presenter.getUpdateUserOnComplete = () async {
       print("complete on update profile");
-      EasyLoading.dismiss();
+      await EasyLoading.showSuccess('Profile updated successfully');
+      Future.delayed(const Duration(milliseconds: 2250)).then((value) {
+        Navigator.of(getContext()).pop();
+      });
+
+      refreshUI();
     };
   }
 
@@ -109,13 +114,23 @@ class EditProfileController extends Controller {
 
   void update() async {
     EasyLoading.show(status: 'loading...');
-    await presenter.updateProfile(
-        _nameController!.text,
-        _emailController!.text,
-        currPassController!.text,
-        newPassController!.text,
-        conPassPassController!.text,
-        'okay');
+    if (_image != null) {
+      await presenter.updateProfile(
+          _nameController!.text,
+          _emailController!.text,
+          currPassController!.text,
+          newPassController!.text,
+          conPassPassController!.text,
+          _image!.path.toString());
+    } else {
+      await presenter.updateProfile(
+          _nameController!.text,
+          _emailController!.text,
+          currPassController!.text,
+          newPassController!.text,
+          conPassPassController!.text,
+          '');
+    }
   }
 
   @override

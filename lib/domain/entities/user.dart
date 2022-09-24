@@ -9,6 +9,7 @@ class User {
   String? newPass;
   String? conPass;
   File? image;
+  int? statusCode;
   User({
     this.name,
     this.email,
@@ -18,6 +19,7 @@ class User {
     this.newPass,
     this.conPass,
     this.image,
+    this.statusCode,
   });
 
   factory User.fromJson(Map<String, dynamic> user) {
@@ -29,13 +31,13 @@ class User {
     );
   }
 
-  factory User.fromJsonUpdate(Map<String, dynamic> user) {
+  factory User.fromJsonUpdate(Map<String, dynamic> user, int statusCode) {
     return User(
-      name: user['errors']['name'],
-      email: user['errors']['email'],
-      avatar: user['errors']['avatar'],
-      currentPass: user['errors']['current_password'],
-      newPass: user['errors']['new_password'],
-    );
+        name: user['errors']['name'],
+        email: user['errors']['email'],
+        avatar: user['errors']['avatar'],
+        currentPass: user['errors']['current_password'],
+        newPass: user['errors']['new_password'],
+        statusCode: statusCode);
   }
 }
