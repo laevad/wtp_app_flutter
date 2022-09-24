@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class User {
   String? name;
   String? email;
@@ -8,7 +6,7 @@ class User {
   String? currentPass;
   String? newPass;
   String? conPass;
-  File? image;
+  String? imageMsg;
   int? statusCode;
   User({
     this.name,
@@ -18,7 +16,7 @@ class User {
     this.currentPass,
     this.newPass,
     this.conPass,
-    this.image,
+    this.imageMsg,
     this.statusCode,
   });
 
@@ -38,6 +36,8 @@ class User {
         avatar: user['errors']['avatar'],
         currentPass: user['errors']['current_password'],
         newPass: user['errors']['new_password'],
+        imageMsg: user['errors']['image'],
+        conPass: user['errors']['password_confirmation'],
         statusCode: statusCode);
   }
 }

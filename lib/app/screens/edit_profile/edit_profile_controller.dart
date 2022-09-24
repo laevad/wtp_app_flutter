@@ -15,6 +15,7 @@ class EditProfileController extends Controller {
   final EditProfilePresenter presenter;
   User? _user;
   File? _image;
+  bool isSuccess = false;
   User? get user => _user;
   File? get image => _image;
 
@@ -72,15 +73,20 @@ class EditProfileController extends Controller {
     presenter.getUpdateUserOnNext = (User user) async {
       _user = user;
       print("next on update profile");
+      if (user.statusCode == 200) {
+        isSuccess = true;
+      }
       refreshUI();
     };
     presenter.getUpdateUserOnComplete = () async {
       print("complete on update profile");
-      await EasyLoading.showSuccess('Profile updated successfully');
-      Future.delayed(const Duration(milliseconds: 2250)).then((value) {
-        Navigator.of(getContext()).pop();
-      });
-
+      EasyLoading.dismiss();
+      if (isSuccess) {
+        await EasyLoading.showSuccess('Profile updated successfully');
+        Future.delayed(const Duration(milliseconds: 2250)).then((value) {
+          Navigator.of(getContext()).pop();
+        });
+      }
       refreshUI();
     };
   }

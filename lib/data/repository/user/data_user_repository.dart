@@ -22,19 +22,20 @@ class DataUserRepository extends UserRepository {
   @override
   Future updateProfile(String name, String email, String currPass,
       String newPass, String conPass, String image) async {
+    // print("image in data: $image");
     Map<String, String> body = {
       'name': name,
       'email': email,
-      'avatar': image,
+      'image': image,
       'current_password': currPass,
       "new_password": newPass,
       "password_confirmation": conPass,
     };
 
     Map<String, String> headers = {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ${await IsAuth.getData("token")}',
-      'Accept': 'application/json'
+      'Accept': 'multipart/form-data'
     };
     if (image.isNotEmpty) {
       var request =
@@ -46,11 +47,14 @@ class DataUserRepository extends UserRepository {
       print("Result: ${response.statusCode}");
       // await response.stream.bytesToString()
       if (response.statusCode == 422) {
-        // print(await response.stream.bytesToString());
         return User.fromJsonUpdate(
             jsonDecode(await response.stream.bytesToString()),
             response.statusCode);
+        throw Error();
       }
+      return User.fromJsonUpdate(
+          jsonDecode(await response.stream.bytesToString()),
+          response.statusCode);
     }
     var request =
         http.MultipartRequest('post', Uri.parse("$siteURL/user/update"))
