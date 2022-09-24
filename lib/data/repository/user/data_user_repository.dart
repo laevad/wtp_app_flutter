@@ -38,11 +38,11 @@ class DataUserRepository extends UserRepository {
       'Accept': 'multipart/form-data'
     };
     if (image.isNotEmpty) {
-      var request =
-          http.MultipartRequest('post', Uri.parse("$siteURL/user/update"))
-            ..fields.addAll(body)
-            ..headers.addAll(headers)
-            ..files.add(await http.MultipartFile.fromPath('image', image));
+      var request = http.MultipartRequest(
+          'post', Uri.parse("${await IsAuth.getData('url')}/user/update"))
+        ..fields.addAll(body)
+        ..headers.addAll(headers)
+        ..files.add(await http.MultipartFile.fromPath('image', image));
       final response = await request.send();
       print("Result: ${response.statusCode}");
       // await response.stream.bytesToString()
@@ -56,10 +56,10 @@ class DataUserRepository extends UserRepository {
           jsonDecode(await response.stream.bytesToString()),
           response.statusCode);
     }
-    var request =
-        http.MultipartRequest('post', Uri.parse("$siteURL/user/update"))
-          ..fields.addAll(body)
-          ..headers.addAll(headers);
+    var request = http.MultipartRequest(
+        'post', Uri.parse("${await IsAuth.getData('url')}/user/update"))
+      ..fields.addAll(body)
+      ..headers.addAll(headers);
     // ..files.add(await http.MultipartFile.fromPath('image', image));
     final response = await request.send();
     print("Result data: ${response.statusCode}");

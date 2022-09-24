@@ -55,12 +55,13 @@ class ServerViewState extends ViewState<ServerView, ServerController> {
                 child: Column(
                   children: [
                     EditCustomInput(
+                      controller: controller.urlController,
                       labelText: 'Server',
                       hintText: 'e.g http://192.168.88.27:8000/api',
                     ),
                     const SizedBox(height: 25),
                     CustomButtonSaveChanges(
-                      onPressed: () {},
+                      onPressed: () => controller.save(),
                       text: 'Save Changes',
                     ),
                   ],
