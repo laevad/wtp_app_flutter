@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:wtp_app/app/screens/home/home_view.dart';
 import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
 import '../screens/settings/settings_screen.dart';
@@ -40,10 +39,10 @@ class Constant {
   );
 
   static const List<GButton> _icons = [
-    GButton(
-      icon: Icons.home_outlined,
-      text: 'Home',
-    ),
+    // GButton(
+    //   icon: Icons.home_outlined,
+    //   text: 'Home',
+    // ),
     GButton(
       icon: Icons.drive_eta_outlined,
       text: 'Trips',
@@ -59,13 +58,13 @@ class Constant {
   ];
 
   static const List<Widget> _pages = [
-    HomeView(),
+    // HomeView(),
     TripView(),
     IncentivesView(),
     SettingsScreen(),
   ];
 
-  static int _selectedIndex = 1;
+  static int _selectedIndex = 0;
 
   static int get selectedIndex => _selectedIndex;
 
