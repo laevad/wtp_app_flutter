@@ -6,6 +6,7 @@ import '../../utils/constant.dart';
 class EditCustomInput extends StatefulWidget {
   final String? labelText, hintText;
   final bool? isPass;
+  final bool? isDisable;
   final TextEditingController? controller;
   final String? errorMsg;
   bool isShowPass;
@@ -18,6 +19,7 @@ class EditCustomInput extends StatefulWidget {
     this.errorMsg,
     this.isPass = false,
     this.isShowPass = false,
+    this.isDisable = false,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class _EditCustomInputState extends State<EditCustomInput> {
       elevation: 0,
       shadowColor: Colors.grey,
       child: TextFormField(
+        readOnly: widget.isDisable!,
         controller: widget.controller,
         obscureText: widget.isPass! ? widget.isShowPass : false,
         autocorrect: false,

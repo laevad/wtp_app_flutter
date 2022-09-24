@@ -5,6 +5,7 @@ import 'package:wtp_app/app/utils/constant.dart';
 import 'package:wtp_app/app/widgets/edit_profile/edit_custom_input.dart';
 import 'package:wtp_app/data/repository/user/data_user_repository.dart';
 
+import '../../widgets/global_custom/custom_button_save_changes.dart';
 import '../../widgets/global_custom/custom_image.dart';
 import 'edit_profile_controller.dart';
 
@@ -128,6 +129,7 @@ class EditProfileViewState
                         ),
                         const SizedBox(height: 20),
                         EditCustomInput(
+                          isDisable: true,
                           errorMsg: controller.user?.name,
                           controller: controller.nameController,
                           labelText: 'Name',
@@ -165,27 +167,10 @@ class EditProfileViewState
                           isPass: true,
                         ),
                         const SizedBox(height: 25),
-                        ElevatedButton(
+                        CustomButtonSaveChanges(
                           onPressed: () => controller.update(),
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: Constant.lightColorScheme.primary,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                            ),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
-                            child: Text(
-                              'SAVE',
-                              style:
-                                  TextStyle(fontSize: 14, letterSpacing: 2.2),
-                            ),
-                          ),
-                        )
+                          text: 'Save Changes',
+                        ),
                       ],
                     ),
                   ),

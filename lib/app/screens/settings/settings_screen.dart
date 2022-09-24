@@ -62,6 +62,12 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
                         onTap: () => controller.editProfile(),
                       ),
                       ButtonTileWidget(
+                        iconData: Icons.cloud_sync_outlined,
+                        context: context,
+                        title: 'Server Url',
+                        onTap: () => controller.editServerUrl(),
+                      ),
+                      ButtonTileWidget(
                         iconData: Icons.exit_to_app,
                         context: context,
                         title: 'Logout',

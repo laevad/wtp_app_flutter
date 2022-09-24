@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:wtp_app/app/screens/settings/setting_presenter.dart';
 
 import '../../utils/constant.dart';
 import '../edit_profile/edit_profile_view.dart';
 import '../login/login_screen.dart';
+import '../server_url/server_view.dart';
+import 'setting_presenter.dart';
 
 class SettingsController extends Controller {
   final SettingsPresenter presenter;
@@ -38,6 +39,10 @@ class SettingsController extends Controller {
 
   void editProfile() {
     Navigator.pushNamed(getContext(), EditProfileView.routeName);
+  }
+
+  void editServerUrl() {
+    Navigator.pushNamed(getContext(), ServerView.routeName);
   }
 
   @override

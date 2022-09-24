@@ -29,6 +29,7 @@ class DataAuthRepository extends AuthRepository {
       AuthToken authToken =
           AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
       await IsAuth.setToken(key: 'token', value: authToken.token!);
+      await IsAuth.setToken(key: 'url', value: 'http://192.168.88.27:8000/api');
       return AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
     } else {
       throw Exception;
