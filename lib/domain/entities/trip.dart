@@ -10,6 +10,10 @@ class Trip {
   int? totalDistance;
   String? driver;
   String? createdAt;
+  String? fromLatitude;
+  String? fromLongitude;
+  String? toLatitude;
+  String? toLongitude;
 
   Trip({
     this.id,
@@ -23,6 +27,10 @@ class Trip {
     this.totalDistance,
     this.driver,
     this.createdAt,
+    this.fromLatitude,
+    this.fromLongitude,
+    this.toLatitude,
+    this.toLongitude,
   });
 
   factory Trip.fromJson(Map<String, dynamic> json) {
@@ -38,23 +46,20 @@ class Trip {
       totalDistance: json['t_total_distance'],
       driver: json['driver'],
       createdAt: json['created_at'],
+      fromLatitude: json['from_latitude'],
+      fromLongitude: json['from_longitude'],
+      toLatitude: json['to_latitude'],
+      toLongitude: json['to_longitude'],
     );
   }
 }
 
 class TripModel {
-  int? totalPage;
-  int? perPage;
   int? currentPage;
   int? lastPage;
   List<Trip>? trips;
 
-  TripModel(
-      {this.totalPage,
-      this.trips,
-      this.perPage,
-      this.lastPage,
-      this.currentPage});
+  TripModel({this.trips, this.lastPage, this.currentPage});
 
   factory TripModel.fromJson(Map<String, dynamic> json) {
     return TripModel(
