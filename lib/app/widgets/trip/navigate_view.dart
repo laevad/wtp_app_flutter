@@ -30,7 +30,7 @@ class _NavigateViewState extends State<NavigateView> {
         body: SingleChildScrollView(
           child: Column(children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 1.7,
+              height: MediaQuery.of(context).size.height / 1.8,
               child: Container(
                 color: Colors.red,
               ),

@@ -19,13 +19,19 @@ class MyTripController extends Controller {
   int _page = 0;
   final ScrollController _scrollController = ScrollController();
   ScrollController? get scrollController => _scrollController;
-
   MyTripController(tripRepository) : presenter = TripPresenter(tripRepository);
+
+  Future refresh() async {
+    _page = 0;
+    presenter.getData(++_page);
+  }
+
   @override
   void initListeners() async {
     /**/
     Constant.configLoading();
     if (_page == 0) {
+      print(_page);
       EasyLoading.show(status: 'loading please wait...');
       presenter.getData(++_page);
       refreshUI();

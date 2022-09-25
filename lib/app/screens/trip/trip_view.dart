@@ -60,18 +60,21 @@ class TripViewState extends ViewState<TripView, MyTripController> {
                       child: TabBarView(children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: ListView.builder(
-                            itemCount: controller.trip!.length,
-                            controller: controller.scrollController,
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return TripCustomExpandTile(
-                                index: (index + 1).toString(),
-                                trip: controller.trip![index],
-                              );
-                            },
+                          child: RefreshIndicator(
+                            onRefresh: controller.refresh,
+                            child: ListView.builder(
+                              itemCount: controller.trip!.length,
+                              controller: controller.scrollController,
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                return TripCustomExpandTile(
+                                  index: (index + 1).toString(),
+                                  trip: controller.trip![index],
+                                );
+                              },
+                            ),
                           ),
                         ),
                         // Padding(
