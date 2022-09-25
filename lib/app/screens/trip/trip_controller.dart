@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:wtp_app/app/screens/trip/trip_presenter.dart';
 
 import '../../../domain/entities/trip.dart';
-import '../navigate/navigate_view.dart';
+import '../../utils/constant.dart';
+import '../../widgets/trip/navigate_view.dart';
 
 enum LoadingMoreStatus { loading, stable }
 
 class MyTripController extends Controller {
   final TripPresenter presenter;
 
-  late List<Trip> _trip;
-  List<Trip> get trip => _trip;
+  List<Trip>? _trip;
+  List<Trip>? get trip => _trip;
   int? _lastPage;
   int? get lastPage => _lastPage;
-  static int _page = 0;
-  bool isLoading = false;
+  int _page = 0;
   final ScrollController _scrollController = ScrollController();
   ScrollController? get scrollController => _scrollController;
 
@@ -23,16 +24,21 @@ class MyTripController extends Controller {
   @override
   void initListeners() async {
     /**/
+    Constant.configLoading();
     if (_page == 0) {
+      EasyLoading.show(status: 'loading please wait...');
       presenter.getData(++_page);
       refreshUI();
     }
 
     presenter.getTripOnNext = (TripModel trip) {
+      if (_trip == null) {
+        EasyLoading.show(status: "loading please wait...");
+      }
       if (_page == 1) {
         _trip = trip.trips!;
       } else {
-        _trip = _trip + trip.trips!;
+        _trip = _trip! + trip.trips!;
       }
       _lastPage = trip.lastPage;
       print("trip on next");
@@ -46,18 +52,27 @@ class MyTripController extends Controller {
         if (_page < (lastPage!.toInt())) {
           if (_scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
+            EasyLoading.show(status: "loading please wait...");
             presenter.getData(++_page);
             refreshUI();
           }
         }
       });
+      EasyLoading.dismiss();
       print("trip on complete");
     };
     /**/
   }
 
-  void navigate() {
-    Navigator.pushNamed(getContext(), NavigateView.routeName);
+  void navigate(String? destination, String? source) {
+    Navigator.push(
+      getContext(),
+      MaterialPageRoute(
+          builder: (context) => NavigateView(
+                destination: destination,
+                source: source,
+              )),
+    );
   }
 
   @override

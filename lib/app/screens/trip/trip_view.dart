@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/repository/trip/data_trip_repository.dart';
 import '../../utils/constant.dart';
+import '../../widgets/history/history_custom_expand_tile.dart';
+import '../../widgets/trip/trip_custom_expand_tile.dart';
 import 'trip_controller.dart';
 
 class TripView extends View {
@@ -18,36 +20,83 @@ class TripViewState extends ViewState<TripView, MyTripController> {
   TripViewState() : super(MyTripController(DataTripRepository()));
 
   @override
-  Widget get view => ControlledWidgetBuilder<MyTripController>(
-        builder: (context, controller) {
-          return Theme(
-            data: ThemeData(
-                colorScheme: Constant.lightColorScheme,
-                textTheme: GoogleFonts.openSansTextTheme().apply(
-                    displayColor: const Color(0xFF383838),
-                    bodyColor: const Color(0xFF383838)),
-                useMaterial3: true),
+  Widget get view {
+    return ControlledWidgetBuilder<MyTripController>(
+      builder: (context, controller) {
+        if (controller.trip == null) {
+          return Container();
+        }
+        return Theme(
+          data: ThemeData(
+              colorScheme: Constant.lightColorScheme,
+              textTheme: GoogleFonts.openSansTextTheme().apply(
+                  displayColor: const Color(0xFF383838),
+                  bodyColor: const Color(0xFF383838)),
+              useMaterial3: true),
+          child: DefaultTabController(
+            length: 2,
             child: SafeArea(
               child: Scaffold(
                 key: globalKey,
-                body: controller.trip == null
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        itemCount: controller.trip!.length,
-                        controller: controller.scrollController,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 100,
-                            child: ListTile(
-                              title: Text(index.toString()),
-                            ),
-                          );
-                        },
-                      ),
+                body: Column(
+                  children: [
+                    TabBar(
+                      indicatorColor: Constant.lightColorScheme.primary,
+                      tabs: [
+                        Tab(
+                          icon: Icon(
+                            Icons.car_rental,
+                            color: Constant.lightColorScheme.primary,
+                          ),
+                        ),
+                        Tab(
+                          icon: Icon(
+                            Icons.history,
+                            color: Constant.lightColorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: TabBarView(children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 1),
+                          child: ListView.builder(
+                            itemCount: controller.trip!.length,
+                            controller: controller.scrollController,
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return TripCustomExpandTile(
+                                index: (index + 1).toString(),
+                                trip: controller.trip![index],
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 1),
+                          child: ListView.builder(
+                            itemCount: 1,
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return HistoryCustomExpandTile(
+                                  index: (index + 1).toString());
+                            },
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
               ),
             ),
-          );
-        },
-      );
+          ),
+        );
+      },
+    );
+  }
 }

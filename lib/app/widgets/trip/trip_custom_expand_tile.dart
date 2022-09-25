@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
+import '../../../domain/entities/trip.dart';
 import '../../screens/trip/trip_controller.dart';
 import '../../utils/constant.dart';
+import '../global_custom/custom_text_softwrap.dart';
 import '../global_custom/nav_route_widget.dart';
 
 class TripCustomExpandTile extends StatelessWidget {
   final String? index;
-  const TripCustomExpandTile({Key? key, this.index}) : super(key: key);
+  final Trip? trip;
+
+  const TripCustomExpandTile({Key? key, this.index, this.trip})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,10 @@ class TripCustomExpandTile extends StatelessWidget {
           title: Container(
             width: 50,
             height: 50,
-            decoration: const BoxDecoration(
+            padding: EdgeInsets.only(right: 5),
+            decoration: BoxDecoration(
+              color:
+                  Constant.lightColorScheme.primaryContainer.withOpacity(0.3),
               borderRadius: BorderRadius.all(
                 Radius.circular(10),
               ),
@@ -29,23 +37,16 @@ class TripCustomExpandTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                    CircleAvatar(
+                      backgroundColor:
+                          Constant.lightColorScheme.onPrimaryContainer,
+                      child: Text(index.toString()),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18),
-                      child: Text(
-                        'John Client',
-                        style: TextStyle(
-                            color: Constant.lightColorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    )
+                    CustomTextWrap(text: trip!.client!),
                   ],
                 ),
                 Text(
-                  '47km',
+                  "${trip!.totalDistance!}km",
                   style: TextStyle(
                     color: Constant.lightColorScheme.onSurfaceVariant,
                   ),
@@ -57,11 +58,11 @@ class TripCustomExpandTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: NavRouteWidget(
-                onPressed: () => myTripController.navigate(),
+                onPressed: () => myTripController.navigate(
+                    trip!.tripStart!, trip!.tripStart!),
                 btnText: 'Navigate',
-                destination:
-                    'Panabo City Seawall and Park, 1, Bunawan, Panabo, Davao del Norte',
-                source: 'Corrales Avenue, Cagayan de Oro, Misamis Oriental',
+                destination: trip!.tripStart!,
+                source: trip!.tripEnd!,
               ),
             ),
           ]),

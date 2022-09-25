@@ -7,7 +7,6 @@ import 'app/screens/edit_profile/edit_profile_view.dart';
 import 'app/screens/home/home_view.dart';
 import 'app/screens/incentives/incentives_view.dart';
 import 'app/screens/login/login_screen.dart';
-import 'app/screens/navigate/navigate_view.dart';
 import 'app/screens/server_url/server_view.dart';
 import 'app/screens/splash/splash_view.dart';
 import 'app/screens/trip/trip_view.dart';
@@ -45,7 +44,6 @@ class _MyAppState extends State<MyApp> {
         TripView.routeName: (context) => const TripView(),
         IncentivesView.routeName: (context) => const IncentivesView(),
         HomeView.routeName: (context) => const HomeView(),
-        NavigateView.routeName: (context) => const NavigateView(),
         ServerView.routeName: (context) => const ServerView(),
       },
     );
