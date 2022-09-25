@@ -58,10 +58,8 @@ class TripModel {
 
   factory TripModel.fromJson(Map<String, dynamic> json) {
     return TripModel(
-      totalPage: json['to'],
-      perPage: json['per_page'],
       lastPage: json['last_page'],
-      currentPage: json['current_page'],
+      currentPage: json['current_page'] ?? 0,
       trips: (json['data'] as List).map((data) => Trip.fromJson(data)).toList(),
     );
   }

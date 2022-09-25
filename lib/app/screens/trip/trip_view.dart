@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/repository/trip/data_trip_repository.dart';
 import '../../utils/constant.dart';
-import '../../widgets/history/history_custom_expand_tile.dart';
 import '../../widgets/trip/trip_custom_expand_tile.dart';
 import 'trip_controller.dart';
 
@@ -34,7 +33,7 @@ class TripViewState extends ViewState<TripView, MyTripController> {
                   bodyColor: const Color(0xFF383838)),
               useMaterial3: true),
           child: DefaultTabController(
-            length: 2,
+            length: 1,
             child: SafeArea(
               child: Scaffold(
                 key: globalKey,
@@ -49,12 +48,12 @@ class TripViewState extends ViewState<TripView, MyTripController> {
                             color: Constant.lightColorScheme.primary,
                           ),
                         ),
-                        Tab(
-                          icon: Icon(
-                            Icons.history,
-                            color: Constant.lightColorScheme.primary,
-                          ),
-                        ),
+                        // Tab(
+                        //   icon: Icon(
+                        //     Icons.history,
+                        //     color: Constant.lightColorScheme.primary,
+                        //   ),
+                        // ),
                       ],
                     ),
                     Expanded(
@@ -75,19 +74,19 @@ class TripViewState extends ViewState<TripView, MyTripController> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: ListView.builder(
-                            itemCount: 1,
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return HistoryCustomExpandTile(
-                                  index: (index + 1).toString());
-                            },
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 1),
+                        //   child: ListView.builder(
+                        //     itemCount: 1,
+                        //     physics: const BouncingScrollPhysics(),
+                        //     shrinkWrap: true,
+                        //     scrollDirection: Axis.vertical,
+                        //     itemBuilder: (context, index) {
+                        //       return HistoryCustomExpandTile(
+                        //           index: (index + 1).toString());
+                        //     },
+                        //   ),
+                        // ),
                       ]),
                     ),
                   ],
