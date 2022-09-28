@@ -11,8 +11,8 @@
         android:label="wtp_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-<!--       <meta-data android:name="com.google.android.geo.API_KEY"-->
-<!--                  android:value="AIzaSyD9Y0bKzNdejkn6EKEyUP8rgJ0ozfpilNg"/>-->
+       <meta-data android:name="com.google.android.geo.API_KEY"
+                  android:value="AIzaSyD9Y0bKzNdejkn6EKEyUP8rgJ0ozfpilNg"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

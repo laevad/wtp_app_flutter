@@ -24,11 +24,11 @@ class TripCustomExpandTile extends StatelessWidget {
           title: Container(
             width: 50,
             height: 50,
-            padding: EdgeInsets.only(right: 5),
+            padding: const EdgeInsets.only(right: 5),
             decoration: BoxDecoration(
               color:
                   Constant.lightColorScheme.primaryContainer.withOpacity(0.3),
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(10),
               ),
             ),
