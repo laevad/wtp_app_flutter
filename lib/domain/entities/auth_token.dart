@@ -4,15 +4,21 @@ class AuthToken {
   String? passwordMsg;
   int? statusCode;
   String? invalidCred;
-  AuthToken(
-      {this.token,
-      this.emailMsg,
-      this.passwordMsg,
-      this.statusCode,
-      this.invalidCred});
+  String? id;
+  AuthToken({
+    this.token,
+    this.emailMsg,
+    this.passwordMsg,
+    this.statusCode,
+    this.invalidCred,
+    this.id,
+  });
 
   factory AuthToken.fromJson(Map<String, dynamic> response, int statusCode) {
-    return AuthToken(token: response['access_token'], statusCode: statusCode);
+    return AuthToken(
+        token: response['access_token'],
+        id: response['id'],
+        statusCode: statusCode);
   }
 
   factory AuthToken.fromJsonErrorMsg(
