@@ -57,7 +57,7 @@ class AnimatedToggleState extends State<AnimatedToggle> {
                     widget.values.length,
                     (index) => Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.05),
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                       child: Text(
                         widget.values[index],
                         style: TextStyle(

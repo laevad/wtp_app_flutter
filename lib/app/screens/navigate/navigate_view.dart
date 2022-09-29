@@ -107,7 +107,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                   Align(
                     alignment: Alignment.topCenter,
                     child: AnimatedToggle(
-                      values: const ['drive off', 'drive on'],
+                      values: const ['Track off', 'Track on'],
                       onToggleCallback: (value) {
                         setState(() {
                           controller.toggleValue = value;
