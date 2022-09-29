@@ -5,7 +5,7 @@ import 'package:wtp_app/app/screens/trip/trip_presenter.dart';
 
 import '../../../domain/entities/trip.dart';
 import '../../utils/constant.dart';
-import '../../widgets/trip/navigate_view.dart';
+import '../navigate/navigate_view.dart';
 
 enum LoadingMoreStatus { loading, stable }
 
@@ -74,14 +74,7 @@ class TripController extends Controller {
   }
 
   void navigate(String? destination, String? source) {
-    Navigator.push(
-      getContext(),
-      MaterialPageRoute(
-          builder: (context) => NavigateView(
-                destination: destination,
-                source: source,
-              )),
-    );
+    Navigator.pushNamed(getContext(), NavigateView.routeName);
   }
 
   @override

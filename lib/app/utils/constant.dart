@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
@@ -90,4 +91,11 @@ class Constant {
       ..dismissOnTap = false;
     // ..customAnimation = CustomAnimation();
   }
+
+  static ThemeData themeData = ThemeData(
+      colorScheme: Constant.lightColorScheme,
+      textTheme: GoogleFonts.openSansTextTheme().apply(
+          displayColor: const Color(0xFF383838),
+          bodyColor: const Color(0xFF383838)),
+      useMaterial3: true);
 }

@@ -48,6 +48,7 @@ class _NavigateViewState extends State<NavigateView> {
   Future<void> _determinePosition() async {
     Position position = await Geolocator.getCurrentPosition();
     currentLatLng = LatLng(position.latitude, position.longitude);
+
     setState(() {});
     return;
   }
