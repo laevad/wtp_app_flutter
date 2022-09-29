@@ -74,7 +74,10 @@ class TripController extends Controller {
   }
 
   void navigate(String? destination, String? source) {
-    Navigator.pushNamed(getContext(), NavigateView.routeName);
+    Navigator.pushNamed(getContext(), NavigateView.routeName, arguments: {
+      'destination': destination,
+      'source': source,
+    });
   }
 
   @override

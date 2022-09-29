@@ -26,6 +26,8 @@ class NavigateController extends Controller {
   Completer<GoogleMapController> get mapController => _controller;
   //device location
   loc.LocationData? currentLocation;
+  /* markers */
+  final Set<Marker> markers = <Marker>{};
 
   /*stream location*/
   final loc.Location newLoc = loc.Location();
@@ -85,6 +87,14 @@ class NavigateController extends Controller {
       _locationSubscription = null;
       refreshUI();
     }).listen((event) {
+      markers.add(Marker(
+        markerId: const MarkerId("current"),
+        position: currentLatLng,
+        icon: BitmapDescriptor.defaultMarker,
+        infoWindow: const InfoWindow(
+          title: 'My Location',
+        ),
+      ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
       mapControllerLocal
           .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(

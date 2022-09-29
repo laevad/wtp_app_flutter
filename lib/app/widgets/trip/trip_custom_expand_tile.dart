@@ -58,8 +58,8 @@ class TripCustomExpandTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: NavRouteWidget(
-                onPressed: () => myTripController.navigate(
-                    trip!.tripStart!, trip!.tripStart!),
+                onPressed: () =>
+                    myTripController.navigate(trip!.tripEnd!, trip!.tripStart!),
                 btnText: 'Navigate',
                 destination: trip!.tripStart!,
                 source: trip!.tripEnd!,

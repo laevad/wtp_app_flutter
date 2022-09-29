@@ -20,15 +20,17 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
   @override
   Widget get view => ControlledWidgetBuilder<NavigateController>(
         builder: (context, controller) {
+          final arguments = (ModalRoute.of(context)?.settings.arguments ??
+              <String, dynamic>{}) as Map;
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
               appBar: AppBar(),
               key: globalKey,
-              body: SingleChildScrollView(
-                child: Column(children: [
+              body: Stack(
+                children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.8,
+                    height: MediaQuery.of(context).size.height,
                     child: Container(
                       color: Colors.red,
                       child: GoogleMap(
@@ -39,20 +41,11 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                         onMapCreated: (GoogleMapController mapController) {
                           controller.mapController.complete(mapController);
                         },
-                        markers: <Marker>{
-                          Marker(
-                            markerId: const MarkerId("current"),
-                            position: controller.currentLatLng,
-                            icon: BitmapDescriptor.defaultMarker,
-                            infoWindow: const InfoWindow(
-                              title: 'My Location',
-                            ),
-                          )
-                        },
+                        markers: controller.markers,
                       ),
                     ),
                   ),
-                ]),
+                ],
               ),
             ),
           );
