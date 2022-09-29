@@ -24,8 +24,8 @@ class NavigateController extends Controller {
   double cameraTilt = 40;
   double cameraBearing = 30;
   /* */
-  final Completer<GoogleMapController> _controller = Completer();
-  Completer<GoogleMapController> get mapController => _controller;
+  final Completer<GoogleMapController> gmController = Completer();
+  Completer<GoogleMapController> get mapController => gmController;
   //device location
   loc.LocationData? currentLocation;
   /* markers */
@@ -41,6 +41,8 @@ class NavigateController extends Controller {
 
   /* bool */
   bool isStart = false;
+
+  /* test */
 
   @override
   void initListeners() {
@@ -67,7 +69,7 @@ class NavigateController extends Controller {
   @override
   void onInitState() async {
     _requestPermission();
-    // _goToCurrentLocation();
+    _goToCurrentLocation();
 
     polylinePoints = PolylinePoints();
     super.onInitState();
@@ -91,7 +93,7 @@ class NavigateController extends Controller {
   Future<void> _goToCurrentLocation() async {
     await _determinePosition();
 
-    final GoogleMapController mapControllerLocal = await _controller.future;
+    final GoogleMapController mapControllerLocal = await gmController.future;
     _locationSubscription = newLoc.onLocationChanged.handleError((onError) {
       print(onError);
       _locationSubscription?.cancel();
@@ -107,16 +109,16 @@ class NavigateController extends Controller {
         ),
       ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
-      mapControllerLocal
-          .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(
-          currentLatLng.latitude,
-          currentLatLng.longitude,
-        ),
-        zoom: cameraZoom,
-        tilt: cameraTilt,
-        bearing: cameraBearing,
-      )));
+      // mapControllerLocal
+      //     .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      //   target: LatLng(
+      //     currentLatLng.latitude,
+      //     currentLatLng.longitude,
+      //   ),
+      //   zoom: cameraZoom,
+      //   tilt: cameraTilt,
+      //   bearing: cameraBearing,
+      // )));
       refreshUI();
     });
     // location.onLocationChanged.listen((event) {
@@ -143,7 +145,8 @@ class NavigateController extends Controller {
     return;
   }
 
-  void setPolyLines(LatLng sourceLocation, LatLng destinationLocation) async {
+  void setPolyLines(LatLng sourceLocation, LatLng destinationLocation,
+      String source, String destination) async {
     PolylineResult? result = await polylinePoints?.getRouteBetweenCoordinates(
       "AIzaSyAzra1o8YI_Wiurg5N_qB1BGA4BffCPN94",
       PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
@@ -158,22 +161,22 @@ class NavigateController extends Controller {
             polylineId: const PolylineId('polyLine'),
             color: const Color(0xFF08A5CB),
             points: polyLineCoordinates,
-            width: 4),
+            width: 6),
       );
       markers.add(Marker(
         markerId: const MarkerId("source"),
         position: sourceLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-        infoWindow: const InfoWindow(
-          title: 'My Location',
+        infoWindow: InfoWindow(
+          title: source,
         ),
       ));
       markers.add(Marker(
         markerId: const MarkerId("destination"),
         position: destinationLocation,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-        infoWindow: const InfoWindow(
-          title: 'My Location',
+        infoWindow: InfoWindow(
+          title: destination,
         ),
       ));
       refreshUI();

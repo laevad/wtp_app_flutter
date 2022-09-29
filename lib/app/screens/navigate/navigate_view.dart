@@ -30,10 +30,45 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
             arguments['toLatitude'],
             arguments['toLongitude'],
           );
+          final bound = LatLngBounds(
+            southwest: sourceLocation,
+            northeast: destinationLocation,
+          );
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(
+                actions: [
+                  TextButton(
+                      onPressed: () async {
+                        final GoogleMapController mapControllerLocal =
+                            await controller.gmController.future;
+                        mapControllerLocal
+                            .animateCamera(CameraUpdate.newCameraPosition(
+                          CameraPosition(
+                            target: sourceLocation,
+                            zoom: 14.5,
+                            tilt: 50.0,
+                          ),
+                        ));
+                      },
+                      child: const Text('SOURCE')),
+                  TextButton(
+                      onPressed: () async {
+                        final GoogleMapController mapControllerLocal =
+                            await controller.gmController.future;
+                        mapControllerLocal
+                            .animateCamera(CameraUpdate.newCameraPosition(
+                          CameraPosition(
+                            target: destinationLocation,
+                            zoom: 14.5,
+                            tilt: 50.0,
+                          ),
+                        ));
+                      },
+                      child: const Text('DESTINATION')),
+                ],
+              ),
               key: globalKey,
               body: Stack(
                 children: [
@@ -42,13 +77,15 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                     child: Container(
                       color: Colors.red,
                       child: GoogleMap(
+                        zoomControlsEnabled: false,
                         polylines: controller.polyLines,
                         mapType: MapType.normal,
                         initialCameraPosition: CameraPosition(
                           target: controller.isStart
                               ? controller.currentLatLng
                               : sourceLocation,
-                          zoom: controller.isStart ? controller.cameraZoom : 17,
+                          zoom:
+                              controller.isStart ? controller.cameraZoom : 14.5,
                           tilt: controller.cameraTilt,
                           bearing: controller.cameraBearing,
                         ),
@@ -56,9 +93,36 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             (GoogleMapController mapController) async {
                           controller.mapController.complete(mapController);
                           controller.setPolyLines(
-                              sourceLocation, destinationLocation);
+                            sourceLocation,
+                            destinationLocation,
+                            arguments['source'],
+                            arguments['destination'],
+                          );
                         },
                         markers: controller.markers,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12.0, right: 12),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.red,
+                        onPressed: () async {
+                          final GoogleMapController mapControllerLocal =
+                              await controller.gmController.future;
+                          mapControllerLocal.animateCamera(
+                              CameraUpdate.newLatLngBounds(
+                                  LatLngBounds(
+                                      southwest: sourceLocation,
+                                      northeast: destinationLocation),
+                                  50.0));
+                        },
+                        child: const Icon(
+                          Icons.center_focus_strong,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
