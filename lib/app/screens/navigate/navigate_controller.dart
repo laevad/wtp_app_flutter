@@ -21,7 +21,7 @@ class NavigateController extends Controller {
   late LatLng currentLatLng = const LatLng(8.5212429, 124.5747574);
   /* */
   double cameraZoom = 16;
-  double cameraTilt = 40;
+  double cameraTilt = 50;
   double cameraBearing = 30;
   /* */
   final Completer<GoogleMapController> gmController = Completer();
@@ -40,10 +40,12 @@ class NavigateController extends Controller {
   final Set<Polyline> polyLines = <Polyline>{};
 
   /* bool */
-  bool isStart = false;
+  final bool _isStart = false;
+  bool get isStart => _isStart;
 
-  /* test */
-
+  /* map type */
+  MapType _currentMapType = MapType.normal;
+  MapType get currentMapType => _currentMapType;
   @override
   void initListeners() {
     /**/
@@ -69,7 +71,7 @@ class NavigateController extends Controller {
   @override
   void onInitState() async {
     _requestPermission();
-    _goToCurrentLocation();
+    // _goToCurrentLocation();
 
     polylinePoints = PolylinePoints();
     super.onInitState();
@@ -90,7 +92,7 @@ class NavigateController extends Controller {
     }
   }
 
-  Future<void> _goToCurrentLocation() async {
+  Future<void> goToCurrentLocation() async {
     await _determinePosition();
 
     final GoogleMapController mapControllerLocal = await gmController.future;
@@ -109,33 +111,19 @@ class NavigateController extends Controller {
         ),
       ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
-      // mapControllerLocal
-      //     .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      //   target: LatLng(
-      //     currentLatLng.latitude,
-      //     currentLatLng.longitude,
-      //   ),
-      //   zoom: cameraZoom,
-      //   tilt: cameraTilt,
-      //   bearing: cameraBearing,
-      // )));
+      mapControllerLocal
+          .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: LatLng(
+          currentLatLng.latitude,
+          currentLatLng.longitude,
+        ),
+        zoom: 16.5,
+        tilt: cameraTilt,
+        bearing: cameraBearing,
+      )));
+
       refreshUI();
     });
-    // location.onLocationChanged.listen((event) {
-    //   currentLatLng = LatLng(event.latitude!, event.longitude!);
-    //
-    //   mapControllerLocal
-    //       .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-    //     target: LatLng(
-    //       currentLatLng.latitude,
-    //       currentLatLng.longitude,
-    //     ),
-    //     zoom: cameraZoom,
-    //     tilt: cameraTilt,
-    //     bearing: cameraBearing,
-    //   )));
-    //   refreshUI();
-    // });
   }
 
   Future<void> _determinePosition() async {
@@ -159,10 +147,11 @@ class NavigateController extends Controller {
       polyLines.add(
         Polyline(
             polylineId: const PolylineId('polyLine'),
-            color: const Color(0xFF08A5CB),
+            color: const Color(0xD7CB0835),
             points: polyLineCoordinates,
             width: 6),
       );
+
       markers.add(Marker(
         markerId: const MarkerId("source"),
         position: sourceLocation,
@@ -179,7 +168,18 @@ class NavigateController extends Controller {
           title: destination,
         ),
       ));
-      refreshUI();
     }
+    refreshUI();
+  }
+
+  void changeMapType() {
+    refreshUI();
+    _currentMapType =
+        _currentMapType == MapType.normal ? MapType.satellite : MapType.normal;
+  }
+
+  void cancelLive() {
+    _locationSubscription?.cancel();
+    _locationSubscription = null;
   }
 }

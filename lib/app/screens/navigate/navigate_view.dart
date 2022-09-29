@@ -5,6 +5,7 @@ import 'package:wtp_app/app/screens/navigate/navigate_controller.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../utils/constant.dart';
+import '../../widgets/global_custom/custom_toggle_switch.dart';
 
 class NavigateView extends View {
   static const String routeName = '/navigateView';
@@ -20,6 +21,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
   @override
   Widget get view => ControlledWidgetBuilder<NavigateController>(
         builder: (context, controller) {
+          int _toggleValue = 0;
           final arguments = (ModalRoute.of(context)?.settings.arguments ??
               <String, dynamic>{}) as Map;
           LatLng sourceLocation = LatLng(
@@ -79,7 +81,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       child: GoogleMap(
                         zoomControlsEnabled: false,
                         polylines: controller.polyLines,
-                        mapType: MapType.normal,
+                        mapType: controller.currentMapType,
                         initialCameraPosition: CameraPosition(
                           target: controller.isStart
                               ? controller.currentLatLng
@@ -103,25 +105,76 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       ),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: AnimatedToggle(
+                      values: const ['drive off', 'drive on'],
+                      onToggleCallback: (value) {
+                        setState(() {
+                          _toggleValue = value;
+                        });
+                        _toggleValue == 1
+                            ? controller.goToCurrentLocation()
+                            : controller.cancelLive();
+                      },
+                      buttonColor: Constant.lightColorScheme.onPrimaryContainer,
+                      backgroundColor: Constant.lightColorScheme.surfaceVariant,
+                      textColor: const Color(0xFFFFFFFF),
+                    ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0, right: 12),
+                    padding: const EdgeInsets.all(10),
                     child: Align(
-                      alignment: Alignment.bottomRight,
+                      alignment: Alignment.topRight,
+                      child: Column(
+                        children: [
+                          FloatingActionButton(
+                            heroTag: "btn1",
+                            backgroundColor: Colors.red,
+                            onPressed: () async {
+                              final GoogleMapController mapControllerLocal =
+                                  await controller.gmController.future;
+                              mapControllerLocal.animateCamera(
+                                  CameraUpdate.newLatLngBounds(
+                                      LatLngBounds(
+                                          southwest: sourceLocation,
+                                          northeast: destinationLocation),
+                                      90.0));
+                            },
+                            child: const Icon(
+                              Icons.center_focus_strong,
+                              size: 45,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: FloatingActionButton(
+                              heroTag: "btn2",
+                              backgroundColor: Colors.green,
+                              onPressed: () => controller.changeMapType(),
+                              child: const Icon(
+                                Icons.map,
+                                color: Colors.white,
+                                size: 45,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
                       child: FloatingActionButton(
-                        backgroundColor: Colors.red,
-                        onPressed: () async {
-                          final GoogleMapController mapControllerLocal =
-                              await controller.gmController.future;
-                          mapControllerLocal.animateCamera(
-                              CameraUpdate.newLatLngBounds(
-                                  LatLngBounds(
-                                      southwest: sourceLocation,
-                                      northeast: destinationLocation),
-                                  50.0));
-                        },
+                        backgroundColor: Colors.purple,
+                        onPressed: () async {},
                         child: const Icon(
-                          Icons.center_focus_strong,
+                          Icons.add_location,
                           color: Colors.white,
+                          size: 45,
                         ),
                       ),
                     ),
