@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 
@@ -19,13 +19,17 @@ class NavigateController extends Controller {
   late LatLng currentLatLng = const LatLng(8.5212429, 124.5747574);
   /* */
   double cameraZoom = 16;
-  double cameraTilt = 80;
+  double cameraTilt = 40;
   double cameraBearing = 30;
   /* */
   final Completer<GoogleMapController> _controller = Completer();
   Completer<GoogleMapController> get mapController => _controller;
   //device location
-  LocationData? currentLocation;
+  loc.LocationData? currentLocation;
+
+  /*stream location*/
+  final loc.Location newLoc = loc.Location();
+  StreamSubscription<loc.LocationData>? _locationSubscription;
 
   @override
   void initListeners() {
@@ -43,16 +47,17 @@ class NavigateController extends Controller {
   }
 
   @override
+  void onDisposed() {
+    presenter.dispose();
+    _locationSubscription?.cancel();
+    super.onDisposed();
+  }
+
+  @override
   void onInitState() async {
     _requestPermission();
-    _goToCurrentLocation();
+    // _goToCurrentLocation();
     super.onInitState();
-    if (currentLocation == null) {
-      Location location = Location();
-      await location.getLocation().then((value) {
-        currentLocation = value;
-      });
-    }
   }
 
   void addLocation() {
@@ -72,11 +77,15 @@ class NavigateController extends Controller {
 
   Future<void> _goToCurrentLocation() async {
     await _determinePosition();
-    Location location = Location();
-    final GoogleMapController mapControllerLocal = await _controller.future;
-    location.onLocationChanged.listen((event) {
-      currentLatLng = LatLng(event.latitude!, event.longitude!);
 
+    final GoogleMapController mapControllerLocal = await _controller.future;
+    _locationSubscription = newLoc.onLocationChanged.handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      _locationSubscription = null;
+      refreshUI();
+    }).listen((event) {
+      currentLatLng = LatLng(event.latitude!, event.longitude!);
       mapControllerLocal
           .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: LatLng(
@@ -89,6 +98,21 @@ class NavigateController extends Controller {
       )));
       refreshUI();
     });
+    // location.onLocationChanged.listen((event) {
+    //   currentLatLng = LatLng(event.latitude!, event.longitude!);
+    //
+    //   mapControllerLocal
+    //       .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+    //     target: LatLng(
+    //       currentLatLng.latitude,
+    //       currentLatLng.longitude,
+    //     ),
+    //     zoom: cameraZoom,
+    //     tilt: cameraTilt,
+    //     bearing: cameraBearing,
+    //   )));
+    //   refreshUI();
+    // });
   }
 
   Future<void> _determinePosition() async {
