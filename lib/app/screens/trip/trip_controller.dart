@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:wtp_app/app/screens/trip/trip_presenter.dart';
-import 'package:wtp_app/domain/entities/location.dart';
 
 import '../../../domain/entities/trip.dart';
 import '../../utils/constant.dart';
@@ -15,15 +14,14 @@ class TripController extends Controller {
 
   List<Trip>? _trip;
   List<Trip>? get trip => _trip;
-  LocationModel? _location;
-  LocationModel? get location => _location;
+
   int? _lastPage;
   int? get lastPage => _lastPage;
   int _page = 0;
   final ScrollController _scrollController = ScrollController();
   ScrollController? get scrollController => _scrollController;
   TripController(tripRepository, repository)
-      : presenter = TripPresenter(tripRepository, repository);
+      : presenter = TripPresenter(tripRepository);
 
   Future refresh() async {
     _page = 0;
@@ -71,17 +69,7 @@ class TripController extends Controller {
       EasyLoading.dismiss();
       print("trip on complete");
     };
-    /**/
-    presenter.getUserLocationOnNext = (LocationModel location) {
-      _location = location;
-      print("user location on next");
-    };
-    presenter.getUserLocationOnError = (e) {
-      print("User location error ${e.toString()}");
-    };
-    presenter.getUserLocationOnComplete = () {
-      print("user location on complete");
-    };
+
     /**/
   }
 
@@ -94,10 +82,6 @@ class TripController extends Controller {
                 source: source,
               )),
     );
-  }
-
-  void addLocation() {
-    presenter.addUserLocation(12, 12);
   }
 
   @override

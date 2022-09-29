@@ -1,10 +1,10 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/app/screens/trip/trip_presenter.dart';
+import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 import 'package:wtp_app/domain/usecase/user/add_user_location_usecase.dart';
 
 class AddUserLocationUseCaseObserver
     extends Observer<AddUserLocationUseCaseResponse> {
-  final TripPresenter presenter;
+  final NavigatePresenter presenter;
 
   AddUserLocationUseCaseObserver(this.presenter);
 

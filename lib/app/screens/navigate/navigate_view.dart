@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_controller.dart';
 
+import '../../../data/repository/user/data_user_location_repository.dart';
+
 class NavigateView extends View {
   const NavigateView({Key? key}) : super(key: key);
 
@@ -10,7 +12,7 @@ class NavigateView extends View {
 }
 
 class NavigateViewState extends ViewState<NavigateView, NavigateController> {
-  NavigateViewState() : super(NavigateController());
+  NavigateViewState() : super(NavigateController(DataUserLocationRepository()));
 
   @override
   Widget get view => ControlledWidgetBuilder<NavigateController>(
