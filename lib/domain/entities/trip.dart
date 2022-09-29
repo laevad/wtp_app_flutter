@@ -10,10 +10,10 @@ class Trip {
   int? totalDistance;
   String? driver;
   String? createdAt;
-  String? fromLatitude;
-  String? fromLongitude;
-  String? toLatitude;
-  String? toLongitude;
+  double? fromLatitude;
+  double? fromLongitude;
+  double? toLatitude;
+  double? toLongitude;
 
   Trip({
     this.id,

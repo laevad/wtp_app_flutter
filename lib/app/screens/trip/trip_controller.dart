@@ -73,10 +73,21 @@ class TripController extends Controller {
     /**/
   }
 
-  void navigate(String? destination, String? source) {
+  void navigate({
+    String? destination,
+    String? source,
+    double? fromLatitude,
+    double? fromLongitude,
+    double? toLatitude,
+    double? toLongitude,
+  }) {
     Navigator.pushNamed(getContext(), NavigateView.routeName, arguments: {
       'destination': destination,
       'source': source,
+      'fromLatitude': fromLatitude,
+      'fromLongitude': fromLongitude,
+      'toLatitude': toLatitude,
+      'toLongitude': toLongitude,
     });
   }
 

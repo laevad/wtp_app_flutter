@@ -22,6 +22,14 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
         builder: (context, controller) {
           final arguments = (ModalRoute.of(context)?.settings.arguments ??
               <String, dynamic>{}) as Map;
+          LatLng sourceLocation = LatLng(
+            arguments['fromLatitude'],
+            arguments['fromLongitude'],
+          );
+          LatLng destinationLocation = LatLng(
+            arguments['toLatitude'],
+            arguments['toLongitude'],
+          );
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
@@ -34,12 +42,21 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                     child: Container(
                       color: Colors.red,
                       child: GoogleMap(
+                        polylines: controller.polyLines,
                         mapType: MapType.normal,
                         initialCameraPosition: CameraPosition(
-                            target: controller.currentLatLng,
-                            zoom: controller.cameraZoom),
-                        onMapCreated: (GoogleMapController mapController) {
+                          target: controller.isStart
+                              ? controller.currentLatLng
+                              : sourceLocation,
+                          zoom: controller.isStart ? controller.cameraZoom : 17,
+                          tilt: controller.cameraTilt,
+                          bearing: controller.cameraBearing,
+                        ),
+                        onMapCreated:
+                            (GoogleMapController mapController) async {
                           controller.mapController.complete(mapController);
+                          controller.setPolyLines(
+                              sourceLocation, destinationLocation);
                         },
                         markers: controller.markers,
                       ),

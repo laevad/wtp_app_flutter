@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
@@ -33,6 +35,13 @@ class NavigateController extends Controller {
   final loc.Location newLoc = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
 
+  PolylinePoints? polylinePoints;
+  List<LatLng> polyLineCoordinates = [];
+  final Set<Polyline> polyLines = <Polyline>{};
+
+  /* bool */
+  bool isStart = false;
+
   @override
   void initListeners() {
     /**/
@@ -59,6 +68,8 @@ class NavigateController extends Controller {
   void onInitState() async {
     _requestPermission();
     // _goToCurrentLocation();
+
+    polylinePoints = PolylinePoints();
     super.onInitState();
   }
 
@@ -130,5 +141,42 @@ class NavigateController extends Controller {
     currentLatLng = LatLng(position.latitude, position.longitude);
     refreshUI();
     return;
+  }
+
+  void setPolyLines(LatLng sourceLocation, LatLng destinationLocation) async {
+    PolylineResult? result = await polylinePoints?.getRouteBetweenCoordinates(
+      "AIzaSyAzra1o8YI_Wiurg5N_qB1BGA4BffCPN94",
+      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
+      PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
+    );
+    if (result?.status == 'OK') {
+      for (var point in result!.points) {
+        polyLineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+      polyLines.add(
+        Polyline(
+            polylineId: const PolylineId('polyLine'),
+            color: const Color(0xFF08A5CB),
+            points: polyLineCoordinates,
+            width: 4),
+      );
+      markers.add(Marker(
+        markerId: const MarkerId("source"),
+        position: sourceLocation,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+        infoWindow: const InfoWindow(
+          title: 'My Location',
+        ),
+      ));
+      markers.add(Marker(
+        markerId: const MarkerId("destination"),
+        position: destinationLocation,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+        infoWindow: const InfoWindow(
+          title: 'My Location',
+        ),
+      ));
+      refreshUI();
+    }
   }
 }
