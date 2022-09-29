@@ -21,7 +21,6 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
   @override
   Widget get view => ControlledWidgetBuilder<NavigateController>(
         builder: (context, controller) {
-          int _toggleValue = 0;
           final arguments = (ModalRoute.of(context)?.settings.arguments ??
               <String, dynamic>{}) as Map;
           LatLng sourceLocation = LatLng(
@@ -79,7 +78,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                     child: Container(
                       color: Colors.red,
                       child: GoogleMap(
-                        zoomControlsEnabled: false,
+                        zoomControlsEnabled: true,
                         polylines: controller.polyLines,
                         mapType: controller.currentMapType,
                         initialCameraPosition: CameraPosition(
@@ -111,11 +110,8 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       values: const ['drive off', 'drive on'],
                       onToggleCallback: (value) {
                         setState(() {
-                          _toggleValue = value;
+                          controller.toggleValue = value;
                         });
-                        _toggleValue == 1
-                            ? controller.goToCurrentLocation()
-                            : controller.cancelLive();
                       },
                       buttonColor: Constant.lightColorScheme.onPrimaryContainer,
                       backgroundColor: Constant.lightColorScheme.surfaceVariant,
@@ -170,7 +166,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       padding: const EdgeInsets.only(bottom: 12),
                       child: FloatingActionButton(
                         backgroundColor: Colors.purple,
-                        onPressed: () async {},
+                        onPressed: () async => controller.addMarker(),
                         child: const Icon(
                           Icons.add_location,
                           color: Colors.white,

@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
@@ -12,6 +11,8 @@ import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 import '../../../domain/entities/location.dart';
 
 class NavigateController extends Controller {
+  static int num = 1;
+  int toggleValue = 0;
   final NavigatePresenter presenter;
   LocationModel? _location;
   LocationModel? get location => _location;
@@ -23,6 +24,7 @@ class NavigateController extends Controller {
   double cameraZoom = 16;
   double cameraTilt = 50;
   double cameraBearing = 30;
+
   /* */
   final Completer<GoogleMapController> gmController = Completer();
   Completer<GoogleMapController> get mapController => gmController;
@@ -65,13 +67,14 @@ class NavigateController extends Controller {
   void onDisposed() {
     presenter.dispose();
     _locationSubscription?.cancel();
+    _locationSubscription = null;
     super.onDisposed();
   }
 
   @override
   void onInitState() async {
     _requestPermission();
-    // _goToCurrentLocation();
+    goToCurrentLocation();
 
     polylinePoints = PolylinePoints();
     super.onInitState();
@@ -93,8 +96,6 @@ class NavigateController extends Controller {
   }
 
   Future<void> goToCurrentLocation() async {
-    await _determinePosition();
-
     final GoogleMapController mapControllerLocal = await gmController.future;
     _locationSubscription = newLoc.onLocationChanged.handleError((onError) {
       print(onError);
@@ -111,26 +112,21 @@ class NavigateController extends Controller {
         ),
       ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
-      mapControllerLocal
-          .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(
-          currentLatLng.latitude,
-          currentLatLng.longitude,
-        ),
-        zoom: 16.5,
-        tilt: cameraTilt,
-        bearing: cameraBearing,
-      )));
+      toggleValue == 1
+          ? mapControllerLocal
+              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+              target: LatLng(
+                currentLatLng.latitude,
+                currentLatLng.longitude,
+              ),
+              zoom: 16.5,
+              tilt: cameraTilt,
+              bearing: cameraBearing,
+            )))
+          : null;
 
       refreshUI();
     });
-  }
-
-  Future<void> _determinePosition() async {
-    Position position = await Geolocator.getCurrentPosition();
-    currentLatLng = LatLng(position.latitude, position.longitude);
-    refreshUI();
-    return;
   }
 
   void setPolyLines(LatLng sourceLocation, LatLng destinationLocation,
@@ -181,5 +177,17 @@ class NavigateController extends Controller {
   void cancelLive() {
     _locationSubscription?.cancel();
     _locationSubscription = null;
+  }
+
+  void addMarker() {
+    markers.add(Marker(
+      markerId: MarkerId("${num++}"),
+      position: currentLatLng,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+      infoWindow: const InfoWindow(
+        title: 'My Location',
+      ),
+    ));
+    refreshUI();
   }
 }
