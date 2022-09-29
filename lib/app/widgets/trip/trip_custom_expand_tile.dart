@@ -16,8 +16,8 @@ class TripCustomExpandTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyTripController myTripController =
-        FlutterCleanArchitecture.getController<MyTripController>(context);
+    TripController myTripController =
+        FlutterCleanArchitecture.getController<TripController>(context);
     return Card(
       child: ExpansionTile(
           // initiallyExpanded: true,

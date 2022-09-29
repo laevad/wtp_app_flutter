@@ -3,6 +3,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/repository/trip/data_trip_repository.dart';
+import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/trip/trip_custom_expand_tile.dart';
 import 'trip_controller.dart';
@@ -15,12 +16,16 @@ class TripView extends View {
   TripViewState createState() => TripViewState();
 }
 
-class TripViewState extends ViewState<TripView, MyTripController> {
-  TripViewState() : super(MyTripController(DataTripRepository()));
+class TripViewState extends ViewState<TripView, TripController> {
+  TripViewState()
+      : super(TripController(
+          DataTripRepository(),
+          DataUserLocationRepository(),
+        ));
 
   @override
   Widget get view {
-    return ControlledWidgetBuilder<MyTripController>(
+    return ControlledWidgetBuilder<TripController>(
       builder: (context, controller) {
         if (controller.trip == null) {
           return Container();

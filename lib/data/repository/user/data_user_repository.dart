@@ -10,11 +10,8 @@ import '../../data_constants.dart';
 class DataUserRepository extends UserRepository {
   @override
   Future getUser() async {
-    var response = await http.get(Uri.parse("$siteURL/auth/me"), headers: {
-      'Authorization': 'Bearer ${await IsAuth.getData("token")}',
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
+    var response = await http.get(Uri.parse("$siteURL/auth/me"),
+        headers: await getHeader());
 
     return User.fromJson(jsonDecode(response.body));
   }
@@ -32,16 +29,11 @@ class DataUserRepository extends UserRepository {
       "password_confirmation": conPass,
     };
 
-    Map<String, String> headers = {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': 'bearer ${await IsAuth.getData("token")}',
-      'Accept': 'multipart/form-data'
-    };
     if (image.isNotEmpty) {
       var request = http.MultipartRequest(
           'post', Uri.parse("${await IsAuth.getData('url')}/user/update"))
         ..fields.addAll(body)
-        ..headers.addAll(headers)
+        ..headers.addAll(await getHeader())
         ..files.add(await http.MultipartFile.fromPath('image', image));
       final response = await request.send();
       print("Result: ${response.statusCode}");
@@ -59,7 +51,7 @@ class DataUserRepository extends UserRepository {
     var request = http.MultipartRequest(
         'post', Uri.parse("${await IsAuth.getData('url')}/user/update"))
       ..fields.addAll(body)
-      ..headers.addAll(headers);
+      ..headers.addAll(await getHeader());
     // ..files.add(await http.MultipartFile.fromPath('image', image));
     final response = await request.send();
     print("Result data: ${response.statusCode}");
