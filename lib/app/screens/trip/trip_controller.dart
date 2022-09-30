@@ -20,8 +20,7 @@ class TripController extends Controller {
   int _page = 0;
   final ScrollController _scrollController = ScrollController();
   ScrollController? get scrollController => _scrollController;
-  TripController(tripRepository, repository)
-      : presenter = TripPresenter(tripRepository);
+  TripController(tripRepository) : presenter = TripPresenter(tripRepository);
 
   Future refresh() async {
     _page = 0;

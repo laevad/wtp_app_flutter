@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../../data/repository/trip/data_trip_repository.dart';
-import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/trip/trip_custom_expand_tile.dart';
 import 'trip_controller.dart';
@@ -19,7 +18,6 @@ class TripViewState extends ViewState<TripView, TripController> {
   TripViewState()
       : super(TripController(
           DataTripRepository(),
-          DataUserLocationRepository(),
         ));
 
   @override
