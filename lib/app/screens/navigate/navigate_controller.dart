@@ -120,7 +120,7 @@ class NavigateController extends Controller {
                 currentLatLng.latitude,
                 currentLatLng.longitude,
               ),
-              zoom: 16.5,
+              zoom: 17.5,
               tilt: cameraTilt,
               bearing: cameraBearing,
             )))
