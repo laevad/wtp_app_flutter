@@ -69,7 +69,7 @@ class IncentivesViewState
                     child: const Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Total : 2000',
+                          'Total : 300',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,

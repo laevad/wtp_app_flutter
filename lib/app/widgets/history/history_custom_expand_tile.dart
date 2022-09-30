@@ -12,7 +12,7 @@ class HistoryCustomExpandTile extends StatelessWidget {
       child: ExpansionTile(
         collapsedTextColor: Colors.red,
         title: Text(
-          'sample history $index',
+          'PHP 300',
           style: TextStyle(
             color: Constant.lightColorScheme.onSurfaceVariant,
             fontWeight: FontWeight.w500,
@@ -20,12 +20,15 @@ class HistoryCustomExpandTile extends StatelessWidget {
         ),
         children: [
           ListTile(
-            leading: const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-            ),
             title: Text(
-              'Davidkun',
+              'Carmen, CDO\n-',
+              style: TextStyle(
+                color: Constant.lightColorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle: Text(
+              'Cogon Public Market',
               style: TextStyle(
                 color: Constant.lightColorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,

@@ -93,15 +93,16 @@ class TripController extends Controller {
     double? toLongitude,
   }) {
     presenter.updateStatus(bookingId!, 3);
-    Navigator.pushNamed(getContext(), NavigateView.routeName, arguments: {
-      'destination': destination,
-      'source': source,
-      'bookingId': bookingId,
-      'fromLatitude': fromLatitude,
-      'fromLongitude': fromLongitude,
-      'toLatitude': toLatitude,
-      'toLongitude': toLongitude,
-    });
+    Navigator.pushReplacementNamed(getContext(), NavigateView.routeName,
+        arguments: {
+          'destination': destination,
+          'source': source,
+          'bookingId': bookingId,
+          'fromLatitude': fromLatitude,
+          'fromLongitude': fromLongitude,
+          'toLatitude': toLatitude,
+          'toLongitude': toLongitude,
+        });
   }
 
   @override
