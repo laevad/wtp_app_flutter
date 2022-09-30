@@ -35,8 +35,7 @@ class LoginController extends Controller {
         });
 
         Future.delayed(const Duration(milliseconds: 2250)).then((value) async {
-          Navigator.pushNamedAndRemoveUntil(getContext(),
-              BottomNavView.routeName, (Route<dynamic> route) => false);
+          Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
         });
       }
 

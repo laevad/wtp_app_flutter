@@ -164,14 +164,14 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                           backgroundColor:
                               MaterialStateProperty.all(Colors.red),
                         ),
-                        onPressed: () {},
+                        onPressed: () => controller.backToHome(),
                         child: const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 40),
                           child: Text(
                             "Done",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

@@ -42,7 +42,7 @@ class TripCustomExpandTile extends StatelessWidget {
                           Constant.lightColorScheme.onPrimaryContainer,
                       child: Text(index.toString()),
                     ),
-                    CustomTextWrap(text: trip!.client!),
+                    CustomTextWrap(text: trip!.tripStatus!),
                   ],
                 ),
                 Text(
@@ -66,7 +66,7 @@ class TripCustomExpandTile extends StatelessWidget {
                   toLatitude: trip!.toLatitude,
                   toLongitude: trip!.toLongitude,
                 ),
-                btnText: 'Navigate',
+                btnText: 'Start Navigate',
                 destination: trip!.tripStart!,
                 source: trip!.tripEnd!,
               ),

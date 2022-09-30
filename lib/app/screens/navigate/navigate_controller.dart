@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
+
+import '../bottom_nav/bottom_nav_view.dart';
 
 class NavigateController extends Controller {
   static int num = 1;
@@ -189,5 +192,9 @@ class NavigateController extends Controller {
 
   void addLocationTo({required double latitude, required double longitude}) {
     presenter.addUserLocation(latitude, longitude);
+  }
+
+  void backToHome() {
+    Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
   }
 }

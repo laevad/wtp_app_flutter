@@ -125,6 +125,7 @@ class NavRouteWidget extends StatelessWidget {
               ),
               child: Text(
                 btnText!,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Constant.lightColorScheme.onPrimaryContainer,
