@@ -9,3 +9,11 @@ Future<Map<String, String>> getHeader() async {
     'Accept': 'multipart/form-data'
   };
 }
+
+Future<Map<String, String>> getHeader1() async {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': 'bearer ${await IsAuth.getData("token")}',
+    'Accept': 'application/json'
+  };
+}

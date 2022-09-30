@@ -20,7 +20,7 @@ class NavigatePresenter extends Presenter {
   }
 
   addUserLocation(double latitude, double longitude) {
-    return addUserLocationUseCase.execute(
+    addUserLocationUseCase.execute(
         AddUserLocationUseCaseObserver(this),
         AddUserLocationUseCaseParams(
           latitude,

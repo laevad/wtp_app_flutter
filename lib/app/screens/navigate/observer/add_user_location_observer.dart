@@ -20,6 +20,6 @@ class AddUserLocationUseCaseObserver
 
   @override
   void onNext(AddUserLocationUseCaseResponse? response) {
-    presenter.getUserLocationOnNext!(response!.location);
+    presenter.getUserLocationOnNext!();
   }
 }

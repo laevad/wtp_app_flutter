@@ -8,14 +8,11 @@ import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 
-import '../../../domain/entities/location.dart';
-
 class NavigateController extends Controller {
   static int num = 1;
   int toggleValue = 0;
   final NavigatePresenter presenter;
-  LocationModel? _location;
-  LocationModel? get location => _location;
+
   NavigateController(repository) : presenter = NavigatePresenter(repository);
 
   /* */
@@ -51,8 +48,7 @@ class NavigateController extends Controller {
   @override
   void initListeners() {
     /**/
-    presenter.getUserLocationOnNext = (LocationModel location) {
-      _location = location;
+    presenter.getUserLocationOnNext = () {
       print("user location on next");
     };
     presenter.getUserLocationOnError = (e) {
@@ -112,7 +108,7 @@ class NavigateController extends Controller {
         ),
       ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
-      print("latitude: ${event.latitude}");
+      addLocationTo(latitude: event.latitude!, longitude: event.longitude!);
       toggleValue == 1
           ? mapControllerLocal
               .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -189,5 +185,9 @@ class NavigateController extends Controller {
       ),
     ));
     refreshUI();
+  }
+
+  void addLocationTo({required double latitude, required double longitude}) {
+    presenter.addUserLocation(latitude, longitude);
   }
 }
