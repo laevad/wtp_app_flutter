@@ -19,7 +19,7 @@ class UpdateTripStatusUseCase extends UseCase<UpdateTripStatusUseCaseResponse,
       logger.finest('UpdateTripStatusUseCase successfully');
     } catch (e) {
       controller.addError(e);
-      logger.finest('UpdateTripStatusUseCase unsuccessful');
+      logger.severe('UpdateTripStatusUseCase unsuccessful');
     }
     return controller.stream;
   }

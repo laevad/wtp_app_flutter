@@ -26,6 +26,7 @@ class DataTripRepository extends TripRepository {
       'status_id': statusId
     };
     String url = "$siteURL/trip/status";
-    await http.post(Uri.parse(url), headers: await getHeader1());
+    await http.post(Uri.parse(url),
+        headers: await getHeader1(), body: jsonEncode(body));
   }
 }

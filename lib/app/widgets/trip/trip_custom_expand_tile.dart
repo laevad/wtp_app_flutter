@@ -59,6 +59,7 @@ class TripCustomExpandTile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: NavRouteWidget(
                 onPressed: () => myTripController.navigate(
+                  bookingId: trip!.id,
                   destination: trip!.tripEnd!,
                   source: trip!.tripStart!,
                   fromLatitude: trip!.fromLatitude,

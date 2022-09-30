@@ -71,9 +71,21 @@ class TripController extends Controller {
     };
 
     /**/
+    presenter.updateTripStatusOnNext = (res) {
+      print("trip update status on next");
+    };
+    presenter.updateTripStatusOnComplete = () {
+      print("trip update status on complete");
+    };
+    presenter.updateTripStatusOnError = (e) {
+      print("trip update status on error: ${e.toString()}");
+    };
+
+    /**/
   }
 
   void navigate({
+    required String? bookingId,
     String? destination,
     String? source,
     double? fromLatitude,
@@ -81,6 +93,7 @@ class TripController extends Controller {
     double? toLatitude,
     double? toLongitude,
   }) {
+    presenter.updateStatus(bookingId!, 3);
     Navigator.pushReplacementNamed(getContext(), NavigateView.routeName,
         arguments: {
           'destination': destination,
