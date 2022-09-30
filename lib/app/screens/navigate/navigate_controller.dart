@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 
 import '../bottom_nav/bottom_nav_view.dart';
+import '../trip/trip_view.dart';
 
 class NavigateController extends Controller {
   static int num = 1;
@@ -210,5 +211,8 @@ class NavigateController extends Controller {
     refreshUI();
   }
 
-  void updateStatus() {}
+  void back() {
+    Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
+    refreshUI();
+  }
 }

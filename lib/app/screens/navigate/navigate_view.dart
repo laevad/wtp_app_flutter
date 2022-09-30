@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_controller.dart';
+import 'package:wtp_app/app/widgets/global_custom/custom_appbar.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../utils/constant.dart';
@@ -35,7 +36,8 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
-              appBar: AppBar(
+              appBar: CustomAppBar(
+                onPressed: () => controller.back(),
                 actions: [
                   TextButton(
                       onPressed: () async {

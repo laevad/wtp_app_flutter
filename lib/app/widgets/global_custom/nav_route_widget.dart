@@ -135,23 +135,41 @@ class NavRouteWidget extends StatelessWidget {
                       ),
                     ),
                   )
-                : ElevatedButton(
-                    onPressed: () => onPressed != null
-                        ? onPressed!()
-                        : Navigator.pop(context),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Constant.lightColorScheme.inversePrimary),
-                    ),
-                    child: Text(
-                      btnText!,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Constant.lightColorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ),
+                : (status == 'Ongoing'
+                    ? ElevatedButton(
+                        onPressed: () => onPressed != null
+                            ? onPressed!()
+                            : Navigator.pop(context),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Constant.lightColorScheme.inversePrimary),
+                        ),
+                        child: Text(
+                          'Continue Navigate',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Constant.lightColorScheme.onPrimaryContainer,
+                          ),
+                        ),
+                      )
+                    : ElevatedButton(
+                        onPressed: () => onPressed != null
+                            ? onPressed!()
+                            : Navigator.pop(context),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Constant.lightColorScheme.inversePrimary),
+                        ),
+                        child: Text(
+                          btnText!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Constant.lightColorScheme.onPrimaryContainer,
+                          ),
+                        ),
+                      )),
           ),
         ],
       ),
