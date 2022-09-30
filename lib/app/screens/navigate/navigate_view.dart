@@ -78,7 +78,12 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                     child: Container(
                       color: Colors.red,
                       child: GoogleMap(
+                        mapToolbarEnabled: false,
+                        trafficEnabled: false,
+                        tiltGesturesEnabled: true,
+                        rotateGesturesEnabled: false,
                         zoomControlsEnabled: true,
+                        zoomGesturesEnabled: true,
                         polylines: controller.polyLines,
                         mapType: controller.currentMapType,
                         initialCameraPosition: CameraPosition(
@@ -131,11 +136,14 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                               final GoogleMapController mapControllerLocal =
                                   await controller.gmController.future;
                               mapControllerLocal.animateCamera(
-                                  CameraUpdate.newLatLngBounds(
-                                      LatLngBounds(
-                                          southwest: sourceLocation,
-                                          northeast: destinationLocation),
-                                      90.0));
+                                CameraUpdate.newLatLngBounds(
+                                  LatLngBounds(
+                                    southwest: sourceLocation,
+                                    northeast: destinationLocation,
+                                  ),
+                                  90.0,
+                                ),
+                              );
                             },
                             child: const Icon(
                               Icons.center_focus_strong,
@@ -156,22 +164,19 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12, bottom: 12),
+                            child: FloatingActionButton(
+                              backgroundColor: Colors.purple,
+                              onPressed: () async => controller.addMarker(),
+                              child: const Icon(
+                                Icons.add_location,
+                                color: Colors.white,
+                                size: 45,
+                              ),
+                            ),
+                          ),
                         ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.purple,
-                        onPressed: () async => controller.addMarker(),
-                        child: const Icon(
-                          Icons.add_location,
-                          color: Colors.white,
-                          size: 45,
-                        ),
                       ),
                     ),
                   ),

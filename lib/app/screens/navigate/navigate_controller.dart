@@ -112,6 +112,7 @@ class NavigateController extends Controller {
         ),
       ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
+      print("latitude: ${event.latitude}");
       toggleValue == 1
           ? mapControllerLocal
               .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -143,11 +144,10 @@ class NavigateController extends Controller {
       polyLines.add(
         Polyline(
             polylineId: const PolylineId('polyLine'),
-            color: const Color(0xD7CB0835),
+            color: const Color(0xB6B8CB08),
             points: polyLineCoordinates,
             width: 6),
       );
-
       markers.add(Marker(
         markerId: const MarkerId("source"),
         position: sourceLocation,
