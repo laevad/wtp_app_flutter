@@ -8,12 +8,14 @@ class NavRouteWidget extends StatelessWidget {
   final String? destination;
   final String? btnText;
   final Function? onPressed;
+  final String? status;
   const NavRouteWidget({
     Key? key,
     this.source,
     this.destination,
     this.btnText,
     this.onPressed,
+    this.status,
   }) : super(key: key);
 
   @override
@@ -116,22 +118,40 @@ class NavRouteWidget extends StatelessWidget {
           )),
           SizedBox(
             width: 100,
-            child: ElevatedButton(
-              onPressed: () =>
-                  onPressed != null ? onPressed!() : Navigator.pop(context),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Constant.lightColorScheme.inversePrimary),
-              ),
-              child: Text(
-                btnText!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Constant.lightColorScheme.onPrimaryContainer,
-                ),
-              ),
-            ),
+            child: status == 'Yet to Start'
+                ? ElevatedButton(
+                    onPressed: () => onPressed != null
+                        ? onPressed!()
+                        : Navigator.pop(context),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Constant.lightColorScheme.inversePrimary),
+                    ),
+                    child: Text(
+                      btnText!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Constant.lightColorScheme.onPrimaryContainer,
+                      ),
+                    ),
+                  )
+                : ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                    ),
+                    child: FittedBox(
+                      child: Text(
+                        'Completed',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Constant.lightColorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                    ),
+                  ),
           ),
         ],
       ),

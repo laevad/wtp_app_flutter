@@ -66,6 +66,7 @@ class TripCustomExpandTile extends StatelessWidget {
                   toLatitude: trip!.toLatitude,
                   toLongitude: trip!.toLongitude,
                 ),
+                status: trip!.tripStatus,
                 btnText: 'Start Navigate',
                 destination: trip!.tripStart!,
                 source: trip!.tripEnd!,
