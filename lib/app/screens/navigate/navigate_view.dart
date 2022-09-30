@@ -31,10 +31,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
             arguments['toLatitude'],
             arguments['toLongitude'],
           );
-          final bound = LatLngBounds(
-            southwest: sourceLocation,
-            northeast: destinationLocation,
-          );
+
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
@@ -129,28 +126,6 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       alignment: Alignment.topRight,
                       child: Column(
                         children: [
-                          FloatingActionButton(
-                            heroTag: "btn1",
-                            backgroundColor: Colors.red,
-                            onPressed: () async {
-                              final GoogleMapController mapControllerLocal =
-                                  await controller.gmController.future;
-                              mapControllerLocal.animateCamera(
-                                CameraUpdate.newLatLngBounds(
-                                  LatLngBounds(
-                                    southwest: sourceLocation,
-                                    northeast: destinationLocation,
-                                  ),
-                                  90.0,
-                                ),
-                              );
-                            },
-                            child: const Icon(
-                              Icons.center_focus_strong,
-                              size: 45,
-                              color: Colors.white,
-                            ),
-                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: FloatingActionButton(
@@ -177,6 +152,30 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red),
+                        ),
+                        onPressed: () {},
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          child: Text(
+                            "Done",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),

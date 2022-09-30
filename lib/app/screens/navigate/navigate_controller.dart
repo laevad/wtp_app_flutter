@@ -140,7 +140,7 @@ class NavigateController extends Controller {
       polyLines.add(
         Polyline(
             polylineId: const PolylineId('polyLine'),
-            color: const Color(0xB6B8CB08),
+            color: const Color(0xFF5008CB),
             points: polyLineCoordinates,
             width: 6),
       );
