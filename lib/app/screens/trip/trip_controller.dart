@@ -97,6 +97,7 @@ class TripController extends Controller {
         arguments: {
           'destination': destination,
           'source': source,
+          'bookingId': bookingId,
           'fromLatitude': fromLatitude,
           'fromLongitude': fromLongitude,
           'toLatitude': toLatitude,

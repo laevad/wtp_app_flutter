@@ -60,6 +60,16 @@ class NavigateController extends Controller {
     presenter.getUserLocationOnComplete = () {
       print("user location on complete");
     };
+
+    presenter.updateTripStatusOnNext = (res) {
+      print("trip update completed status on next");
+    };
+    presenter.updateTripStatusOnComplete = () {
+      print("trip update completed status on complete");
+    };
+    presenter.updateTripStatusOnError = (e) {
+      print("trip update completed status on error: ${e.toString()}");
+    };
   }
 
   @override
@@ -194,7 +204,11 @@ class NavigateController extends Controller {
     presenter.addUserLocation(latitude, longitude);
   }
 
-  void backToHome() {
+  void backToHome({required String bookingId, required int statusId}) {
+    presenter.updateStatus(bookingId, statusId);
     Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
+    refreshUI();
   }
+
+  void updateStatus() {}
 }

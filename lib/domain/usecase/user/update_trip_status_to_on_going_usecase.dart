@@ -4,11 +4,11 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../../data/repository/trip/data_trip_repository.dart';
 
-class UpdateTripStatusUseCase extends UseCase<UpdateTripStatusUseCaseResponse,
-    UpdateTripStatusUseCaseParams> {
+class UpdateTripStatusToOnGoingUseCase extends UseCase<
+    UpdateTripStatusUseCaseResponse, UpdateTripStatusUseCaseParams> {
   final DataTripRepository repository;
 
-  UpdateTripStatusUseCase(this.repository);
+  UpdateTripStatusToOnGoingUseCase(this.repository);
   @override
   Future<Stream<UpdateTripStatusUseCaseResponse?>> buildUseCaseStream(
       UpdateTripStatusUseCaseParams? params) async {

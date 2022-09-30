@@ -118,8 +118,24 @@ class NavRouteWidget extends StatelessWidget {
           )),
           SizedBox(
             width: 100,
-            child: status == 'Yet to Start'
+            child: status == 'Completed'
                 ? ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                    ),
+                    child: FittedBox(
+                      child: Text(
+                        'Completed',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Constant.lightColorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                    ),
+                  )
+                : ElevatedButton(
                     onPressed: () => onPressed != null
                         ? onPressed!()
                         : Navigator.pop(context),
@@ -133,22 +149,6 @@ class NavRouteWidget extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Constant.lightColorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  )
-                : ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.green),
-                    ),
-                    child: FittedBox(
-                      child: Text(
-                        'Completed',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Constant.lightColorScheme.onPrimaryContainer,
-                        ),
                       ),
                     ),
                   ),

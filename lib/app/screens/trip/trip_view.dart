@@ -15,10 +15,7 @@ class TripView extends View {
 }
 
 class TripViewState extends ViewState<TripView, TripController> {
-  TripViewState()
-      : super(TripController(
-          DataTripRepository(),
-        ));
+  TripViewState() : super(TripController(DataTripRepository()));
 
   @override
   Widget get view {

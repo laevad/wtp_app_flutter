@@ -17,4 +17,15 @@ class DataUserLocationRepository extends UserLocationRepository {
     await http.post(Uri.parse("$siteURL/user/location"),
         headers: await getHeader1(), body: jsonEncode(body1));
   }
+
+  @override
+  Future updateStatus(String bookingId, int statusId) async {
+    Map<String, dynamic> body = {
+      'booking_id': bookingId,
+      'status_id': statusId
+    };
+    String url = "$siteURL/trip/status";
+    await http.post(Uri.parse(url),
+        headers: await getHeader1(), body: jsonEncode(body));
+  }
 }
