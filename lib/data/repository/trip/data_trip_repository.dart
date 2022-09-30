@@ -20,8 +20,12 @@ class DataTripRepository extends TripRepository {
   }
 
   @override
-  Future updateStatus() {
-    // TODO: implement onGoing
-    throw UnimplementedError();
+  Future updateStatus(String bookingId, int statusId) async {
+    Map<String, dynamic> body = {
+      'booking_id': bookingId,
+      'status_id': statusId
+    };
+    String url = "$siteURL/trip/status";
+    await http.post(Uri.parse(url), headers: await getHeader1());
   }
 }
