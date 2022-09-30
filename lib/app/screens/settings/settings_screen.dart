@@ -28,14 +28,17 @@ class ProfileScreenState extends ViewState<SettingsScreen, SettingsController> {
       child: Scaffold(
         key: globalKey,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
           backgroundColor: Constant.lightColorScheme.primaryContainer,
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               SizedBox(
                 width: 8,
               ),
               Text(
-                'Account',
+                'Settings',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,

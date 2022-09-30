@@ -32,20 +32,16 @@ class IncentivesViewState
           child: Scaffold(
             key: globalKey,
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: Constant.lightColorScheme.primaryContainer,
-              title: Text(
-                controller.dateString(),
-                style: const TextStyle(
+              centerTitle: true,
+              title: const Text(
+                'Incentives',
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () => controller.selectDate(),
-                  icon: const Icon(Icons.date_range),
-                ),
-              ],
             ),
             body: SingleChildScrollView(
               child: Column(
