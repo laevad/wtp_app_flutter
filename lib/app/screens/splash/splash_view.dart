@@ -4,8 +4,8 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../data/repository/auth/data_auth_token_repository.dart';
+import '../../navigator/bottom_nav/bottom_nav_view.dart';
 import '../../utils/constant.dart';
-import '../bottom_nav/bottom_nav_view.dart';
 import '../login/login_screen.dart';
 import 'splash_controller.dart';
 

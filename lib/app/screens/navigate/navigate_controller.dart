@@ -9,7 +9,7 @@ import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 
-import '../bottom_nav/bottom_nav_view.dart';
+import '../../navigator/bottom_nav/bottom_nav_view.dart';
 
 class NavigateController extends Controller {
   static int num = 1;
