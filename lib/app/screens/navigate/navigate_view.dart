@@ -3,6 +3,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_controller.dart';
 import 'package:wtp_app/app/widgets/global_custom/custom_appbar.dart';
+import 'package:wtp_app/device/repository/data_direction_repository.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../utils/constant.dart';
@@ -17,7 +18,9 @@ class NavigateView extends View {
 }
 
 class NavigateViewState extends ViewState<NavigateView, NavigateController> {
-  NavigateViewState() : super(NavigateController(DataUserLocationRepository()));
+  NavigateViewState()
+      : super(NavigateController(
+            DataUserLocationRepository(), DataDirectionRepository()));
 
   @override
   Widget get view => ControlledWidgetBuilder<NavigateController>(
@@ -33,6 +36,9 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
             arguments['toLongitude'],
           );
 
+          String source = arguments['source'];
+          String destination = arguments['destination'];
+
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
@@ -47,7 +53,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             .animateCamera(CameraUpdate.newCameraPosition(
                           CameraPosition(
                             target: sourceLocation,
-                            zoom: 14.5,
+                            zoom: 17.5,
                             tilt: 50.0,
                           ),
                         ));
@@ -61,7 +67,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             .animateCamera(CameraUpdate.newCameraPosition(
                           CameraPosition(
                             target: destinationLocation,
-                            zoom: 14.5,
+                            zoom: 17.5,
                             tilt: 50.0,
                           ),
                         ));
@@ -90,19 +96,17 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                               ? controller.currentLatLng
                               : sourceLocation,
                           zoom:
-                              controller.isStart ? controller.cameraZoom : 14.5,
+                              controller.isStart ? controller.cameraZoom : 17.5,
                           tilt: controller.cameraTilt,
                           bearing: controller.cameraBearing,
                         ),
                         onMapCreated:
                             (GoogleMapController mapController) async {
                           controller.mapController.complete(mapController);
-                          controller.setPolyLines(
-                            sourceLocation,
-                            destinationLocation,
-                            arguments['source'],
-                            arguments['destination'],
-                          );
+                          controller.getDirection(
+                              sourceLocation, destinationLocation);
+                          controller.addOriginDestinationMarker(sourceLocation,
+                              destinationLocation, source, destination);
                         },
                         markers: controller.markers,
                       ),
@@ -128,6 +132,26 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       alignment: Alignment.topRight,
                       child: Column(
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: FloatingActionButton(
+                              heroTag: "btn0",
+                              backgroundColor: Colors.blue,
+                              onPressed: () async {
+                                final GoogleMapController mapControllerLocal =
+                                    await controller.gmController.future;
+                                mapControllerLocal.animateCamera(
+                                  CameraUpdate.newLatLngBounds(
+                                      controller.directions!.bounds!, 50.0),
+                                );
+                              },
+                              child: const Icon(
+                                Icons.center_focus_strong,
+                                color: Colors.white,
+                                size: 45,
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: FloatingActionButton(

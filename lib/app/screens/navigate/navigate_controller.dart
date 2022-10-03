@@ -1,13 +1,15 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
+import 'package:wtp_app/domain/entities/direction.dart';
+import 'package:wtp_app/domain/repositories/direction/direction_repository.dart';
 
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
 
@@ -16,7 +18,11 @@ class NavigateController extends Controller {
   int toggleValue = 0;
   final NavigatePresenter presenter;
 
-  NavigateController(repository) : presenter = NavigatePresenter(repository);
+  NavigateController(repository, DirectionRepository directionRepository)
+      : presenter = NavigatePresenter(
+          repository,
+          directionRepository,
+        );
 
   /* */
   late LatLng currentLatLng = const LatLng(8.5212429, 124.5747574);
@@ -30,16 +36,17 @@ class NavigateController extends Controller {
   Completer<GoogleMapController> get mapController => gmController;
   //device location
   loc.LocationData? currentLocation;
-  /* markers */
-  final Set<Marker> markers = <Marker>{};
 
   /*stream location*/
   final loc.Location newLoc = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
 
+  /*poly line */
   PolylinePoints? polylinePoints;
   List<LatLng> polyLineCoordinates = [];
   final Set<Polyline> polyLines = <Polyline>{};
+  /* markers */
+  final Set<Marker> markers = <Marker>{};
 
   /* bool */
   final bool _isStart = false;
@@ -48,6 +55,11 @@ class NavigateController extends Controller {
   /* map type */
   MapType _currentMapType = MapType.normal;
   MapType get currentMapType => _currentMapType;
+
+  /* get direction */
+  late final Directions _directions;
+  Directions? get directions => _directions;
+
   @override
   void initListeners() {
     /**/
@@ -70,6 +82,27 @@ class NavigateController extends Controller {
     presenter.updateTripStatusOnError = (e) {
       print("trip update completed status on error: ${e.toString()}");
     };
+
+    /* get direction */
+    presenter.getDirectionOnNext = (Directions directions) {
+      _directions = directions;
+      polyLines.add(Polyline(
+        polylineId: const PolylineId('overview_polyline'),
+        // color: const Color(0xFF5008CB),
+        color: Colors.red,
+        width: 7,
+        points: directions.polylinePoints!
+            .map((e) => LatLng(e.latitude, e.longitude))
+            .toList(),
+      ));
+      print("get direction on next");
+    };
+    presenter.getDirectionOnError = (e) {
+      print("get direction on error: ${e.toString()}");
+    };
+    presenter.getDirectionOnComplete = () {
+      print("get direction on complete");
+    };
   }
 
   @override
@@ -87,10 +120,6 @@ class NavigateController extends Controller {
 
     polylinePoints = PolylinePoints();
     super.onInitState();
-  }
-
-  void addLocation() {
-    presenter.addUserLocation(12, 12);
   }
 
   _requestPermission() async {
@@ -139,44 +168,6 @@ class NavigateController extends Controller {
     });
   }
 
-  void setPolyLines(LatLng sourceLocation, LatLng destinationLocation,
-      String source, String destination) async {
-    PolylineResult? result = await polylinePoints?.getRouteBetweenCoordinates(
-      "AIzaSyAzra1o8YI_Wiurg5N_qB1BGA4BffCPN94",
-      PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-      PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
-    );
-    if (result?.status == 'OK') {
-      for (var point in result!.points) {
-        polyLineCoordinates.add(LatLng(point.latitude, point.longitude));
-      }
-      polyLines.add(
-        Polyline(
-            polylineId: const PolylineId('polyLine'),
-            color: const Color(0xFF5008CB),
-            points: polyLineCoordinates,
-            width: 6),
-      );
-      markers.add(Marker(
-        markerId: const MarkerId("source"),
-        position: sourceLocation,
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-        infoWindow: InfoWindow(
-          title: source,
-        ),
-      ));
-      markers.add(Marker(
-        markerId: const MarkerId("destination"),
-        position: destinationLocation,
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-        infoWindow: InfoWindow(
-          title: destination,
-        ),
-      ));
-    }
-    refreshUI();
-  }
-
   void changeMapType() {
     refreshUI();
     _currentMapType =
@@ -213,5 +204,34 @@ class NavigateController extends Controller {
   void back() {
     Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
     refreshUI();
+  }
+
+  void getDirection(LatLng origin, LatLng destination) {
+    presenter.getDirection(
+        LatLng(origin.latitude, origin.longitude),
+        LatLng(
+          destination.latitude,
+          destination.longitude,
+        ));
+  }
+
+  void addOriginDestinationMarker(LatLng sourceLocation,
+      LatLng destinationLocation, String source, String destination) {
+    markers.add(Marker(
+      markerId: const MarkerId("source"),
+      position: sourceLocation,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+      infoWindow: InfoWindow(
+        title: source,
+      ),
+    ));
+    markers.add(Marker(
+      markerId: const MarkerId("destination"),
+      position: destinationLocation,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+      infoWindow: InfoWindow(
+        title: destination,
+      ),
+    ));
   }
 }
