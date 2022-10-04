@@ -12,6 +12,7 @@ import 'package:wtp_app/domain/entities/direction.dart';
 import 'package:wtp_app/domain/repositories/direction/direction_repository.dart';
 
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
+import '../../utils/constant.dart';
 
 class NavigateController extends Controller {
   static int num = 1;
@@ -27,7 +28,7 @@ class NavigateController extends Controller {
   /* */
   late LatLng currentLatLng = const LatLng(8.5212429, 124.5747574);
   /* */
-  double cameraZoom = 16;
+  double cameraZoom = 17.5;
   double cameraTilt = 50;
   double cameraBearing = 30;
 
@@ -48,10 +49,6 @@ class NavigateController extends Controller {
   /* markers */
   final Set<Marker> markers = <Marker>{};
 
-  /* bool */
-  final bool _isStart = false;
-  bool get isStart => _isStart;
-
   /* map type */
   MapType _currentMapType = MapType.normal;
   MapType get currentMapType => _currentMapType;
@@ -62,6 +59,7 @@ class NavigateController extends Controller {
 
   @override
   void initListeners() {
+    Constant.configLoading();
     /**/
     presenter.getUserLocationOnNext = () {
       print("user location on next");
@@ -84,7 +82,7 @@ class NavigateController extends Controller {
     };
 
     /* get direction */
-    presenter.getDirectionOnNext = (Directions directions) {
+    presenter.getDirectionOnNext = (Directions directions) async {
       _directions = directions;
       polyLines.add(Polyline(
         polylineId: const PolylineId('overview_polyline'),
@@ -95,6 +93,7 @@ class NavigateController extends Controller {
             .map((e) => LatLng(e.latitude, e.longitude))
             .toList(),
       ));
+
       print("get direction on next");
     };
     presenter.getDirectionOnError = (e) {

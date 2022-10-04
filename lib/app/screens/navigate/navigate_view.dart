@@ -53,8 +53,8 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             .animateCamera(CameraUpdate.newCameraPosition(
                           CameraPosition(
                             target: sourceLocation,
-                            zoom: 17.5,
-                            tilt: 50.0,
+                            zoom: controller.cameraZoom,
+                            tilt: controller.cameraTilt,
                           ),
                         ));
                       },
@@ -67,8 +67,8 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             .animateCamera(CameraUpdate.newCameraPosition(
                           CameraPosition(
                             target: destinationLocation,
-                            zoom: 17.5,
-                            tilt: 50.0,
+                            zoom: controller.cameraZoom,
+                            tilt: controller.cameraTilt,
                           ),
                         ));
                       },
@@ -84,19 +84,11 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       color: Colors.red,
                       child: GoogleMap(
                         mapToolbarEnabled: false,
-                        trafficEnabled: false,
-                        tiltGesturesEnabled: true,
-                        rotateGesturesEnabled: false,
-                        zoomControlsEnabled: true,
-                        zoomGesturesEnabled: true,
                         polylines: controller.polyLines,
                         mapType: controller.currentMapType,
                         initialCameraPosition: CameraPosition(
-                          target: controller.isStart
-                              ? controller.currentLatLng
-                              : sourceLocation,
-                          zoom:
-                              controller.isStart ? controller.cameraZoom : 17.5,
+                          target: sourceLocation,
+                          zoom: controller.cameraZoom,
                           tilt: controller.cameraTilt,
                           bearing: controller.cameraBearing,
                         ),
