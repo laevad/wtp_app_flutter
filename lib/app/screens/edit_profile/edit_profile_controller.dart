@@ -120,23 +120,32 @@ class EditProfileController extends Controller {
 
   void update() async {
     EasyLoading.show(status: 'loading...');
-    if (_image != null) {
-      await presenter.updateProfile(
-          _nameController!.text,
-          _emailController!.text,
-          currPassController!.text,
-          newPassController!.text,
-          conPassPassController!.text,
-          _image!.path.toString());
-    } else {
-      await presenter.updateProfile(
-          _nameController!.text,
-          _emailController!.text,
-          currPassController!.text,
-          newPassController!.text,
-          conPassPassController!.text,
-          '');
-    }
+
+    await presenter.updateProfile(
+        _nameController!.text,
+        _emailController!.text,
+        currPassController!.text,
+        newPassController!.text,
+        conPassPassController!.text,
+        '');
+    //unused
+    // if (_image != null) {
+    //   await presenter.updateProfile(
+    //       _nameController!.text,
+    //       _emailController!.text,
+    //       currPassController!.text,
+    //       newPassController!.text,
+    //       conPassPassController!.text,
+    //       _image!.path.toString());
+    // } else {
+    //   await presenter.updateProfile(
+    //       _nameController!.text,
+    //       _emailController!.text,
+    //       currPassController!.text,
+    //       newPassController!.text,
+    //       conPassPassController!.text,
+    //       '');
+    // }
   }
 
   @override

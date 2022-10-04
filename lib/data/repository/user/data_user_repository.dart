@@ -36,7 +36,7 @@ class DataUserRepository extends UserRepository {
         ..headers.addAll(await getHeader())
         ..files.add(await http.MultipartFile.fromPath('image', image));
       final response = await request.send();
-      print("Result: ${response.statusCode}");
+
       // await response.stream.bytesToString()
       if (response.statusCode == 422) {
         return User.fromJsonUpdate(
@@ -48,10 +48,10 @@ class DataUserRepository extends UserRepository {
           jsonDecode(await response.stream.bytesToString()),
           response.statusCode);
     }
-    var request = http.MultipartRequest(
-        'post', Uri.parse("${await IsAuth.getData('url')}/user/update"))
-      ..fields.addAll(body)
-      ..headers.addAll(await getHeader());
+    var request =
+        http.MultipartRequest('post', Uri.parse("$siteURL/user/update"))
+          ..fields.addAll(body)
+          ..headers.addAll(await getHeader1());
     // ..files.add(await http.MultipartFile.fromPath('image', image));
     final response = await request.send();
     print("Result data: ${response.statusCode}");
