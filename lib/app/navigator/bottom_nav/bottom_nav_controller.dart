@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/utils/constant.dart';
 
 class HomeController extends Controller {
@@ -14,8 +15,25 @@ class HomeController extends Controller {
     refreshUI();
   }
 
+  _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }
+
   @override
   void initListeners() {
     // TODO: implement initListeners
+  }
+
+  @override
+  void onInitState() {
+    _requestPermission();
+    super.onInitState();
   }
 }
