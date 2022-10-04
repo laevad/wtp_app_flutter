@@ -30,7 +30,14 @@ class BottomNavViewState extends ViewState<BottomNavView, HomeController> {
       child: ControlledWidgetBuilder<HomeController>(
         builder: (context, controller) {
           return Scaffold(
-            body: Constant.pages[Constant.selectedIndex],
+            body: PageView(
+              controller: controller.pageController,
+              children: Constant.pages,
+              onPageChanged: (index) async {
+                controller.setSelectedIndex = index;
+                controller.navigateBottomBar(index);
+              },
+            ),
             bottomNavigationBar: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -50,9 +57,13 @@ class BottomNavViewState extends ViewState<BottomNavView, HomeController> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: GNav(
+                  selectedIndex: controller.selectedIndex,
                   onTabChange: (index) {
                     debugPrint("selected tab: ${index.toString()}");
                     controller.navigateBottomBar(index);
+                    controller.pageController.animateToPage(index,
+                        duration: const Duration(milliseconds: 280),
+                        curve: Curves.linear);
                   },
                   gap: 8,
                   padding: const EdgeInsets.all(14),
