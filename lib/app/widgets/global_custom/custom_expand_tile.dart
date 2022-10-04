@@ -3,10 +3,10 @@ import 'package:wtp_app/domain/entities/incentive.dart';
 
 import '../../utils/constant.dart';
 
-class HistoryCustomExpandTile extends StatelessWidget {
+class CustomExpandTile extends StatelessWidget {
   final String? index;
   final Incentive? incentive;
-  const HistoryCustomExpandTile({Key? key, this.index, this.incentive})
+  const CustomExpandTile({Key? key, this.index, this.incentive})
       : super(key: key);
 
   @override
@@ -37,7 +37,9 @@ class HistoryCustomExpandTile extends StatelessWidget {
           ListTile(
             title: Text(
               softWrap: true,
-              "${incentive!.note?.toUpperCase()}",
+              incentive!.note != null
+                  ? "${incentive!.note?.toUpperCase()}"
+                  : 'N/A',
               maxLines: 3,
               style: TextStyle(
                 color: Constant.lightColorScheme.onSurfaceVariant,
