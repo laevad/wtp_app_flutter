@@ -1,30 +1,87 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:wtp_app/app/screens/incentives/incentives_presenter.dart';
+import 'package:wtp_app/data/repository/incentive/data_incentive_repository.dart';
+import 'package:wtp_app/domain/entities/incentive.dart';
+
+import '../../utils/constant.dart';
 
 class IncentivesController extends Controller {
-  DateTime? _date;
+  final IncentivePresenter presenter;
 
-  String dateString() {
-    if (_date == null) {
-      return "${DateTime.now().day.toString()} - ${DateTime.now().month.toString()} - ${DateTime.now().year.toString()}";
-    } else {
-      return '${_date?.day} - ${_date?.month} - ${_date?.year}';
+  List<Incentive>? _incentive;
+  int? _lastPage;
+  int? get lastPage => _lastPage;
+  int _page = 0;
+  /* */
+  final ScrollController _scrollController = ScrollController();
+  /* static ~ total amount */
+  double _amount = 0;
+
+  ScrollController? get scrollController => _scrollController;
+  List<Incentive>? get incentive => _incentive;
+  double get amount => _amount;
+
+  IncentivesController(DataIncentiveRepository repository)
+      : presenter = IncentivePresenter(repository);
+
+  @override
+  void initListeners() {
+    Constant.configLoading();
+    if (_page == 0) {
+      print(_page);
+      EasyLoading.show(status: 'loading please wait...');
+      presenter.getIncentive(++_page);
+      refreshUI();
     }
+
+    /* */
+    presenter.getIncentiveOnNext = (IncentiveModel incentive) {
+      if (incentive.incentive != null) {
+        for (var i = 0; i < incentive.incentive!.length; i++) {
+          _amount = amount + (incentive.incentive![i].amount as double);
+        }
+      }
+      if (_incentive == null) {
+        EasyLoading.show(status: "loading please wait...");
+      }
+      if (_page == 1) {
+        _incentive = incentive.incentive!;
+      } else {
+        _incentive = _incentive! + incentive.incentive!;
+      }
+      _lastPage = incentive.lastPage;
+      print("incentive on next");
+      refreshUI();
+    };
+    presenter.getIncentiveOnError = (e) {
+      print("Incentive on Error: ${e.toString()}");
+    };
+    presenter.getIncentiveOnComplete = () async {
+      _scrollController.addListener(() {
+        if (_page < (lastPage!.toInt())) {
+          if (_scrollController.position.pixels ==
+              _scrollController.position.maxScrollExtent) {
+            EasyLoading.show(status: "loading please wait...");
+            presenter.getIncentive(++_page);
+            refreshUI();
+          }
+        }
+      });
+      EasyLoading.dismiss();
+      print("trip on complete");
+    };
   }
 
   @override
-  void initListeners() {}
+  void onDisposed() {
+    presenter.dispose();
+    super.onDisposed();
+  }
 
-  selectDate() async {
-    final dateRes = await showDatePicker(
-        context: getContext(),
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2022),
-        lastDate: DateTime(2050));
-
-    if (dateRes != null) {
-      _date = dateRes;
-      refreshUI();
-    }
+  Future refresh() async {
+    _page = 0;
+    presenter.getIncentive(++_page);
   }
 }

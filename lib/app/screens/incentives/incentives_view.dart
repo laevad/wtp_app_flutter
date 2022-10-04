@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wtp_app/data/repository/incentive/data_incentive_repository.dart';
 
 import '../../utils/constant.dart';
 import '../../widgets/history/history_custom_expand_tile.dart';
@@ -16,12 +17,18 @@ class IncentivesView extends View {
 
 class IncentivesViewState
     extends ViewState<IncentivesView, IncentivesController> {
-  IncentivesViewState() : super(IncentivesController());
+  IncentivesViewState()
+      : super(IncentivesController(
+          DataIncentiveRepository(),
+        ));
 
   @override
   Widget get view {
     return ControlledWidgetBuilder<IncentivesController>(
       builder: (context, controller) {
+        if (controller.incentive == null) {
+          return Container();
+        }
         return Theme(
           data: ThemeData(
               colorScheme: Constant.lightColorScheme,
@@ -52,13 +59,15 @@ class IncentivesViewState
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 1),
                       child: ListView.builder(
-                        itemCount: 1,
+                        itemCount: controller.incentive!.length,
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
                           return HistoryCustomExpandTile(
-                              index: (index + 1).toString());
+                            index: (index + 1).toString(),
+                            incentive: controller.incentive![index],
+                          );
                         },
                       ),
                     ),
@@ -66,11 +75,11 @@ class IncentivesViewState
                   Container(
                     padding: const EdgeInsets.all(15),
                     width: double.infinity,
-                    child: const Align(
+                    child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Total : 300',
-                          style: TextStyle(
+                          'Total : ${controller.amount}',
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
