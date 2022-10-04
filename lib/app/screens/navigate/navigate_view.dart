@@ -134,7 +134,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                                     await controller.gmController.future;
                                 mapControllerLocal.animateCamera(
                                   CameraUpdate.newLatLngBounds(
-                                      controller.directions!.bounds!, 50.0),
+                                      controller.directions!.bounds!, 75.0),
                                 );
                               },
                               child: const Icon(
