@@ -9,7 +9,7 @@ class GetDirectionUseCaseObserver
   GetDirectionUseCaseObserver(this.presenter);
   @override
   void onComplete() {
-    presenter.getUserLocationOnComplete!();
+    presenter.getDirectionOnComplete!();
   }
 
   @override

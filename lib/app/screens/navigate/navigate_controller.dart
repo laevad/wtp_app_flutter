@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
@@ -93,7 +94,7 @@ class NavigateController extends Controller {
             .map((e) => LatLng(e.latitude, e.longitude))
             .toList(),
       ));
-
+      EasyLoading.dismiss();
       print("get direction on next");
     };
     presenter.getDirectionOnError = (e) {
