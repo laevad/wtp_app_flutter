@@ -21,6 +21,7 @@ class GetDirectionUseCase
       controller.add(GetDirectionUseCaseResponse(directions));
 
       logger.finest("GetDirectionUseCase successful");
+      controller.close();
     } catch (e) {
       controller.addError(e);
       logger.severe("GetDirectionUseCase unsuccessful");

@@ -18,6 +18,7 @@ class AddMarkerUseCase
           params!.bookingId, params.latitude, params.longitude);
       controller.add(AddMarkerUseCaseResponse(mapMarker));
       logger.finest("AddMarkerUseCase successful");
+      controller.close();
     } catch (e) {
       controller.addError(e);
       logger.severe("AddMarkerUseCase unsuccessful");

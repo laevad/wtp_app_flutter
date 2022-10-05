@@ -59,6 +59,10 @@ class NavigateController extends Controller {
   late final Directions _directions;
   Directions? get directions => _directions;
 
+  /* list of markers from server */
+  List<MapMarker>? _mapMarker;
+  List<MapMarker>? get mapMarker => _mapMarker;
+
   @override
   void initListeners() {
     Constant.configLoading();
@@ -113,10 +117,36 @@ class NavigateController extends Controller {
     presenter.addMarkerOnNext = (MapMarker mapMarker) {
       print("add marker on next");
       EasyLoading.dismiss();
+      refreshUI();
     };
     presenter.addMarkerOnComplete = () {
       print("add marker complete");
       EasyLoading.dismiss();
+    };
+
+    /* get marker */
+
+    presenter.getMarkerOnError = (e) {
+      print("get marker on error: ${e.toString()}");
+    };
+    presenter.getMarkerOnNext = (MapMarkerModel marker) {
+      _mapMarker = marker.mapMarker;
+      if (_mapMarker != null) {
+        for (int i = 0; i < _mapMarker!.length; i++) {
+          markers.add(Marker(
+            markerId: MarkerId(_mapMarker![i].id.toString()),
+            position:
+                LatLng(_mapMarker![i].latitude!, _mapMarker![i].longitude!),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueMagenta),
+          ));
+        }
+      }
+      print("get marker on next");
+      refreshUI();
+    };
+    presenter.getMarkerOnComplete = () {
+      print("get marker on complete");
     };
   }
 
@@ -251,11 +281,16 @@ class NavigateController extends Controller {
   }
 
   /* add marker */
-  void addMapMarker(String bookingId) {
-    presenter.addMapMarker(
+  void addMapMarker(String bookingId) async {
+    await presenter.addMapMarker(
       bookingId,
       currentLatLng.latitude,
       currentLatLng.longitude,
     );
+  }
+
+  /* get marker */
+  void getMarker(String bookingId) {
+    presenter.getMapMarker(bookingId);
   }
 }

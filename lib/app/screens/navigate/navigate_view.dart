@@ -104,6 +104,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                               sourceLocation, destinationLocation);
                           controller.addOriginDestinationMarker(sourceLocation,
                               destinationLocation, source, destination);
+                          controller.getMarker(bookingId);
                         },
                         markers: controller.markers,
                       ),
@@ -165,9 +166,12 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12, bottom: 12),
                             child: FloatingActionButton(
+                              heroTag: 'addLo',
                               backgroundColor: Colors.purple,
-                              onPressed: () async =>
-                                  controller.addMapMarker(bookingId),
+                              onPressed: () async {
+                                controller.addMapMarker(bookingId);
+                                controller.addMarker();
+                              },
                               child: const Icon(
                                 Icons.add_location,
                                 color: Colors.white,

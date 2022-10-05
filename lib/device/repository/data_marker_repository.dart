@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
+import 'package:wtp_app/domain/entities/map_marker.dart';
 import 'package:wtp_app/domain/repositories/direction/marker_repository.dart';
 
 import '../../data/data_constants.dart';
@@ -21,5 +22,16 @@ class DataMarkerRepository extends MarkerRepository {
     if (res.statusCode != 201) {
       throw Error();
     }
+  }
+
+  @override
+  Future getMarkers(String bookingId) async {
+    Map<String, dynamic> body = {
+      'booking_id': bookingId,
+    };
+    final res = await http.post(Uri.parse("$siteURL/marker/get-marker"),
+        headers: await getHeader1(), body: jsonEncode(body));
+
+    return MapMarkerModel.fromJson(jsonDecode(res.body));
   }
 }

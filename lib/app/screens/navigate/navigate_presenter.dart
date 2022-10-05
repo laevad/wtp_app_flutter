@@ -5,11 +5,13 @@ import 'package:wtp_app/device/repository/data_marker_repository.dart';
 import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../../domain/usecase/direction/add_marker_usecase.dart';
 import '../../../domain/usecase/direction/get_direction_usercase.dart';
+import '../../../domain/usecase/direction/get_marker_usecase.dart';
 import '../../../domain/usecase/user/add_user_location_usecase.dart';
 import '../../../domain/usecase/user/update_trip_status_to_complete_usecase.dart';
 import 'observer/add_marker_observer.dart';
 import 'observer/add_user_location_observer.dart';
 import 'observer/get_direction_observer.dart';
+import 'observer/get_marker_observer.dart';
 import 'observer/update_trip_status_completed_observer.dart';
 
 class NavigatePresenter extends Presenter {
@@ -30,10 +32,15 @@ class NavigatePresenter extends Presenter {
   Function? addMarkerOnNext;
   Function? addMarkerOnComplete;
 
+  Function? getMarkerOnError;
+  Function? getMarkerOnNext;
+  Function? getMarkerOnComplete;
+
   final AddUserLocationUseCase addUserLocationUseCase;
   final UpdateTripStatusToCompleteUseCase tripStatusToCompleteUseCase;
   final GetDirectionUseCase getDirectionUseCase;
   final AddMarkerUseCase addMarkerUseCase;
+  final GetMarkerUseCase getMarkerUseCase;
 
   NavigatePresenter(
     DataUserLocationRepository repository,
@@ -43,13 +50,16 @@ class NavigatePresenter extends Presenter {
         tripStatusToCompleteUseCase =
             UpdateTripStatusToCompleteUseCase(repository),
         getDirectionUseCase = GetDirectionUseCase(directionRepository),
-        addMarkerUseCase = AddMarkerUseCase(markerRepository);
+        addMarkerUseCase = AddMarkerUseCase(markerRepository),
+        getMarkerUseCase = GetMarkerUseCase(markerRepository);
 
   @override
   void dispose() {
     addUserLocationUseCase.dispose();
     tripStatusToCompleteUseCase.dispose();
     getDirectionUseCase.dispose();
+    addMarkerUseCase.dispose();
+    getMarkerUseCase.dispose();
   }
 
   addUserLocation(double latitude, double longitude) {
@@ -74,5 +84,12 @@ class NavigatePresenter extends Presenter {
   addMapMarker(String bookingId, double latitude, double longitude) {
     addMarkerUseCase.execute(AddMarkerUseCaseObserver(this),
         AddMarkerUseCaseParams(bookingId, latitude, longitude));
+  }
+
+  void getMapMarker(String bookingId) {
+    return getMarkerUseCase.execute(
+      GetMarkerUseCaseObserver(this),
+      GetMarkerUseCaseParams(bookingId),
+    );
   }
 }
