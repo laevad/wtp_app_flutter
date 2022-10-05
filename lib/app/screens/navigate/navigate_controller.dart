@@ -10,8 +10,10 @@ import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
 import 'package:wtp_app/domain/entities/direction.dart';
+import 'package:wtp_app/domain/entities/map_marker.dart';
 import 'package:wtp_app/domain/repositories/direction/direction_repository.dart';
 
+import '../../../device/repository/data_marker_repository.dart';
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
 import '../../utils/constant.dart';
 
@@ -20,11 +22,10 @@ class NavigateController extends Controller {
   int toggleValue = 0;
   final NavigatePresenter presenter;
 
-  NavigateController(repository, DirectionRepository directionRepository)
+  NavigateController(repository, DirectionRepository directionRepository,
+      DataMarkerRepository markerRepository)
       : presenter = NavigatePresenter(
-          repository,
-          directionRepository,
-        );
+            repository, directionRepository, markerRepository);
 
   /* */
   late LatLng currentLatLng = const LatLng(8.5212429, 124.5747574);
@@ -102,6 +103,20 @@ class NavigateController extends Controller {
     };
     presenter.getDirectionOnComplete = () {
       print("get direction on complete");
+    };
+
+    /* add marker */
+    presenter.addMarkerOnError = (e) {
+      print("add marker on error: ${e.toString()}");
+      EasyLoading.dismiss();
+    };
+    presenter.addMarkerOnNext = (MapMarker mapMarker) {
+      print("add marker on next");
+      EasyLoading.dismiss();
+    };
+    presenter.addMarkerOnComplete = () {
+      print("add marker complete");
+      EasyLoading.dismiss();
     };
   }
 
@@ -185,7 +200,7 @@ class NavigateController extends Controller {
       position: currentLatLng,
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
       infoWindow: const InfoWindow(
-        title: 'My Location',
+        title: 'Drop',
       ),
     ));
     refreshUI();
@@ -233,5 +248,14 @@ class NavigateController extends Controller {
         title: destination,
       ),
     ));
+  }
+
+  /* add marker */
+  void addMapMarker(String bookingId) {
+    presenter.addMapMarker(
+      bookingId,
+      currentLatLng.latitude,
+      currentLatLng.longitude,
+    );
   }
 }

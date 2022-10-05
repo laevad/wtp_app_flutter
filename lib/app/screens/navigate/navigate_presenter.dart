@@ -1,9 +1,13 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:wtp_app/device/repository/data_marker_repository.dart';
 
+import '../../../data/repository/user/data_user_location_repository.dart';
+import '../../../domain/usecase/direction/add_marker_usecase.dart';
 import '../../../domain/usecase/direction/get_direction_usercase.dart';
 import '../../../domain/usecase/user/add_user_location_usecase.dart';
 import '../../../domain/usecase/user/update_trip_status_to_complete_usecase.dart';
+import 'observer/add_marker_observer.dart';
 import 'observer/add_user_location_observer.dart';
 import 'observer/get_direction_observer.dart';
 import 'observer/update_trip_status_completed_observer.dart';
@@ -22,15 +26,24 @@ class NavigatePresenter extends Presenter {
   Function? getDirectionOnError;
   Function? getDirectionOnComplete;
 
+  Function? addMarkerOnError;
+  Function? addMarkerOnNext;
+  Function? addMarkerOnComplete;
+
   final AddUserLocationUseCase addUserLocationUseCase;
   final UpdateTripStatusToCompleteUseCase tripStatusToCompleteUseCase;
   final GetDirectionUseCase getDirectionUseCase;
+  final AddMarkerUseCase addMarkerUseCase;
 
-  NavigatePresenter(repository, directionRepository)
-      : addUserLocationUseCase = AddUserLocationUseCase(repository),
+  NavigatePresenter(
+    DataUserLocationRepository repository,
+    directionRepository,
+    DataMarkerRepository markerRepository,
+  )   : addUserLocationUseCase = AddUserLocationUseCase(repository),
         tripStatusToCompleteUseCase =
             UpdateTripStatusToCompleteUseCase(repository),
-        getDirectionUseCase = GetDirectionUseCase(directionRepository);
+        getDirectionUseCase = GetDirectionUseCase(directionRepository),
+        addMarkerUseCase = AddMarkerUseCase(markerRepository);
 
   @override
   void dispose() {
@@ -56,5 +69,10 @@ class NavigatePresenter extends Presenter {
   updateStatus(String bookingId, int statusId) {
     tripStatusToCompleteUseCase.execute(UpdateTripStatusCompletedObserver(this),
         UpdateTripStatusToCompleteUseCaseParams(bookingId, statusId));
+  }
+
+  addMapMarker(String bookingId, double latitude, double longitude) {
+    addMarkerUseCase.execute(AddMarkerUseCaseObserver(this),
+        AddMarkerUseCaseParams(bookingId, latitude, longitude));
   }
 }

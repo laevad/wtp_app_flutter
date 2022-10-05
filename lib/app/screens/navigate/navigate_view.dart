@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_controller.dart';
 import 'package:wtp_app/app/widgets/global_custom/custom_appbar.dart';
 import 'package:wtp_app/device/repository/data_direction_repository.dart';
+import 'package:wtp_app/device/repository/data_marker_repository.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../utils/constant.dart';
@@ -20,7 +21,10 @@ class NavigateView extends View {
 class NavigateViewState extends ViewState<NavigateView, NavigateController> {
   NavigateViewState()
       : super(NavigateController(
-            DataUserLocationRepository(), DataDirectionRepository()));
+          DataUserLocationRepository(),
+          DataDirectionRepository(),
+          DataMarkerRepository(),
+        ));
 
   @override
   Widget get view => ControlledWidgetBuilder<NavigateController>(
@@ -38,6 +42,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
 
           String source = arguments['source'];
           String destination = arguments['destination'];
+          String bookingId = arguments['bookingId'];
 
           return Theme(
             data: Constant.themeData,
@@ -161,7 +166,8 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                             padding: const EdgeInsets.only(top: 12, bottom: 12),
                             child: FloatingActionButton(
                               backgroundColor: Colors.purple,
-                              onPressed: () async => controller.addMarker(),
+                              onPressed: () async =>
+                                  controller.addMapMarker(bookingId),
                               child: const Icon(
                                 Icons.add_location,
                                 color: Colors.white,
