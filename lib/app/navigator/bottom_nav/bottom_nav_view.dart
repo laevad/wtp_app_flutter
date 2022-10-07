@@ -62,7 +62,7 @@ class BottomNavViewState extends ViewState<BottomNavView, HomeController> {
                     debugPrint("selected tab: ${index.toString()}");
                     controller.navigateBottomBar(index);
                     controller.pageController.animateToPage(index,
-                        duration: const Duration(milliseconds: 280),
+                        duration: const Duration(milliseconds: 250),
                         curve: Curves.linear);
                   },
                   gap: 8,

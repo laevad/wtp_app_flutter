@@ -37,22 +37,22 @@ class Trip {
 
   factory Trip.fromJson(Map<String, dynamic> json) {
     return Trip(
-        id: json['id'],
-        client: json['client'],
-        vehicle: json['vehicle'],
-        tripStart: json['t_trip_start'],
-        tripEnd: json['t_trip_end'],
-        startDate: json['trip_start_date'],
-        endDate: json['trip_end_date'],
-        tripStatus: json['trip_status'],
-        totalDistance: json['t_total_distance'],
-        driver: json['driver'],
-        createdAt: json['created_at'],
-        fromLatitude: json['from_latitude'],
-        fromLongitude: json['from_longitude'],
-        toLatitude: json['to_latitude'],
-        toLongitude: json['to_longitude'],
-        statusId: json['status_id']);
+        id: json['id'] ?? '',
+        client: json['client'] ?? '',
+        vehicle: json['vehicle'] ?? '',
+        tripStart: json['t_trip_start'] ?? '',
+        tripEnd: json['t_trip_end'] ?? '',
+        startDate: json['trip_start_date'] ?? '',
+        endDate: json['trip_end_date'] ?? '',
+        tripStatus: json['trip_status'] ?? '',
+        totalDistance: json['t_total_distance'] ?? 0,
+        driver: json['driver'] ?? '',
+        createdAt: json['created_at'] ?? '',
+        fromLatitude: json['from_latitude'] ?? '',
+        fromLongitude: json['from_longitude'] ?? '',
+        toLatitude: json['to_latitude'] ?? '',
+        toLongitude: json['to_longitude'] ?? '',
+        statusId: json['status_id'] ?? 0);
   }
 }
 

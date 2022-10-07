@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
 import 'package:wtp_app/domain/entities/trip.dart';
 import 'package:wtp_app/domain/repositories/trip/trip_repository.dart';
 
@@ -11,8 +12,18 @@ class DataTripRepository extends TripRepository {
   @override
   Future<TripModel> getAllTrip(int page) async {
     String url = "$siteURL/trip/trip?page=$page";
-    var response = await http.get(Uri.parse(url), headers: await getHeader1());
+    Map<String, dynamic> body1 = {
+      'driver_id': await IsAuth.getData('id'),
+    };
 
+    var response = await http.post(
+      Uri.parse(url),
+      headers: await getHeader1(),
+      body: jsonEncode(body1),
+    );
+
+    print("Body===============");
+    print(response.body);
     if (response.statusCode == 200) {
       return TripModel.fromJson(jsonDecode(response.body));
     }
