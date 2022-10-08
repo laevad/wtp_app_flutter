@@ -15,6 +15,8 @@ class Trip {
   double? fromLongitude;
   double? toLatitude;
   double? toLongitude;
+  String? driveId;
+  String? clientId;
 
   Trip({
     this.id,
@@ -33,6 +35,8 @@ class Trip {
     this.fromLongitude,
     this.toLatitude,
     this.toLongitude,
+    this.clientId,
+    this.driveId,
   });
 
   factory Trip.fromJson(Map<String, dynamic> json) {
@@ -48,10 +52,12 @@ class Trip {
         totalDistance: json['t_total_distance'] ?? 0,
         driver: json['driver'] ?? '',
         createdAt: json['created_at'] ?? '',
-        fromLatitude: json['from_latitude'] ?? '',
-        fromLongitude: json['from_longitude'] ?? '',
-        toLatitude: json['to_latitude'] ?? '',
-        toLongitude: json['to_longitude'] ?? '',
+        driveId: json['driver_id'] ?? '',
+        clientId: json['client_id'] ?? '',
+        fromLatitude: json['from_latitude'] ?? 0.0,
+        fromLongitude: json['from_longitude'] ?? 0.0,
+        toLatitude: json['to_latitude'] ?? 0.0,
+        toLongitude: json['to_longitude'] ?? 0.0,
         statusId: json['status_id'] ?? 0);
   }
 }
