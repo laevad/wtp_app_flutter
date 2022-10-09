@@ -27,7 +27,7 @@ class TripViewState extends ViewState<TripView, TripController> {
         return Theme(
           data: Constant.themeData,
           child: DefaultTabController(
-            length: 1,
+            length: 2,
             child: SafeArea(
               child: Scaffold(
                 key: globalKey,
@@ -42,12 +42,12 @@ class TripViewState extends ViewState<TripView, TripController> {
                             color: Constant.lightColorScheme.primary,
                           ),
                         ),
-                        // Tab(
-                        //   icon: Icon(
-                        //     Icons.history,
-                        //     color: Constant.lightColorScheme.primary,
-                        //   ),
-                        // ),
+                        Tab(
+                          icon: Icon(
+                            Icons.history,
+                            color: Constant.lightColorScheme.primary,
+                          ),
+                        ),
                       ],
                     ),
                     Expanded(
@@ -71,19 +71,18 @@ class TripViewState extends ViewState<TripView, TripController> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(horizontal: 1),
-                        //   child: ListView.builder(
-                        //     itemCount: 1,
-                        //     physics: const BouncingScrollPhysics(),
-                        //     shrinkWrap: true,
-                        //     scrollDirection: Axis.vertical,
-                        //     itemBuilder: (context, index) {
-                        //       return HistoryCustomExpandTile(
-                        //           index: (index + 1).toString());
-                        //     },
-                        //   ),
-                        // ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 1),
+                          child: ListView.builder(
+                            itemCount: 1,
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return Container();
+                            },
+                          ),
+                        ),
                       ]),
                     ),
                   ],

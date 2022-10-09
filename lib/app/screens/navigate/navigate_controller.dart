@@ -153,8 +153,8 @@ class NavigateController extends Controller {
   @override
   void onDisposed() {
     presenter.dispose();
-    _locationSubscription?.cancel();
-    _locationSubscription = null;
+    // _locationSubscription?.cancel();
+    // _locationSubscription = null;
     super.onDisposed();
   }
 
