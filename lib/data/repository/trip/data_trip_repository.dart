@@ -21,7 +21,6 @@ class DataTripRepository extends TripRepository {
       headers: await getHeader1(),
       body: jsonEncode(body1),
     );
-    print(response.body);
     if (response.statusCode == 200) {
       return TripModel.fromJson(jsonDecode(response.body));
     }
