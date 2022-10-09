@@ -34,6 +34,14 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                 FocusScope.of(context).unfocus();
               },
               child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  actions: [
+                    IconButton(
+                        onPressed: () => controller.serverUrlSettings(),
+                        icon: Icon(Icons.settings)),
+                  ],
+                ),
                 key: globalKey,
                 body: SafeArea(
                   child: SingleChildScrollView(
@@ -52,7 +60,7 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                               children: <Widget>[
                                 SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height / 4,
+                                      MediaQuery.of(context).size.height / 5,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:wtp_app/app/screens/server_url/server_view.dart';
 
 import '../../../domain/entities/auth_token.dart';
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
@@ -49,6 +50,10 @@ class LoginController extends Controller {
     loginPresenter!.getAuthTokenOnError = (e) {
       print("auth on error");
       print(e);
+      ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
+      ScaffoldMessenger.of(getContext()).showSnackBar(const SnackBar(
+          content: Text("Error check the server url, Please try again")));
+
       EasyLoading.dismiss();
     };
 
@@ -62,6 +67,10 @@ class LoginController extends Controller {
       email: emailController.text,
       password: passwordController.text,
     );
+  }
+
+  void serverUrlSettings() {
+    Navigator.pushNamed(getContext(), ServerView.routeName);
   }
 
   @override
