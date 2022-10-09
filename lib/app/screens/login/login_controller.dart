@@ -52,7 +52,7 @@ class LoginController extends Controller {
       print(e);
       ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
       ScaffoldMessenger.of(getContext()).showSnackBar(const SnackBar(
-          content: Text("Error check the server url, Please try again")));
+          content: Text("Invalid credentials/Prohibited Account")));
 
       EasyLoading.dismiss();
     };
