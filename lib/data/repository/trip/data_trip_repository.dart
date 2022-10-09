@@ -11,7 +11,7 @@ class DataTripRepository extends TripRepository {
   late List<TripModel> trips;
   @override
   Future<TripModel> getAllTrip(int page) async {
-    String url = "$siteURL/trip/trip?page=$page";
+    String url = "${await IsAuth.getData('url')}/trip/trip?page=$page";
     Map<String, dynamic> body1 = {
       'driver_id': await IsAuth.getData('id'),
     };
@@ -33,7 +33,7 @@ class DataTripRepository extends TripRepository {
       'booking_id': bookingId,
       'status_id': statusId
     };
-    String url = "$siteURL/trip/status";
+    String url = "${await IsAuth.getData('url')}/trip/status";
     await http.post(Uri.parse(url),
         headers: await getHeader1(), body: jsonEncode(body));
   }

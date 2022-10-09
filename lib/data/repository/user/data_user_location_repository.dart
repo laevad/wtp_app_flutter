@@ -14,7 +14,7 @@ class DataUserLocationRepository extends UserLocationRepository {
       'longitude': longitude,
       'latitude': latitude,
     };
-    await http.post(Uri.parse("$siteURL/user/location"),
+    await http.post(Uri.parse("${await IsAuth.getData('url')}/user/location"),
         headers: await getHeader1(), body: jsonEncode(body1));
   }
 
@@ -24,7 +24,7 @@ class DataUserLocationRepository extends UserLocationRepository {
       'booking_id': bookingId,
       'status_id': statusId
     };
-    String url = "$siteURL/trip/status";
+    String url = "${await IsAuth.getData('url')}/trip/status";
     await http.post(Uri.parse(url),
         headers: await getHeader1(), body: jsonEncode(body));
   }

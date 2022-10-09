@@ -6,6 +6,7 @@ import 'package:wtp_app/domain/entities/map_marker.dart';
 import 'package:wtp_app/domain/repositories/direction/marker_repository.dart';
 
 import '../../data/data_constants.dart';
+import '../../data/repository/helpers/auth/is_auth.dart';
 
 class DataMarkerRepository extends MarkerRepository {
   @override
@@ -16,8 +17,10 @@ class DataMarkerRepository extends MarkerRepository {
       'latitude': latitude,
       'longitude': longitude,
     };
-    final res = await http.post(Uri.parse("$siteURL/marker/marker"),
-        headers: await getHeader1(), body: jsonEncode(body));
+    final res = await http.post(
+        Uri.parse("${await IsAuth.getData('url')}/marker/marker"),
+        headers: await getHeader1(),
+        body: jsonEncode(body));
 
     if (res.statusCode != 201) {
       throw Error();
@@ -29,8 +32,10 @@ class DataMarkerRepository extends MarkerRepository {
     Map<String, dynamic> body = {
       'booking_id': bookingId,
     };
-    final res = await http.post(Uri.parse("$siteURL/marker/get-marker"),
-        headers: await getHeader1(), body: jsonEncode(body));
+    final res = await http.post(
+        Uri.parse("${await IsAuth.getData('url')}/marker/get-marker"),
+        headers: await getHeader1(),
+        body: jsonEncode(body));
 
     return MapMarkerModel.fromJson(jsonDecode(res.body));
   }

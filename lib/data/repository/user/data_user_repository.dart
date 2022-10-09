@@ -10,7 +10,8 @@ import '../../data_constants.dart';
 class DataUserRepository extends UserRepository {
   @override
   Future getUser() async {
-    var response = await http.get(Uri.parse("$siteURL/auth/me"),
+    var response = await http.get(
+        Uri.parse("${await IsAuth.getData('url')}/auth/me"),
         headers: await getHeader());
 
     return User.fromJson(jsonDecode(response.body));
@@ -48,10 +49,10 @@ class DataUserRepository extends UserRepository {
           jsonDecode(await response.stream.bytesToString()),
           response.statusCode);
     }
-    var request =
-        http.MultipartRequest('post', Uri.parse("$siteURL/user/update"))
-          ..fields.addAll(body)
-          ..headers.addAll(await getHeader1());
+    var request = http.MultipartRequest(
+        'post', Uri.parse("${await IsAuth.getData('url')}/user/update"))
+      ..fields.addAll(body)
+      ..headers.addAll(await getHeader1());
     // ..files.add(await http.MultipartFile.fromPath('image', image));
     final response = await request.send();
     print("Result data: ${response.statusCode}");
