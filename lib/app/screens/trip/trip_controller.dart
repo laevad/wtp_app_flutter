@@ -24,7 +24,7 @@ class TripController extends Controller {
 
   Future refresh() async {
     _page = 0;
-    presenter.getData(++_page);
+    presenter.getData(++_page, '');
   }
 
   @override
@@ -34,7 +34,7 @@ class TripController extends Controller {
     if (_page == 0) {
       print(_page);
       EasyLoading.show(status: 'loading please wait...');
-      presenter.getData(++_page);
+      presenter.getData(++_page, '');
       refreshUI();
     }
 
@@ -61,7 +61,7 @@ class TripController extends Controller {
           if (_scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
             EasyLoading.show(status: "loading please wait...");
-            presenter.getData(++_page);
+            presenter.getData(++_page, '');
             refreshUI();
           }
         }

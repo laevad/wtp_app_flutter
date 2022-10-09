@@ -10,7 +10,7 @@ import '../../data_constants.dart';
 class DataTripRepository extends TripRepository {
   late List<TripModel> trips;
   @override
-  Future<TripModel> getAllTrip(int page) async {
+  Future<TripModel> getAllTrip(int page, String tripStatus) async {
     String url = "${await IsAuth.getData('url')}/trip/trip?page=$page";
     Map<String, dynamic> body1 = {
       'driver_id': await IsAuth.getData('id'),

@@ -22,9 +22,9 @@ class TripPresenter extends Presenter {
       : getAllTripUseCase = GetAllTripUseCase(tripRepository),
         tripStatusUseCase = UpdateTripStatusToOnGoingUseCase(tripRepository);
 
-  getData(int page) {
-    return getAllTripUseCase.execute(
-        GetAllTripUseCaseObserver(this), GetAllTripUseCaseParams(page));
+  getData(int page, String tripStatus) {
+    return getAllTripUseCase.execute(GetAllTripUseCaseObserver(this),
+        GetAllTripUseCaseParams(page, tripStatus));
   }
 
   updateStatus(String bookingId, int statusId) {
