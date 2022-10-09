@@ -154,8 +154,8 @@ class NavigateController extends Controller {
   @override
   void onDisposed() {
     presenter.dispose();
-    // _locationSubscription?.cancel();
-    // _locationSubscription = null;
+    _locationSubscription?.cancel();
+    _locationSubscription = null;
     super.onDisposed();
   }
 
@@ -251,7 +251,6 @@ class NavigateController extends Controller {
 
   void back() {
     Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
-    refreshUI();
   }
 
   void getDirection(LatLng origin, LatLng destination) {

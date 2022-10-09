@@ -75,7 +75,7 @@ class TripController extends Controller {
       refreshUI();
     };
     presenter.getTripOnError = (e) {
-      print("trip on error ${e.toString()}");
+      print("trip on error!!! ${e.toString()}");
       EasyLoading.dismiss();
     };
     presenter.getTripOnComplete = () async {
