@@ -17,4 +17,8 @@ class IsAuth {
   static Future getData(String key) async {
     return await storage.read(key: key, aOptions: _secureOption());
   }
+
+  static deleteKey({required String key}) async {
+    await storage.delete(key: key);
+  }
 }

@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wtp_app/app/screens/navigate/navigate_presenter.dart';
+import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
 import 'package:wtp_app/domain/entities/direction.dart';
 import 'package:wtp_app/domain/entities/map_marker.dart';
 import 'package:wtp_app/domain/repositories/direction/direction_repository.dart';
@@ -196,18 +197,21 @@ class NavigateController extends Controller {
       ));
       currentLatLng = LatLng(event.latitude!, event.longitude!);
       addLocationTo(latitude: event.latitude!, longitude: event.longitude!);
-      toggleValue == 1
-          ? mapControllerLocal
-              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-              target: LatLng(
-                currentLatLng.latitude,
-                currentLatLng.longitude,
-              ),
-              zoom: 17.5,
-              tilt: cameraTilt,
-              bearing: cameraBearing,
-            )))
-          : null;
+      if (toggleValue == 1) {
+        updateStatus();
+        mapControllerLocal
+            .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(
+            currentLatLng.latitude,
+            currentLatLng.longitude,
+          ),
+          zoom: 17.5,
+          tilt: cameraTilt,
+          bearing: cameraBearing,
+        )));
+      } else {
+        null;
+      }
 
       refreshUI();
     });
@@ -243,7 +247,6 @@ class NavigateController extends Controller {
   void backToHome({required String bookingId, required int statusId}) {
     presenter.updateStatus(bookingId, statusId);
     Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
-    refreshUI();
   }
 
   void back() {
@@ -292,5 +295,9 @@ class NavigateController extends Controller {
   /* get marker */
   void getMarker(String bookingId) {
     presenter.getMapMarker(bookingId);
+  }
+
+  Future<void> updateStatus() async {
+    presenter.updateStatus(await IsAuth.getData('bookingId'), 3);
   }
 }

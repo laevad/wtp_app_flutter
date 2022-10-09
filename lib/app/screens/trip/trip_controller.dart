@@ -15,16 +15,34 @@ class TripController extends Controller {
   List<Trip>? _trip;
   List<Trip>? get trip => _trip;
 
+  List<Trip>? _tripC;
+  List<Trip>? get tripC => _tripC;
+
   int? _lastPage;
   int? get lastPage => _lastPage;
+
+  int? _lastPageC;
+  int? get lastPageC => _lastPageC;
+
   int _page = 0;
   final ScrollController _scrollController = ScrollController();
   ScrollController? get scrollController => _scrollController;
+
+  int _pageC = 0;
+  final ScrollController _scrollControllerC = ScrollController();
+  ScrollController? get scrollControllerC => _scrollControllerC;
   TripController(tripRepository) : presenter = TripPresenter(tripRepository);
 
   Future refresh() async {
     _page = 0;
-    presenter.getData(++_page, '');
+    _trip = [];
+    presenter.getData(++_page);
+  }
+
+  Future refreshC() async {
+    _pageC = 0;
+    _tripC = [];
+    presenter.getDataComplete(++_pageC);
   }
 
   @override
@@ -34,7 +52,12 @@ class TripController extends Controller {
     if (_page == 0) {
       print(_page);
       EasyLoading.show(status: 'loading please wait...');
-      presenter.getData(++_page, '');
+      presenter.getData(++_page);
+      refreshUI();
+    }
+    if (_pageC == 0) {
+      EasyLoading.show(status: 'loading please wait...');
+      presenter.getDataComplete(++_pageC);
       refreshUI();
     }
 
@@ -61,7 +84,38 @@ class TripController extends Controller {
           if (_scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
             EasyLoading.show(status: "loading please wait...");
-            presenter.getData(++_page, '');
+            presenter.getData(++_page);
+            refreshUI();
+          }
+        }
+      });
+      EasyLoading.dismiss();
+      print("trip on complete");
+    };
+    presenter.getTripCOnNext = (TripModel trip) {
+      if (_tripC == null) {
+        EasyLoading.show(status: "loading please wait...");
+      }
+      if (_pageC == 1) {
+        _tripC = trip.trips!;
+      } else {
+        _tripC = _tripC! + trip.trips!;
+      }
+      _lastPageC = trip.lastPage;
+      print("trip on next");
+      refreshUI();
+    };
+    presenter.getTripCOnError = (e) {
+      print("trip on error ${e.toString()}");
+      EasyLoading.dismiss();
+    };
+    presenter.getTripCOnComplete = () async {
+      _scrollControllerC.addListener(() {
+        if (_pageC < (lastPageC!.toInt())) {
+          if (_scrollControllerC.position.pixels ==
+              _scrollControllerC.position.maxScrollExtent) {
+            EasyLoading.show(status: "loading please wait...");
+            presenter.getDataComplete(++_pageC);
             refreshUI();
           }
         }
@@ -82,6 +136,7 @@ class TripController extends Controller {
     };
 
     /**/
+    refreshUI();
   }
 
   void navigate({
@@ -92,8 +147,9 @@ class TripController extends Controller {
     double? fromLongitude,
     double? toLatitude,
     double? toLongitude,
+    String? status,
   }) {
-    presenter.updateStatus(bookingId!, 3);
+    // presenter.updateStatus(bookingId!, 3);
     Navigator.pushReplacementNamed(getContext(), NavigateView.routeName,
         arguments: {
           'destination': destination,
@@ -103,6 +159,7 @@ class TripController extends Controller {
           'fromLongitude': fromLongitude,
           'toLatitude': toLatitude,
           'toLongitude': toLongitude,
+          'status': status,
         });
   }
 

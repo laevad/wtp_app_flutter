@@ -14,8 +14,7 @@ class GetAllTripUseCase
   Future<Stream<GetAllTripUseCaseResponse?>> buildUseCaseStream(params) async {
     final controller = StreamController<GetAllTripUseCaseResponse>();
     try {
-      final trip =
-          await repository.getAllTrip(params!.page, params.tripStatus!);
+      final trip = await repository.getAllTrip(params!.page);
       controller.add(GetAllTripUseCaseResponse(trip));
       logger.finest('GetAllTripUseCase success');
       controller.close();
@@ -29,9 +28,8 @@ class GetAllTripUseCase
 
 class GetAllTripUseCaseParams {
   final int page;
-  final String? tripStatus;
 
-  GetAllTripUseCaseParams(this.page, this.tripStatus);
+  GetAllTripUseCaseParams(this.page);
 }
 
 class GetAllTripUseCaseResponse {

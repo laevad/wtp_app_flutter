@@ -44,6 +44,10 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
           String destination = arguments['destination'];
           String bookingId = arguments['bookingId'];
 
+          String status = arguments['status'];
+
+          // IsAuth.deleteKey(key: 'bookingId');
+          // IsAuth.setToken(key: 'bookingId', value: bookingId);
           return Theme(
             data: Constant.themeData,
             child: Scaffold(
@@ -110,20 +114,24 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: AnimatedToggle(
-                      values: const ['Track off', 'Track on'],
-                      onToggleCallback: (value) {
-                        setState(() {
-                          controller.toggleValue = value;
-                        });
-                      },
-                      buttonColor: Constant.lightColorScheme.onPrimaryContainer,
-                      backgroundColor: Constant.lightColorScheme.surfaceVariant,
-                      textColor: const Color(0xFFFFFFFF),
-                    ),
-                  ),
+                  status != 'Completed'
+                      ? Align(
+                          alignment: Alignment.topCenter,
+                          child: AnimatedToggle(
+                            values: const ['Track off', 'Track on'],
+                            onToggleCallback: (value) {
+                              setState(() {
+                                controller.toggleValue = value;
+                              });
+                            },
+                            buttonColor:
+                                Constant.lightColorScheme.onPrimaryContainer,
+                            backgroundColor:
+                                Constant.lightColorScheme.surfaceVariant,
+                            textColor: const Color(0xFFFFFFFF),
+                          ),
+                        )
+                      : const SizedBox(),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Align(
@@ -163,51 +171,57 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12, bottom: 12),
-                            child: FloatingActionButton(
-                              heroTag: 'addLo',
-                              backgroundColor: Colors.purple,
-                              onPressed: () async {
-                                controller.addMapMarker(bookingId);
-                                controller.addMarker();
-                              },
-                              child: const Icon(
-                                Icons.add_location,
-                                color: Colors.white,
-                                size: 45,
-                              ),
-                            ),
-                          ),
+                          status != 'Completed'
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 12, bottom: 12),
+                                  child: FloatingActionButton(
+                                    heroTag: 'addLo',
+                                    backgroundColor: Colors.purple,
+                                    onPressed: () async {
+                                      controller.addMapMarker(bookingId);
+                                      controller.addMarker();
+                                    },
+                                    child: const Icon(
+                                      Icons.add_location,
+                                      color: Colors.white,
+                                      size: 45,
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red),
-                        ),
-                        onPressed: () => controller.backToHome(
-                            bookingId: arguments['bookingId'], statusId: 2),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40),
-                          child: Text(
-                            "Done",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
+                  status != 'Completed'
+                      ? Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.red),
+                              ),
+                              onPressed: () => controller.backToHome(
+                                  bookingId: arguments['bookingId'],
+                                  statusId: 2),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 40),
+                                child: Text(
+                                  "Done",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),

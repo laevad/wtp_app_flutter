@@ -21,7 +21,7 @@ class TripViewState extends ViewState<TripView, TripController> {
   Widget get view {
     return ControlledWidgetBuilder<TripController>(
       builder: (context, controller) {
-        if (controller.trip == null) {
+        if (controller.trip == null || controller.tripC == null) {
           return Container();
         }
         return Theme(
@@ -73,14 +73,21 @@ class TripViewState extends ViewState<TripView, TripController> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: ListView.builder(
-                            itemCount: 1,
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return Container();
-                            },
+                          child: RefreshIndicator(
+                            onRefresh: controller.refreshC,
+                            child: ListView.builder(
+                              itemCount: controller.tripC!.length,
+                              controller: controller.scrollControllerC,
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                return TripCustomExpandTile(
+                                  index: (index + 1).toString(),
+                                  trip: controller.tripC![index],
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ]),
