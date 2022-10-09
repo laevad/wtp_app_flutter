@@ -57,6 +57,7 @@ class IncentivesController extends Controller {
     };
     presenter.getIncentiveOnError = (e) {
       print("Incentive on Error: ${e.toString()}");
+      EasyLoading.dismiss();
     };
     presenter.getIncentiveOnComplete = () async {
       _scrollController.addListener(() {
