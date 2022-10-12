@@ -12,7 +12,9 @@ class DataIncentiveRepository extends IncentiveRepository {
   Future<IncentiveModel> getAllIncentive(int page) async {
     String url =
         "${await IsAuth.getData('url')}/incentive/incentive?page=$page";
-    var response = await http.get(Uri.parse(url), headers: await getHeader1());
+    Map<String, dynamic> body = {"user_id": await IsAuth.getData('id')};
+    var response = await http.post(Uri.parse(url),
+        headers: await getHeader1(), body: jsonEncode(body));
 
     if (response.statusCode == 200) {
       return IncentiveModel.fromJson(jsonDecode(response.body));
