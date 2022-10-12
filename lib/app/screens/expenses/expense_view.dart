@@ -47,7 +47,7 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
                   context: context,
                   builder: (context) {
                     return Container(
-                      height: 300,
+                      height: MediaQuery.of(context).size.height / 4,
                       decoration: BoxDecoration(
                           color: Constant.lightColorScheme.primaryContainer,
                           borderRadius: const BorderRadius.only(
