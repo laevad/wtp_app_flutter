@@ -3,10 +3,10 @@ import 'package:wtp_app/domain/entities/incentive.dart';
 
 import '../../utils/constant.dart';
 
-class CustomExpandTile extends StatelessWidget {
+class CustomExpandTileIncentive extends StatelessWidget {
   final String? index;
   final Incentive? incentive;
-  const CustomExpandTile({Key? key, this.index, this.incentive})
+  const CustomExpandTileIncentive({Key? key, this.index, this.incentive})
       : super(key: key);
 
   @override

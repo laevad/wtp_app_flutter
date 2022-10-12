@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wtp_app/data/repository/incentive/data_incentive_repository.dart';
 
 import '../../utils/constant.dart';
-import '../../widgets/global_custom/custom_expand_tile.dart';
+import '../../widgets/incentive/custom_expand_tile_incentive.dart';
 import 'incentives_controller.dart';
 
 class IncentivesView extends View {
@@ -64,7 +64,7 @@ class IncentivesViewState
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
-                          return CustomExpandTile(
+                          return CustomExpandTileIncentive(
                             index: (index + 1).toString(),
                             incentive: controller.incentive![index],
                           );
