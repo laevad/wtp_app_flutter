@@ -39,7 +39,7 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                   actions: [
                     IconButton(
                         onPressed: () => controller.serverUrlSettings(),
-                        icon: Icon(Icons.settings)),
+                        icon: const Icon(Icons.settings)),
                   ],
                 ),
                 key: globalKey,
@@ -88,10 +88,10 @@ class LoginScreenState extends ViewState<LoginScreen, LoginController> {
                                   ),
                                 ),
                                 CustomTextField(
-                                    labelText: 'Email',
-                                    controller: controller.emailController,
-                                    errorMsg:
-                                        controller.getAuthToken?.emailMsg),
+                                  labelText: 'Email',
+                                  controller: controller.emailController,
+                                  errorMsg: controller.getAuthToken?.emailMsg,
+                                ),
                                 const SizedBox(
                                   height: 25,
                                 ),

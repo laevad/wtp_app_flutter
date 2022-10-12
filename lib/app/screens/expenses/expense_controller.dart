@@ -21,6 +21,9 @@ class ExpenseController extends Controller {
   List<Expense>? get expense => _expense;
   double get amount => _amount;
 
+  //text controller
+  TextEditingController descriptionTextController = TextEditingController();
+
   final ExpensePresenter presenter;
 
   ExpenseController(DataExpenseRepository repository)
@@ -77,6 +80,104 @@ class ExpenseController extends Controller {
   @override
   void onDisposed() {
     presenter.dispose();
+    descriptionTextController.dispose();
     super.onDisposed();
+  }
+
+  showModalBottom({
+    required String title,
+    required TextEditingController descriptionTextController,
+  }) {
+    return showModalBottomSheet(
+      context: getContext(),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.only(top: 15),
+          child: SingleChildScrollView(
+              child: Container(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 20, left: 15, right: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.4,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      child: const TextField(
+                        textInputAction: TextInputAction.done,
+                        // controller: textEditingController!,
+                        decoration: InputDecoration(
+                          hintText: 'Amount',
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 5.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          textInputAction: TextInputAction.done,
+                          minLines: 2,
+                          maxLines: 5,
+                          controller: descriptionTextController,
+                          decoration: const InputDecoration(
+                            hintText: 'Description',
+                            border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 5.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Constant.lightColorScheme.primary,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 25,
+                            vertical: 10,
+                          ),
+                          child: const Text(
+                            "Add",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )),
+        );
+      },
+    );
   }
 }

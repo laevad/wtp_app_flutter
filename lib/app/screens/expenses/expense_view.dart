@@ -76,36 +76,15 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              shape: CircleBorder(
-                  side: BorderSide(
-                color: Constant.lightColorScheme.onSecondaryContainer,
-              )),
-              onPressed: () {
-                showModalBottomSheet(
-                  enableDrag: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      decoration: BoxDecoration(
-                          color: Constant.lightColorScheme.primaryContainer,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(25),
-                              topRight: Radius.circular(25))),
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Close'),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: const Icon(Icons.add),
+              backgroundColor: Constant.lightColorScheme.primary,
+              onPressed: () => controller.showModalBottom(
+                title: 'Add Travel Expense',
+                descriptionTextController: controller.descriptionTextController,
+              ),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
           );
         },
