@@ -115,7 +115,7 @@ class ExpenseController extends Controller {
                     ),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 1.4,
+                    width: MediaQuery.of(context).size.width / 1.0,
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 8),
                       child: const TextField(
