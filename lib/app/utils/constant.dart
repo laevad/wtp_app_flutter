@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:wtp_app/app/screens/incentives/incentives_view.dart';
 
+import '../screens/expenses/expense_view.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/trip/trip_view.dart';
 
@@ -53,6 +54,10 @@ class Constant {
       text: 'Incentives',
     ),
     GButton(
+      icon: Icons.calculate_outlined,
+      text: 'Expense Report',
+    ),
+    GButton(
       icon: Icons.settings_outlined,
       text: 'Settings',
     ),
@@ -62,6 +67,7 @@ class Constant {
     // HomeView(),
     TripView(),
     IncentivesView(),
+    ExpenseView(),
     SettingsScreen(),
   ];
 
