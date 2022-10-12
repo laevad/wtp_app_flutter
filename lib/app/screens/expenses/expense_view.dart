@@ -35,6 +35,14 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
             body: SingleChildScrollView(
               child: Container(),
             ),
+            floatingActionButton: FloatingActionButton(
+              shape: CircleBorder(
+                  side: BorderSide(
+                color: Constant.lightColorScheme.onSecondaryContainer,
+              )),
+              onPressed: () {},
+              child: const Icon(Icons.add),
+            ),
           );
         },
       );
