@@ -290,6 +290,7 @@ class ExpenseController extends Controller {
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 15),
                           child: TextField(
+                            keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.done,
                             controller: amountTextController,
                             decoration: const InputDecoration(
