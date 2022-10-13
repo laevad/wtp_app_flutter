@@ -2,10 +2,11 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:wtp_app/app/screens/expenses/expense_presenter.dart';
 import 'package:wtp_app/domain/usecase/expense/get_expense_type_usecase.dart';
 
-class GetExpenseTypeUseCase extends Observer<GetExpenseTypeUseCaseResponse> {
+class GetExpenseTypeUseCaseObserver
+    extends Observer<GetExpenseTypeUseCaseResponse> {
   final ExpensePresenter presenter;
 
-  GetExpenseTypeUseCase(this.presenter);
+  GetExpenseTypeUseCaseObserver(this.presenter);
 
   @override
   void onComplete() {

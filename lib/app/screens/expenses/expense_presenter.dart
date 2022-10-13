@@ -4,6 +4,8 @@ import 'package:wtp_app/data/repository/expense/data_expense_repository.dart';
 import 'package:wtp_app/domain/usecase/expense/get_all_expense_usecase.dart';
 import 'package:wtp_app/domain/usecase/expense/get_expense_type_usecase.dart';
 
+import 'observer/get_expense_type_observer.dart';
+
 class ExpensePresenter extends Presenter {
   Function? getExpenseOnComplete;
   Function? getExpenseOnError;
@@ -31,5 +33,9 @@ class ExpensePresenter extends Presenter {
       GetAllExpenseUseCaseObserver(this),
       GetAllExpenseUseCaseParams(page),
     );
+  }
+
+  getExpenseType() {
+    return getExpenseTypeUseCase.execute(GetExpenseTypeUseCaseObserver(this));
   }
 }

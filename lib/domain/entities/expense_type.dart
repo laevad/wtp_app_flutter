@@ -1,10 +1,10 @@
 class ExpenseType {
   final String? name;
-
-  ExpenseType({this.name});
+  final int? id;
+  ExpenseType({this.name, this.id});
 
   factory ExpenseType.fromJson(Map<String, dynamic> json) {
-    return ExpenseType(name: json['name']);
+    return ExpenseType(name: json['name'], id: json['id']);
   }
 }
 

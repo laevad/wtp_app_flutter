@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:wtp_app/app/screens/expenses/expense_controller.dart';
@@ -78,9 +79,9 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
             floatingActionButton: FloatingActionButton(
               backgroundColor: Constant.lightColorScheme.primary,
               onPressed: () => controller.showModalBottom(
-                title: 'Add Travel Expense',
-                descriptionTextController: controller.descriptionTextController,
-              ),
+                  title: 'Add Expense',
+                  descriptionTextController:
+                      controller.descriptionTextController),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
