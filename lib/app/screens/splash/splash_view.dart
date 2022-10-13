@@ -24,7 +24,7 @@ class SplashViewState extends ViewState<SplashView, SplashController> {
   Widget get view => ControlledWidgetBuilder<SplashController>(
         builder: (context, controller) {
           return AnimatedSplashScreen.withScreenFunction(
-            splash: 'assets/images/play_store_512.png',
+            splash: 'assets/images/logo.png',
             animationDuration: const Duration(seconds: 1),
             duration: 1,
             screenFunction: () async {
