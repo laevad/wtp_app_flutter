@@ -59,6 +59,7 @@ class IncentivesViewState
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 1),
                       child: ListView.builder(
+                        controller: controller.scrollController,
                         itemCount: controller.incentive!.length,
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
