@@ -18,7 +18,7 @@ class CustomExpandTileIncentive extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Php ${incentive!.amount.toString()}",
+              "Php ${incentive!.amount?.toStringAsFixed(2)}",
               style: TextStyle(
                 color: Constant.lightColorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,

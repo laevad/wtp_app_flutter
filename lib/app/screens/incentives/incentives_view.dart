@@ -79,7 +79,7 @@ class IncentivesViewState
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Total : ${controller.amount}',
+                          'Total : ${controller.amount.toStringAsFixed(2)}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
