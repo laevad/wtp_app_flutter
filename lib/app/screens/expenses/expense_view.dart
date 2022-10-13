@@ -47,6 +47,7 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 1),
                       child: ListView.builder(
+                        controller: controller.scrollController,
                         itemCount: controller.expense!.length,
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
