@@ -29,6 +29,15 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
               automaticallyImplyLeading: false,
               backgroundColor: Constant.lightColorScheme.primaryContainer,
               centerTitle: true,
+              actions: [
+                IconButton(
+                    onPressed: () => controller.addExpenseView(),
+                    icon: Icon(
+                      Icons.add_circle_outlined,
+                      size: 40,
+                      color: Constant.lightColorScheme.onPrimaryContainer,
+                    )),
+              ],
               title: const Text(
                 'Expense Report',
                 style: TextStyle(
@@ -74,14 +83,6 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
                         )),
                   ),
                 ],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Constant.lightColorScheme.primary,
-              onPressed: () => controller.addExpenseView(),
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
               ),
             ),
           );
