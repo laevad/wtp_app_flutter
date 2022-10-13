@@ -69,7 +69,25 @@ class AddExpenseController extends Controller {
     presenter.addExpenseOnNext = (ExpenseModel expenseModel) {
       _expenseError = expenseModel.errors;
       statusCode = expenseModel.statusCode;
-      print(expenseModel.statusCode);
+      if (statusCode == 422) {
+        print(_expenseError!.expenseTypeError);
+        if (_expenseError!.expenseTypeError != "") {
+          ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
+          ScaffoldMessenger.of(getContext()).showSnackBar(
+              SnackBar(content: Text("${_expenseError!.expenseTypeError}")));
+        } else if (_expenseError!.bookingError != "") {
+          ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
+          ScaffoldMessenger.of(getContext()).showSnackBar(
+              SnackBar(content: Text("${_expenseError!.bookingError}")));
+        } else if (_expenseError!.amountError != "") {
+          ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
+          ScaffoldMessenger.of(getContext()).showSnackBar(
+              SnackBar(content: Text("${_expenseError!.amountError}")));
+        }
+      }
+      if (statusCode == 200) {
+        Navigator.pop(getContext());
+      }
       print("add expense on next");
       refreshUI();
     };
@@ -91,14 +109,11 @@ class AddExpenseController extends Controller {
     super.onDisposed();
   }
 
-  void addExpense(String expenseTypeId, String bookingId, String amount,
-      String description) {
-    /*
-    *  int expenseType
-    *  double amount
-    * */
-    presenter.addExpense(expenseTypeId, bookingId, amount, description);
-    // print(expenseTypeId);
-    // print(amount);
+  void addExpense() async {
+    await presenter.addExpense(
+        _selectedExpenseType.toString(),
+        _selectedTrip.toString(),
+        amountTextController.text,
+        descriptionTextController.text);
   }
 }

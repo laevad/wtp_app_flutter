@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:wtp_app/domain/entities/expense.dart';
 import 'package:wtp_app/domain/entities/expense_type.dart';
@@ -51,18 +50,24 @@ class DataExpenseRepository extends ExpenseRepository {
   @override
   Future<ExpenseModel> addExpense(String expenseTypeId, String bookingId,
       String amount, String description) async {
+    // print("PRINT TST: $expenseTypeId");
     String url = "${await IsAuth.getData('url')}/expense/add-expense";
 
     Map<String, dynamic> body = {
-      "expense_type_id": expenseTypeId.isNull ? int.parse(expenseTypeId) : "",
-      "amount": amount.isNull ? double.parse(amount) : "",
-      "description": description.isEmpty ? "" : description,
-      "booking_id": bookingId.isEmpty ? "" : bookingId,
+      "expense_type_id":
+          expenseTypeId != "null" ? int.parse(expenseTypeId) : "",
+      "amount": amount != "null"
+          ? amount.isNotEmpty
+              ? double.parse(amount)
+              : ""
+          : "",
+      "description": description == "null" ? "" : description,
+      "booking_id": bookingId == "null" ? "" : bookingId,
     };
 
     var response = await http.post(Uri.parse(url),
         headers: await getHeader1(), body: jsonEncode(body));
-
+    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 422) {
       return ExpenseModel.fromJsonError(
         jsonDecode(response.body),

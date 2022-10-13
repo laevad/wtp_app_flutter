@@ -150,7 +150,12 @@ class ExpenseController extends Controller {
   }
 
   void addExpenseView() {
-    Navigator.pushNamed(getContext(), AddExpenseView.routeName);
+    Navigator.pushNamed(getContext(), AddExpenseView.routeName).then((value) {
+      _expense = [];
+      _amount = 0;
+      presenter.getExpense(1);
+      _page = 1;
+    });
   }
 
   void addExpense(String expenseTypeId, String bookingId, String amount,
