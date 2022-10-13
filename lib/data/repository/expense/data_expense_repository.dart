@@ -35,7 +35,7 @@ class DataExpenseRepository extends ExpenseRepository {
   }
 
   @override
-  Future<TripStartEndModel> getTripStartEndModel(String userId) async {
+  Future<TripStartEndModel> getTripStartEndModel() async {
     String url = "${await IsAuth.getData('url')}/expense/booking-s-e";
     Map<String, dynamic> body = {"user_id": await IsAuth.getData('id')};
     var response = await http.post(Uri.parse(url),

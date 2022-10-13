@@ -1,9 +1,11 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:wtp_app/app/screens/expenses/observer/get_expense_observer.dart';
+import 'package:wtp_app/app/screens/expenses/observer/get_trip_start_end_observer.dart';
 import 'package:wtp_app/data/repository/expense/data_expense_repository.dart';
 import 'package:wtp_app/domain/usecase/expense/get_all_expense_usecase.dart';
 import 'package:wtp_app/domain/usecase/expense/get_expense_type_usecase.dart';
 
+import '../../../domain/usecase/expense/get_trip_start_end_usecase.dart';
 import 'observer/get_expense_type_observer.dart';
 
 class ExpensePresenter extends Presenter {
@@ -15,17 +17,24 @@ class ExpensePresenter extends Presenter {
   Function? getExpenseTypeOnError;
   Function? getExpenseOnTypeNext;
 
+  Function? getTripStartEndOnNext;
+  Function? getTripStartEndOnComplete;
+  Function? getTripStartEndOnError;
+
   final GetAllExpenseUseCase getAllExpenseUseCase;
   final GetExpenseTypeUseCase getExpenseTypeUseCase;
+  final GetTripStartEndUseCase getTripStartEndUseCase;
 
   ExpensePresenter(DataExpenseRepository repository)
       : getAllExpenseUseCase = GetAllExpenseUseCase(repository),
-        getExpenseTypeUseCase = GetExpenseTypeUseCase(repository);
+        getExpenseTypeUseCase = GetExpenseTypeUseCase(repository),
+        getTripStartEndUseCase = GetTripStartEndUseCase(repository);
 
   @override
   void dispose() {
     getAllExpenseUseCase.dispose();
     getExpenseTypeUseCase.dispose();
+    getTripStartEndUseCase.dispose();
   }
 
   getExpense(int page) {
@@ -37,5 +46,9 @@ class ExpensePresenter extends Presenter {
 
   getExpenseType() {
     return getExpenseTypeUseCase.execute(GetExpenseTypeUseCaseObserver(this));
+  }
+
+  getTripStartEnd() {
+    return getTripStartEndUseCase.execute(GetTripStartEndUseCaseObserver(this));
   }
 }
