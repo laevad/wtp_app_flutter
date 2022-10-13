@@ -27,7 +27,11 @@ class IncentivesViewState
     return ControlledWidgetBuilder<IncentivesController>(
       builder: (context, controller) {
         if (controller.incentive == null) {
-          return Container();
+          return Center(
+            child: CircularProgressIndicator(
+              color: Constant.lightColorScheme.primary,
+            ),
+          );
         }
         return Theme(
           data: ThemeData(

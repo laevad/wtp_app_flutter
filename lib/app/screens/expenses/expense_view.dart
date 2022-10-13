@@ -21,7 +21,11 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
   Widget get view => ControlledWidgetBuilder<ExpenseController>(
         builder: (context, controller) {
           if (controller.expense == null) {
-            return Container();
+            return Center(
+              child: CircularProgressIndicator(
+                color: Constant.lightColorScheme.primary,
+              ),
+            );
           }
           return Scaffold(
             key: globalKey,
