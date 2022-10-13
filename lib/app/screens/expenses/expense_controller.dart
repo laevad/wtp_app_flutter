@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:wtp_app/app/screens/add_expense/add_expense_view.dart';
 import 'package:wtp_app/data/repository/expense/data_expense_repository.dart';
 import 'package:wtp_app/domain/entities/trip_start_end.dart';
 
@@ -146,6 +147,10 @@ class ExpenseController extends Controller {
     descriptionTextController.dispose();
     amountTextController.dispose();
     super.onDisposed();
+  }
+
+  void addExpenseView() {
+    Navigator.pushNamed(getContext(), AddExpenseView.routeName);
   }
 
   void addExpense(String expenseTypeId, String bookingId, String amount,
