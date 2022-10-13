@@ -37,7 +37,7 @@ class ExpenseController extends Controller {
   TextEditingController descriptionTextController = TextEditingController();
   TextEditingController amountTextController = TextEditingController();
 
-  int? _selectedExpenseType;
+  String? _selectedExpenseType;
   String? _selectedTrip;
   final ExpensePresenter presenter;
 
@@ -146,15 +146,22 @@ class ExpenseController extends Controller {
     super.onDisposed();
   }
 
-  void addExpense(
-      int expenseTypeId, String bookingId, double amount, String description) {
-    presenter.addExpense(expenseTypeId, bookingId, amount, description);
+  void addExpense(String expenseTypeId, String bookingId, String amount,
+      String description) {
+    /*
+    *  int expenseType
+    *  double amount
+    * */
+    // presenter.addExpense(expenseTypeId, bookingId, amount, description);
+    print(expenseTypeId);
+    print(amount);
     descriptionTextController.clear();
     amountTextController.clear();
     _selectedTrip = null;
     _selectedExpenseType = null;
     Navigator.pop(getContext());
     _expense = [];
+    _amount = 0;
     presenter.getExpense(1);
     _page = 1;
   }
@@ -207,14 +214,15 @@ class ExpenseController extends Controller {
                             items: _expenseType!.map(
                               (e) {
                                 return DropdownMenuItem(
-                                  value: e.id,
+                                  value: e.id.toString(),
                                   child: Text(e.name.toString()),
                                 );
                               },
                             ).toList(),
                             onChanged: (value) {
                               print(value);
-                              setState(() => _selectedExpenseType = value);
+                              setState(() =>
+                                  _selectedExpenseType = value.toString());
                             },
                           ),
                         ),
@@ -328,10 +336,9 @@ class ExpenseController extends Controller {
                           GestureDetector(
                             onTap: () {
                               addExpense(
-                                  _selectedExpenseType!,
-                                  _selectedTrip!,
-                                  double.parse(
-                                      amountTextController.text.toString()),
+                                  _selectedExpenseType.toString(),
+                                  _selectedTrip.toString(),
+                                  amountTextController.text.toString(),
                                   descriptionTextController.text);
                             },
                             child: Container(
