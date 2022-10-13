@@ -14,19 +14,24 @@ class ExpenseController extends Controller {
   List<Expense>? _expense;
   List<ExpenseType>? _expenseType;
   List<TripStartEnd>? _tripStartEnd;
+
+  Expense? _expenseError;
+
   int? _lastPage;
-  int? get lastPage => _lastPage;
   int _page = 0;
   /* */
   final ScrollController _scrollController = ScrollController();
   /* static ~ total amount */
   double _amount = 0;
 
+  /* getter area */
   ScrollController? get scrollController => _scrollController;
   List<Expense>? get expense => _expense;
   List<ExpenseType>? get expenseType => _expenseType;
   List<TripStartEnd>? get tripStartEnd => _tripStartEnd;
   double get amount => _amount;
+  Expense? get expenseError => _expenseError;
+  int? get lastPage => _lastPage;
 
   //text controller
   TextEditingController descriptionTextController = TextEditingController();
@@ -67,7 +72,7 @@ class ExpenseController extends Controller {
         _expense = _expense! + expense.expense!;
       }
       _lastPage = expense.lastPage;
-      print("expense on next");
+      print("expense on next!!!!!!!!!!!!!!!!!!!!!!!!!1");
       refreshUI();
     };
     presenter.getExpenseOnError = (e) {
@@ -80,13 +85,14 @@ class ExpenseController extends Controller {
           if (_scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
             EasyLoading.show(status: "loading please wait...");
+            print("DFDFDFDFDF: ${_page}");
             presenter.getExpense(++_page);
             refreshUI();
           }
         }
       });
       EasyLoading.dismiss();
-      print("trip on complete");
+      print("Expense on complete");
     };
 
     /*------------------------------------------------------------------------*/
@@ -117,6 +123,20 @@ class ExpenseController extends Controller {
       print("trip on error: ${e.toString()}");
       refreshUI();
     };
+    /* ---------------------------------------------------------------------- */
+    presenter.addExpenseOnNext = (ExpenseModel expenseModel) {
+      _expenseError = expenseModel.errors;
+      print("add expense on next");
+      refreshUI();
+    };
+    presenter.addExpenseOnComplete = () {
+      print("add expense on complete");
+      refreshUI();
+    };
+    presenter.addExpenseOnError = (e) {
+      print("add expense on error: ${e.toString()}");
+      refreshUI();
+    };
   }
 
   @override
@@ -127,6 +147,20 @@ class ExpenseController extends Controller {
     super.onDisposed();
   }
 
+  void addExpense(
+      int expenseTypeId, String bookingId, double amount, String description) {
+    presenter.addExpense(expenseTypeId, bookingId, amount, description);
+    descriptionTextController.clear();
+    amountTextController.clear();
+    _selectedTrip = null;
+    _selectedExpenseType = null;
+    Navigator.pop(getContext());
+    _expense = [];
+    presenter.getExpense(1);
+    _page = 1;
+  }
+
+  /* can create custom/separated widget for this long code if you want */
   showModalBottom({required String title}) {
     return showModalBottomSheet(
       context: getContext(),
@@ -180,6 +214,7 @@ class ExpenseController extends Controller {
                               },
                             ).toList(),
                             onChanged: (value) {
+                              print(value);
                               setState(() =>
                                   _selectedExpenseType = value.toString());
                             },
@@ -286,7 +321,13 @@ class ExpenseController extends Controller {
                           ),
                           const SizedBox(width: 10),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              addExpense(
+                                  int.parse(_selectedExpenseType!),
+                                  _selectedTrip!,
+                                  double.parse(amountTextController.text),
+                                  descriptionTextController.text);
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Constant.lightColorScheme.primary,

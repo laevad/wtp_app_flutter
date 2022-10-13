@@ -13,6 +13,7 @@ class DataExpenseRepository extends ExpenseRepository {
   @override
   Future<ExpenseModel> getAllIncentive(int page) async {
     String url = "${await IsAuth.getData('url')}/expense/expense?page=$page";
+    print(url);
     Map<String, dynamic> body = {"user_id": await IsAuth.getData('id')};
     var response = await http.post(Uri.parse(url),
         headers: await getHeader1(), body: jsonEncode(body));
@@ -47,9 +48,22 @@ class DataExpenseRepository extends ExpenseRepository {
   }
 
   @override
-  Future<ExpenseModel> addExpense(
-      int expenseTypeId, String bookingId, double amount, String description) {
-    // TODO: implement addExpense
-    throw UnimplementedError();
+  Future<ExpenseModel> addExpense(int expenseTypeId, String bookingId,
+      double amount, String description) async {
+    String url = "${await IsAuth.getData('url')}/expense/add-expense";
+    Map<String, dynamic> body = {
+      "expense_type_id": expenseTypeId,
+      "amount": amount,
+      "description": description,
+      "booking_id": bookingId,
+    };
+
+    var response = await http.post(Uri.parse(url),
+        headers: await getHeader1(), body: jsonEncode(body));
+
+    if (response.statusCode == 200) {
+      return ExpenseModel.fromJsonError(jsonDecode(response.body));
+    }
+    return ExpenseModel.fromJsonError(jsonDecode(response.body));
   }
 }
