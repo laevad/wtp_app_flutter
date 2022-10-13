@@ -204,9 +204,10 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                                 backgroundColor:
                                     MaterialStateProperty.all(Colors.red),
                               ),
-                              onPressed: () => controller.backToHome(
-                                  bookingId: arguments['bookingId'],
-                                  statusId: 2),
+                              // onPressed: () => controller.backToHome(
+                              //     bookingId: arguments['bookingId'],
+                              //     statusId: 2),
+                              onPressed: () => {},
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 40),
                                 child: Text(
