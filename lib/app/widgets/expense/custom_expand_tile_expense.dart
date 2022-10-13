@@ -18,7 +18,7 @@ class CustomExpandTileExpense extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Php ${expense!.amount.toString()}",
+              "Php ${expense!.amount?.toStringAsFixed(2)}",
               style: TextStyle(
                 color: Constant.lightColorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w500,
