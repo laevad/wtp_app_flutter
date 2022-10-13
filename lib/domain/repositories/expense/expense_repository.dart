@@ -7,4 +7,10 @@ abstract class ExpenseRepository {
   Future<ExpenseModel> getAllIncentive(int page);
   Future<ExpenseTypeModel> getExpenseTypeModel();
   Future<TripStartEndModel> getTripStartEndModel();
+  Future<ExpenseModel> addExpense(
+    int expenseTypeId,
+    String bookingId,
+    double amount,
+    String description,
+  );
 }

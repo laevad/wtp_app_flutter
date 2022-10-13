@@ -45,4 +45,11 @@ class DataExpenseRepository extends ExpenseRepository {
     }
     throw Exception("failed to getAllIncentive");
   }
+
+  @override
+  Future<ExpenseModel> addExpense(
+      int expenseTypeId, String bookingId, double amount, String description) {
+    // TODO: implement addExpense
+    throw UnimplementedError();
+  }
 }
