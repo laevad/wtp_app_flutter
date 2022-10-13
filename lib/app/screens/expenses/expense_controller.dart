@@ -72,7 +72,7 @@ class ExpenseController extends Controller {
         _expense = _expense! + expense.expense!;
       }
       _lastPage = expense.lastPage;
-      print("expense on next!!!!!!!!!!!!!!!!!!!!!!!!!1");
+      print("expense on next");
       refreshUI();
     };
     presenter.getExpenseOnError = (e) {
