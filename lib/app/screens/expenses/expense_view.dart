@@ -57,7 +57,7 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
                       child: ListView.builder(
                         controller: controller.scrollController,
                         itemCount: controller.expense!.length,
-                        physics: const BouncingScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {

@@ -61,7 +61,7 @@ class IncentivesViewState
                       child: ListView.builder(
                         controller: controller.scrollController,
                         itemCount: controller.incentive!.length,
-                        physics: const BouncingScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
