@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:wtp_app/domain/entities/expense.dart';
 import 'package:wtp_app/domain/entities/expense_type.dart';
+import 'package:wtp_app/domain/entities/trip_start_end.dart';
 import 'package:wtp_app/domain/repositories/expense/expense_repository.dart';
 
 import '../../data_constants.dart';
@@ -31,5 +32,11 @@ class DataExpenseRepository extends ExpenseRepository {
       return ExpenseTypeModel.fromJson(jsonDecode(response.body));
     }
     throw Exception("failed to getExpenseTypeModel");
+  }
+
+  @override
+  Future<TripStartEndModel> getTripStartEndModel(String userId) {
+    // TODO: implement getTripStartEndModel
+    throw UnimplementedError();
   }
 }
