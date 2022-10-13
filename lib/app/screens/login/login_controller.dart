@@ -3,6 +3,7 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:wtp_app/app/screens/server_url/server_view.dart';
 
+import '../../../data/repository/helpers/auth/is_auth.dart';
 import '../../../domain/entities/auth_token.dart';
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
 import '../../utils/constant.dart';
@@ -23,7 +24,10 @@ class LoginController extends Controller {
         super();
 
   @override
-  void initListeners() {
+  void initListeners() async {
+    await IsAuth.deleteKey(key: 'url');
+    await IsAuth.setToken(
+        key: 'url', value: 'https://wtp-web.herokuapp.com/api');
     Constant.configLoading();
     loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) async {
       _authToken = loginDetails;

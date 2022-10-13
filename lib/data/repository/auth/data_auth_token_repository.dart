@@ -30,8 +30,7 @@ class DataAuthRepository extends AuthRepository {
           AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
       await IsAuth.setToken(key: 'token', value: authToken.token!);
       await IsAuth.setToken(key: 'id', value: authToken.id!);
-      await IsAuth.setToken(
-          key: 'url', value: 'https://wtp-web.herokuapp.com/api');
+
       return AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
     } else {
       throw Exception;
