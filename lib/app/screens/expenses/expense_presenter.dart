@@ -1,10 +1,12 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:wtp_app/app/screens/expenses/observer/add_expense_observer.dart';
 import 'package:wtp_app/app/screens/expenses/observer/get_expense_observer.dart';
 import 'package:wtp_app/app/screens/expenses/observer/get_trip_start_end_observer.dart';
 import 'package:wtp_app/data/repository/expense/data_expense_repository.dart';
 import 'package:wtp_app/domain/usecase/expense/get_all_expense_usecase.dart';
 import 'package:wtp_app/domain/usecase/expense/get_expense_type_usecase.dart';
 
+import '../../../domain/usecase/expense/add_expense_usecase.dart';
 import '../../../domain/usecase/expense/get_trip_start_end_usecase.dart';
 import 'observer/get_expense_type_observer.dart';
 
@@ -21,20 +23,27 @@ class ExpensePresenter extends Presenter {
   Function? getTripStartEndOnComplete;
   Function? getTripStartEndOnError;
 
+  Function? addExpenseOnComplete;
+  Function? addExpenseOnNext;
+  Function? addExpenseOnError;
+
   final GetAllExpenseUseCase getAllExpenseUseCase;
   final GetExpenseTypeUseCase getExpenseTypeUseCase;
   final GetTripStartEndUseCase getTripStartEndUseCase;
+  final AddExpenseUseCase addExpenseUseCase;
 
   ExpensePresenter(DataExpenseRepository repository)
       : getAllExpenseUseCase = GetAllExpenseUseCase(repository),
         getExpenseTypeUseCase = GetExpenseTypeUseCase(repository),
-        getTripStartEndUseCase = GetTripStartEndUseCase(repository);
+        getTripStartEndUseCase = GetTripStartEndUseCase(repository),
+        addExpenseUseCase = AddExpenseUseCase(repository);
 
   @override
   void dispose() {
     getAllExpenseUseCase.dispose();
     getExpenseTypeUseCase.dispose();
     getTripStartEndUseCase.dispose();
+    addExpenseUseCase.dispose();
   }
 
   getExpense(int page) {
@@ -50,5 +59,11 @@ class ExpensePresenter extends Presenter {
 
   getTripStartEnd() {
     return getTripStartEndUseCase.execute(GetTripStartEndUseCaseObserver(this));
+  }
+
+  addExpense(
+      int expenseTypeId, String bookingId, double amount, String description) {
+    addExpenseUseCase.execute(AddExpenseUseCaseObserver(this),
+        AddExpenseUseCaseParams(expenseTypeId, bookingId, amount, description));
   }
 }
