@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:wtp_app/data/repository/expense/data_expense_repository.dart';
+import 'package:wtp_app/domain/entities/trip_start_end.dart';
 
 import '../../../domain/entities/expense.dart';
 import '../../../domain/entities/expense_type.dart';
@@ -12,6 +13,7 @@ import 'expense_presenter.dart';
 class ExpenseController extends Controller {
   List<Expense>? _expense;
   List<ExpenseType>? _expenseType;
+  List<TripStartEnd>? _tripStartEnd;
   int? _lastPage;
   int? get lastPage => _lastPage;
   int _page = 0;
@@ -23,10 +25,15 @@ class ExpenseController extends Controller {
   ScrollController? get scrollController => _scrollController;
   List<Expense>? get expense => _expense;
   List<ExpenseType>? get expenseType => _expenseType;
+  List<TripStartEnd>? get tripStartEnd => _tripStartEnd;
   double get amount => _amount;
 
   //text controller
   TextEditingController descriptionTextController = TextEditingController();
+  TextEditingController amountTextController = TextEditingController();
+
+  String? _selectedExpenseType;
+  String? _selectedTrip;
 
   final ExpensePresenter presenter;
 
@@ -35,6 +42,7 @@ class ExpenseController extends Controller {
   @override
   void initListeners() {
     presenter.getExpenseType();
+    presenter.getTripStartEnd();
     Constant.configLoading();
     if (_page == 0) {
       print(_page);
@@ -95,27 +103,35 @@ class ExpenseController extends Controller {
       refreshUI();
       print("Expense type on error: ${e.toString()}");
     };
+    /*------------------------------------------------------------------------*/
+    presenter.getTripStartEndOnNext = (TripStartEndModel trip) {
+      _tripStartEnd = trip.tripStartEnd;
+      print("trip s e on next");
+      refreshUI();
+    };
+    presenter.getTripStartEndOnComplete = () {
+      refreshUI();
+      print("trip s e on complete");
+    };
+    presenter.getTripStartEndOnError = (e) {
+      print("trip on error: ${e.toString()}");
+      refreshUI();
+    };
   }
 
   @override
   void onDisposed() {
     presenter.dispose();
     descriptionTextController.dispose();
+    amountTextController.dispose();
     super.onDisposed();
   }
 
-  String? _selectedExpenseType;
-  String? _selectedExpense;
-
-  showModalBottom({
-    required String title,
-    required TextEditingController descriptionTextController,
-  }) {
+  showModalBottom({required String title}) {
     return showModalBottomSheet(
       context: getContext(),
       isScrollControlled: true,
       builder: (BuildContext context) {
-        _selectedExpenseType = null;
         return StatefulBuilder(
           builder: (context, setState) => Container(
             padding: const EdgeInsets.only(top: 15),
@@ -171,13 +187,77 @@ class ExpenseController extends Controller {
                         ),
                       ),
                       SizedBox(
+                        width: double.infinity,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          margin: const EdgeInsets.only(bottom: 15),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1, color: Colors.grey),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: DropdownButton(
+                            underline: const SizedBox(),
+                            hint: const Text('Select Trip'),
+                            value: _selectedTrip,
+                            isExpanded: true,
+                            items: _tripStartEnd!.map(
+                              (e) {
+                                return DropdownMenuItem(
+                                  alignment: Alignment.topCenter,
+                                  value: e.id,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${e.start}",
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        " ---   ",
+                                        style: TextStyle(
+                                          color:
+                                              Constant.lightColorScheme.primary,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "${e.end}",
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ).toList(),
+                            onChanged: (value) {
+                              print(value);
+                              setState(() => _selectedTrip = value.toString());
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
                         width: MediaQuery.of(context).size.width / 1.0,
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 15),
-                          child: const TextField(
+                          child: TextField(
                             textInputAction: TextInputAction.done,
-                            // controller: textEditingController!,
-                            decoration: InputDecoration(
+                            controller: amountTextController,
+                            decoration: const InputDecoration(
                               hintText: 'Amount',
                               border: OutlineInputBorder(
                                 borderSide:

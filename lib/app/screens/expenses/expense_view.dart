@@ -78,10 +78,7 @@ class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Constant.lightColorScheme.primary,
-              onPressed: () => controller.showModalBottom(
-                  title: 'Add Expense',
-                  descriptionTextController:
-                      controller.descriptionTextController),
+              onPressed: () => controller.showModalBottom(title: 'Add Expense'),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
