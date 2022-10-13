@@ -39,7 +39,6 @@ class ExpenseController extends Controller {
 
   int? _selectedExpenseType;
   String? _selectedTrip;
-
   final ExpensePresenter presenter;
 
   ExpenseController(DataExpenseRepository repository)
@@ -288,7 +287,13 @@ class ExpenseController extends Controller {
                         width: MediaQuery.of(context).size.width / 1.0,
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 15),
-                          child: TextField(
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Enter a valid password!';
+                              }
+                              return null;
+                            },
                             keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.done,
                             controller: amountTextController,

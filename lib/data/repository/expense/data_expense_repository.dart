@@ -64,6 +64,6 @@ class DataExpenseRepository extends ExpenseRepository {
     if (response.statusCode == 200) {
       return ExpenseModel.fromJsonError(jsonDecode(response.body));
     }
-    return ExpenseModel.fromJsonError(jsonDecode(response.body));
+    throw Exception("failed to addExpense");
   }
 }
