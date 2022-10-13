@@ -13,7 +13,6 @@ class DataUserRepository extends UserRepository {
     var response = await http.get(
         Uri.parse("${await IsAuth.getData('url')}/auth/me"),
         headers: await getHeader());
-
     return User.fromJson(jsonDecode(response.body));
   }
 

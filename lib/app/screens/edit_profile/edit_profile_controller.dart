@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:wtp_app/app/screens/edit_profile/edit_profile_presenter.dart';
 
 import '../../../domain/entities/user.dart';
-import '../../utils/constant.dart';
 
 class EditProfileController extends Controller {
   final EditProfilePresenter presenter;
@@ -19,13 +18,13 @@ class EditProfileController extends Controller {
   User? get user => _user;
   File? get image => _image;
 
-  final TextEditingController? _nameController;
-  final TextEditingController? _emailController;
-  final TextEditingController? _avatarController;
-  final TextEditingController? _avatarUrlController;
-  TextEditingController? currPassController;
-  TextEditingController? newPassController;
-  TextEditingController? conPassPassController;
+  final TextEditingController? _nameController = TextEditingController();
+  final TextEditingController? _emailController = TextEditingController();
+  final TextEditingController? _avatarController = TextEditingController();
+  final TextEditingController? _avatarUrlController = TextEditingController();
+  TextEditingController? currPassController = TextEditingController();
+  TextEditingController? newPassController = TextEditingController();
+  TextEditingController? conPassPassController = TextEditingController();
 
   TextEditingController? get nameController => _nameController;
   TextEditingController? get emailController => _emailController;
@@ -34,24 +33,18 @@ class EditProfileController extends Controller {
 
   EditProfileController(userRepository)
       : presenter = EditProfilePresenter(userRepository),
-        _nameController = TextEditingController(),
-        _emailController = TextEditingController(),
-        _avatarController = TextEditingController(),
-        _avatarUrlController = TextEditingController(),
         currPassController = TextEditingController(),
         newPassController = TextEditingController(),
         conPassPassController = TextEditingController(),
         super();
   @override
   void initListeners() {
-    Constant.configLoading();
-    EasyLoading.show(status: 'loading...');
     presenter.getUser();
     presenter.getUserOnNext = (User user) async {
-      _nameController?.text = user.name!;
-      _emailController?.text = user.email!;
-      _avatarController?.text = user.avatar.toString();
-      _avatarUrlController?.text = user.avatarUrl.toString();
+      _nameController!.text = user.name!;
+      _emailController!.text = user.email!;
+      _avatarController!.text = user.avatar.toString();
+      _avatarUrlController!.text = user.avatarUrl.toString();
       debugPrint("get user on next");
       refreshUI();
     };
@@ -65,12 +58,13 @@ class EditProfileController extends Controller {
     };
 
     //  ========================== update profile
-    presenter.getUpdateUserOnError = (e) async {
+    presenter.getUpdateUserOnError = (e) {
       print("Error on update profile");
       print(e.toString());
+      EasyLoading.dismiss();
     };
 
-    presenter.getUpdateUserOnNext = (User user) async {
+    presenter.getUpdateUserOnNext = (User user) {
       _user = user;
       print("next on update profile");
       if (user.statusCode == 200) {
@@ -88,6 +82,7 @@ class EditProfileController extends Controller {
         });
       }
       refreshUI();
+      EasyLoading.dismiss();
     };
   }
 
