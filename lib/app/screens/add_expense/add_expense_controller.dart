@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../../data/repository/expense/data_expense_repository.dart';
@@ -12,17 +13,30 @@ class AddExpenseController extends Controller {
   List<ExpenseType>? _expenseType;
   List<TripStartEnd>? _tripStartEnd;
   Expense? _expenseError;
-  int? _statusCode;
+  int? statusCode;
+  String? _selectedExpenseType;
+  String? _selectedTrip;
+  //text controller
+  TextEditingController descriptionTextController = TextEditingController();
+  TextEditingController amountTextController = TextEditingController();
 
   List<ExpenseType>? get expenseType => _expenseType;
   List<TripStartEnd>? get tripStartEnd => _tripStartEnd;
-
   Expense? get expenseError => _expenseError;
+  String? get selectedExpenseType => _selectedExpenseType;
+  String? get selectedTrip => _selectedTrip;
+
+  set setSelectedExpenseType(String val) => _selectedExpenseType = val;
+  set setSelectedTrip(String val) => _selectedTrip = val;
 
   AddExpenseController(DataExpenseRepository repository)
       : presenter = AddExpensePresenter(repository);
   @override
   void initListeners() {
+    /* ====== */
+    presenter.getExpenseType();
+    presenter.getTripStartEnd();
+    /* ====== */
     /*------------------------------------------------------------------------*/
     presenter.getExpenseOnTypeNext = (ExpenseTypeModel expenseType) async {
       _expenseType = expenseType.expenseType;
@@ -54,7 +68,7 @@ class AddExpenseController extends Controller {
     /* ---------------------------------------------------------------------- */
     presenter.addExpenseOnNext = (ExpenseModel expenseModel) {
       _expenseError = expenseModel.errors;
-      _statusCode = expenseModel.statusCode;
+      statusCode = expenseModel.statusCode;
       print(expenseModel.statusCode);
       print("add expense on next");
       refreshUI();
@@ -72,6 +86,19 @@ class AddExpenseController extends Controller {
   @override
   void onDisposed() {
     presenter.dispose();
+    amountTextController.dispose();
+    descriptionTextController.dispose();
     super.onDisposed();
+  }
+
+  void addExpense(String expenseTypeId, String bookingId, String amount,
+      String description) {
+    /*
+    *  int expenseType
+    *  double amount
+    * */
+    presenter.addExpense(expenseTypeId, bookingId, amount, description);
+    // print(expenseTypeId);
+    // print(amount);
   }
 }

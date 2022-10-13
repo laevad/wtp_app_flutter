@@ -22,6 +22,14 @@ class AddExpenseViewState
   // TODO: implement view
   Widget get view => ControlledWidgetBuilder<AddExpenseController>(
         builder: (context, controller) {
+          if (controller.expenseType == null ||
+              controller.tripStartEnd == null) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Constant.lightColorScheme.primary,
+              ),
+            );
+          }
           return Theme(
             data: ThemeData(
                 colorScheme: Constant.lightColorScheme,
@@ -56,10 +64,20 @@ class AddExpenseViewState
                           child: DropdownButton(
                             underline: const SizedBox(),
                             hint: const Text('Select Expense Type'),
+                            value: controller.selectedExpenseType,
                             isExpanded: true,
-                            items: [],
+                            items: controller.expenseType!.map(
+                              (e) {
+                                return DropdownMenuItem(
+                                  value: e.id.toString(),
+                                  child: Text(e.name.toString()),
+                                );
+                              },
+                            ).toList(),
                             onChanged: (value) {
-                              print(value);
+                              setState(() {
+                                controller.setSelectedExpenseType = value!;
+                              });
                             },
                           ),
                         ),
@@ -78,9 +96,53 @@ class AddExpenseViewState
                             underline: const SizedBox(),
                             hint: const Text('Select Trip'),
                             isExpanded: true,
-                            items: [],
+                            value: controller.selectedTrip,
+                            items: controller.tripStartEnd!.map(
+                              (e) {
+                                return DropdownMenuItem(
+                                  alignment: Alignment.topCenter,
+                                  value: e.id,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${e.start}",
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        " ---   ",
+                                        style: TextStyle(
+                                          color:
+                                              Constant.lightColorScheme.primary,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "${e.end}",
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ).toList(),
                             onChanged: (value) {
-                              print(value);
+                              setState(() {
+                                controller.setSelectedTrip = value!;
+                              });
                             },
                           ),
                         ),
