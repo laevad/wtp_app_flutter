@@ -29,17 +29,21 @@ class Expense {
   factory Expense.fromJson(Map<String, dynamic> json) {
     return Expense(
       date: json['date'],
-      amount: (json['amount'] as int).toDouble(),
+      amount: json['amount'].runtimeType == int
+          ? (json['amount'] as int).toDouble()
+          : json['amount'],
       note: json['note'],
       expenseType: json['expense_type'],
       bookingId: json['booking_id'],
+      tripStart: json['trip_start'],
+      tripEnd: json['trip_end'],
     );
   }
   factory Expense.fromJsonError(Map<String, dynamic> json) {
     return Expense(
-      amount: (json['amount'] as int).toDouble(),
-      note: json['description'],
-      expenseType: json['expense_type_id'],
+      amountError: json['amount'],
+      descriptionError: json['description'],
+      expenseTypeError: json['expense_type_id'],
       bookingError: json['booking_id'],
     );
   }

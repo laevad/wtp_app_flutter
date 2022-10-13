@@ -15,7 +15,8 @@ class AddExpenseUseCase
     final controller = StreamController<AddExpenseUseCaseResponse>();
     try {
       final expenseModel = await repository.addExpense(params!.expenseTypeId!,
-          params.bookingId!, params.amount!, params.description!);
+          params.bookingId, params.amount, params.description);
+
       controller.add(AddExpenseUseCaseResponse(expenseModel));
       logger.finest("AddExpenseUseCase success");
       controller.close();
@@ -29,9 +30,9 @@ class AddExpenseUseCase
 
 class AddExpenseUseCaseParams {
   final int? expenseTypeId;
-  final String? bookingId;
-  final double? amount;
-  final String? description;
+  final String bookingId;
+  final double amount;
+  final String description;
 
   AddExpenseUseCaseParams(
     this.expenseTypeId,
