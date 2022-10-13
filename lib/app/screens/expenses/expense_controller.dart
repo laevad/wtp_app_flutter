@@ -105,7 +105,7 @@ class ExpenseController extends Controller {
   }
 
   String? _selectedExpenseType;
-  String? get selectedExpenseType => _selectedExpenseType;
+  String? _selectedExpense;
 
   showModalBottom({
     required String title,

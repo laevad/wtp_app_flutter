@@ -3,12 +3,16 @@ class Expense {
   final double? amount;
   final String? note;
   final String? expenseType;
+  final String? tripStart;
+  final String? tripEnd;
 
   Expense({
     this.date,
     this.amount,
     this.note,
     this.expenseType,
+    this.tripStart,
+    this.tripEnd,
   });
 
   factory Expense.fromJson(Map<String, dynamic> json) {
