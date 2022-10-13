@@ -35,8 +35,14 @@ class DataExpenseRepository extends ExpenseRepository {
   }
 
   @override
-  Future<TripStartEndModel> getTripStartEndModel(String userId) {
-    // TODO: implement getTripStartEndModel
-    throw UnimplementedError();
+  Future<TripStartEndModel> getTripStartEndModel(String userId) async {
+    String url = "${await IsAuth.getData('url')}/expense/booking-s-e";
+    Map<String, dynamic> body = {"user_id": await IsAuth.getData('id')};
+    var response = await http.post(Uri.parse(url),
+        headers: await getHeader1(), body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      return TripStartEndModel.fromJson(jsonDecode(response.body));
+    }
+    throw Exception("failed to getAllIncentive");
   }
 }
