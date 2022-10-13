@@ -13,14 +13,13 @@ class AddExpenseUseCase
   Future<Stream<AddExpenseUseCaseResponse?>> buildUseCaseStream(
       AddExpenseUseCaseParams? params) async {
     final controller = StreamController<AddExpenseUseCaseResponse>();
-    try {
-      final expenseModel = await repository.addExpense(params!.expenseTypeId!,
-          params.bookingId, params.amount, params.description);
+    final expenseModel = await repository.addExpense(params!.expenseTypeId!,
+        params.bookingId, params.amount, params.description);
 
-      controller.add(AddExpenseUseCaseResponse(expenseModel));
-      logger.finest("AddExpenseUseCase success");
-      controller.close();
-    } catch (e) {
+    controller.add(AddExpenseUseCaseResponse(expenseModel));
+    logger.finest("AddExpenseUseCase success");
+    controller.close();
+    try {} catch (e) {
       controller.addError(e);
       logger.severe("AddExpenseUseCase unsuccessful");
     }
@@ -29,9 +28,9 @@ class AddExpenseUseCase
 }
 
 class AddExpenseUseCaseParams {
-  final int? expenseTypeId;
+  final String? expenseTypeId;
   final String bookingId;
-  final double amount;
+  final String amount;
   final String description;
 
   AddExpenseUseCaseParams(

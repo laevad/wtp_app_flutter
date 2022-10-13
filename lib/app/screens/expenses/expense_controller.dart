@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -18,6 +17,7 @@ class ExpenseController extends Controller {
   Expense? _expenseError;
 
   int? _lastPage;
+  int? _statusCode;
   int _page = 0;
   /* */
   final ScrollController _scrollController = ScrollController();
@@ -32,6 +32,7 @@ class ExpenseController extends Controller {
   double get amount => _amount;
   Expense? get expenseError => _expenseError;
   int? get lastPage => _lastPage;
+  int? get statusCode => _statusCode;
 
   //text controller
   TextEditingController descriptionTextController = TextEditingController();
@@ -84,7 +85,6 @@ class ExpenseController extends Controller {
           if (_scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
             EasyLoading.show(status: "loading please wait...");
-            print("DFDFDFDFDF: ${_page}");
             presenter.getExpense(++_page);
             refreshUI();
           }
@@ -125,6 +125,8 @@ class ExpenseController extends Controller {
     /* ---------------------------------------------------------------------- */
     presenter.addExpenseOnNext = (ExpenseModel expenseModel) {
       _expenseError = expenseModel.errors;
+      _statusCode = expenseModel.statusCode;
+      print(expenseModel.statusCode);
       print("add expense on next");
       refreshUI();
     };
@@ -152,18 +154,25 @@ class ExpenseController extends Controller {
     *  int expenseType
     *  double amount
     * */
-    // presenter.addExpense(expenseTypeId, bookingId, amount, description);
-    print(expenseTypeId);
-    print(amount);
-    descriptionTextController.clear();
-    amountTextController.clear();
-    _selectedTrip = null;
-    _selectedExpenseType = null;
-    Navigator.pop(getContext());
-    _expense = [];
-    _amount = 0;
-    presenter.getExpense(1);
-    _page = 1;
+    presenter.addExpense(expenseTypeId, bookingId, amount, description);
+    // print(expenseTypeId);
+    // print(amount);
+
+    if (_statusCode == 200) {
+      descriptionTextController.clear();
+      amountTextController.clear();
+      _selectedTrip = null;
+      _selectedExpenseType = null;
+      Navigator.pop(getContext());
+      _expense = [];
+      _amount = 0;
+      presenter.getExpense(1);
+      _page = 1;
+    } else {
+      if (statusCode == 422 || statusCode == null) {
+        print("ere");
+      }
+    }
   }
 
   /* can create custom/separated widget for this long code if you want */
@@ -295,17 +304,14 @@ class ExpenseController extends Controller {
                         width: MediaQuery.of(context).size.width / 1.0,
                         child: Container(
                           margin: const EdgeInsets.only(bottom: 15),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Enter a valid password!';
-                              }
-                              return null;
-                            },
+                          child: TextField(
                             keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.done,
                             controller: amountTextController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              errorText: _expenseError?.amountError == null
+                                  ? null
+                                  : _expenseError!.amountError.toString(),
                               hintText: 'Amount',
                               border: OutlineInputBorder(
                                 borderSide:

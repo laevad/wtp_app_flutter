@@ -54,7 +54,13 @@ class ExpenseModel {
   int? lastPage;
   List<Expense>? expense;
   Expense? errors;
-  ExpenseModel({this.expense, this.lastPage, this.currentPage, this.errors});
+  int? statusCode;
+  ExpenseModel(
+      {this.expense,
+      this.lastPage,
+      this.currentPage,
+      this.errors,
+      this.statusCode});
   factory ExpenseModel.fromJson(Map<String, dynamic> json) {
     return ExpenseModel(
         lastPage: json['last_page'],
@@ -64,7 +70,11 @@ class ExpenseModel {
             .toList());
   }
 
-  factory ExpenseModel.fromJsonError(Map<String, dynamic> json) {
-    return ExpenseModel(errors: Expense.fromJsonError(json['errors']));
+  factory ExpenseModel.fromJsonError(
+      Map<String, dynamic> json, int statusCode) {
+    return ExpenseModel(
+      errors: Expense.fromJsonError(json['errors']),
+      statusCode: statusCode,
+    );
   }
 }

@@ -61,8 +61,8 @@ class ExpensePresenter extends Presenter {
     return getTripStartEndUseCase.execute(GetTripStartEndUseCaseObserver(this));
   }
 
-  addExpense(
-      int expenseTypeId, String bookingId, double amount, String description) {
+  addExpense(String expenseTypeId, String bookingId, String amount,
+      String description) {
     addExpenseUseCase.execute(AddExpenseUseCaseObserver(this),
         AddExpenseUseCaseParams(expenseTypeId, bookingId, amount, description));
   }

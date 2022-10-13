@@ -65,6 +65,5 @@ class ButtonTileWidget extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

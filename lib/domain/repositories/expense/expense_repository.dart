@@ -8,9 +8,9 @@ abstract class ExpenseRepository {
   Future<ExpenseTypeModel> getExpenseTypeModel();
   Future<TripStartEndModel> getTripStartEndModel();
   Future<ExpenseModel> addExpense(
-    int expenseTypeId,
+    String expenseTypeId,
     String bookingId,
-    double amount,
+    String amount,
     String description,
   );
 }
