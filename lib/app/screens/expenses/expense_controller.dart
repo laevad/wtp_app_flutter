@@ -110,11 +110,13 @@ class ExpenseController extends Controller {
       refreshUI();
     };
     presenter.getTripStartEndOnComplete = () {
-      refreshUI();
+      EasyLoading.dismiss();
       print("trip s e on complete");
+      refreshUI();
     };
     presenter.getTripStartEndOnError = (e) {
       print("trip on error: ${e.toString()}");
+      EasyLoading.dismiss();
       refreshUI();
     };
     /* ---------------------------------------------------------------------- */
@@ -144,6 +146,7 @@ class ExpenseController extends Controller {
 
   void addExpenseView() {
     Navigator.pushNamed(getContext(), AddExpenseView.routeName).then((value) {
+      EasyLoading.show(status: "Loading..");
       _expense = [];
       _amount = 0;
       presenter.getExpense(1);

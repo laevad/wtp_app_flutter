@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../data/repository/expense/data_expense_repository.dart';
 import '../../../domain/entities/expense.dart';
@@ -86,18 +87,22 @@ class AddExpenseController extends Controller {
         }
       }
       if (statusCode == 200) {
+        EasyLoading.dismiss();
         Navigator.pop(getContext());
       }
       print("add expense on next");
       refreshUI();
     };
+    EasyLoading.dismiss();
     presenter.addExpenseOnComplete = () {
       print("add expense on complete");
       refreshUI();
+      EasyLoading.dismiss();
     };
     presenter.addExpenseOnError = (e) {
       print("add expense on error: ${e.toString()}");
       refreshUI();
+      EasyLoading.dismiss();
     };
   }
 
@@ -110,6 +115,7 @@ class AddExpenseController extends Controller {
   }
 
   void addExpense() async {
+    EasyLoading.show(status: "Loading..");
     await presenter.addExpense(
         _selectedExpenseType.toString(),
         _selectedTrip.toString(),
