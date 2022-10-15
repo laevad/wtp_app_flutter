@@ -19,6 +19,6 @@ class IsAuth {
   }
 
   static deleteKey({required String key}) async {
-    await storage.delete(key: key);
+    await storage.delete(key: key, aOptions: _secureOption());
   }
 }

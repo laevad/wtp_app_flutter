@@ -26,8 +26,7 @@ class LoginController extends Controller {
   @override
   void initListeners() async {
     await IsAuth.deleteKey(key: 'url');
-    await IsAuth.setToken(
-        key: 'url', value: 'https://wtp-web.herokuapp.com/api');
+    await IsAuth.setToken(key: 'url', value: 'http://192.168.210.54:8000/api');
     Constant.configLoading();
     loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) async {
       _authToken = loginDetails;
