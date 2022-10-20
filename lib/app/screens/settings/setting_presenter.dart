@@ -1,5 +1,5 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/usecase/auth/logout_usecase.dart';
+import '../../../domain/usecase/auth/logout_usecase.dart';
 
 class SettingsPresenter extends Presenter {
   final LogoutUseCase logoutUseCase;

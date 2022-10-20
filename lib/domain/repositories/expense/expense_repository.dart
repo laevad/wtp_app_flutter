@@ -1,5 +1,5 @@
-import 'package:wtp_app/domain/entities/expense.dart';
-import 'package:wtp_app/domain/entities/trip_start_end.dart';
+import '../../entities/expense.dart';
+import '../../entities/trip_start_end.dart';
 
 import '../../entities/expense_type.dart';
 

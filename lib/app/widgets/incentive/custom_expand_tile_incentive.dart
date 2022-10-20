@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wtp_app/domain/entities/incentive.dart';
+import '../../../domain/entities/incentive.dart';
 
 import '../../utils/constant.dart';
 

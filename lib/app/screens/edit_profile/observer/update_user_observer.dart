@@ -1,5 +1,5 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/usecase/user/update_profile_usecase.dart';
+import '../../../../domain/usecase/user/update_profile_usecase.dart';
 
 import '../edit_profile_presenter.dart';
 

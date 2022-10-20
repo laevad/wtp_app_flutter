@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:wtp_app/app/screens/trip/trip_presenter.dart';
+import 'trip_presenter.dart';
 
 import '../../../domain/entities/trip.dart';
 import '../../utils/constant.dart';

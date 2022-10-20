@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wtp_app/domain/entities/expense.dart';
+import '../../../domain/entities/expense.dart';
 
 import '../../utils/constant.dart';
 

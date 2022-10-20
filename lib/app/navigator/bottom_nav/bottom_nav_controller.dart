@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:wtp_app/app/utils/constant.dart';
+
+import '../../utils/constant.dart';
 
 class HomeController extends Controller {
   final PageController _pageController = PageController();

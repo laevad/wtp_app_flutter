@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:wtp_app/device/utils/direction_constant.dart';
-import 'package:wtp_app/domain/repositories/direction/direction_repository.dart';
+import '../utils/direction_constant.dart';
+import '../../domain/repositories/direction/direction_repository.dart';
 
 import '../../domain/entities/direction.dart';
 

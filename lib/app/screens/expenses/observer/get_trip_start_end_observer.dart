@@ -1,6 +1,6 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/app/screens/expenses/expense_presenter.dart';
-import 'package:wtp_app/domain/usecase/expense/get_trip_start_end_usecase.dart';
+import '../expense_presenter.dart';
+import '../../../../domain/usecase/expense/get_trip_start_end_usecase.dart';
 
 class GetTripStartEndUseCaseObserver
     extends Observer<GetTripStartEndUseCaseResponse> {

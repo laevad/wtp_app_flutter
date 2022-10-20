@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wtp_app/domain/entities/incentive.dart';
-import 'package:wtp_app/domain/repositories/incentive/incentive_repository.dart';
+import '../../../domain/entities/incentive.dart';
+import '../../../domain/repositories/incentive/incentive_repository.dart';
 
 import '../../data_constants.dart';
 import '../helpers/auth/is_auth.dart';

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/entities/map_marker.dart';
-import 'package:wtp_app/domain/repositories/direction/marker_repository.dart';
+import '../../entities/map_marker.dart';
+import '../../repositories/direction/marker_repository.dart';
 
 class AddMarkerUseCase
     extends UseCase<AddMarkerUseCaseResponse, AddMarkerUseCaseParams> {

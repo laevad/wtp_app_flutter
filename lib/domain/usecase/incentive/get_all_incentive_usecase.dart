@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/repositories/incentive/incentive_repository.dart';
+import '../../repositories/incentive/incentive_repository.dart';
 
 import '../../entities/incentive.dart';
 

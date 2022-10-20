@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:wtp_app/app/screens/incentives/incentives_presenter.dart';
-import 'package:wtp_app/data/repository/incentive/data_incentive_repository.dart';
-import 'package:wtp_app/domain/entities/incentive.dart';
+import 'incentives_presenter.dart';
+import '../../../data/repository/incentive/data_incentive_repository.dart';
+import '../../../domain/entities/incentive.dart';
 
 import '../../utils/constant.dart';
 

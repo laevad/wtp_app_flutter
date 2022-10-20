@@ -1,6 +1,6 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:wtp_app/device/repository/data_marker_repository.dart';
+import '../../../device/repository/data_marker_repository.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
 import '../../../domain/usecase/direction/add_marker_usecase.dart';

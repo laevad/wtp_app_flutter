@@ -1,7 +1,7 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/app/screens/incentives/observer/get_all_incentive_observer.dart';
-import 'package:wtp_app/data/repository/incentive/data_incentive_repository.dart';
-import 'package:wtp_app/domain/usecase/incentive/get_all_incentive_usecase.dart';
+import 'observer/get_all_incentive_observer.dart';
+import '../../../data/repository/incentive/data_incentive_repository.dart';
+import '../../../domain/usecase/incentive/get_all_incentive_usecase.dart';
 
 class IncentivePresenter extends Presenter {
   Function? getIncentiveOnComplete;

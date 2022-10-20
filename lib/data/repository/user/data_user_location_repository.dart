@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wtp_app/domain/repositories/user/user_location_repository.dart';
+import '../../../domain/repositories/user/user_location_repository.dart';
 
 import '../../data_constants.dart';
 import '../helpers/auth/is_auth.dart';

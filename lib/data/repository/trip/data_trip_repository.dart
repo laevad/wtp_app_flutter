@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
-import 'package:wtp_app/domain/entities/trip.dart';
-import 'package:wtp_app/domain/repositories/trip/trip_repository.dart';
+import '../helpers/auth/is_auth.dart';
+import '../../../domain/entities/trip.dart';
+import '../../../domain/repositories/trip/trip_repository.dart';
 
 import '../../data_constants.dart';
 

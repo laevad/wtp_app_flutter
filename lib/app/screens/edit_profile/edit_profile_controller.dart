@@ -6,9 +6,9 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:wtp_app/app/screens/edit_profile/edit_profile_presenter.dart';
 
 import '../../../domain/entities/user.dart';
+import 'edit_profile_presenter.dart';
 
 class EditProfileController extends Controller {
   final EditProfilePresenter presenter;

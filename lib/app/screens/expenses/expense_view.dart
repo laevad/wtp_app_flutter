@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/app/screens/expenses/expense_controller.dart';
-import 'package:wtp_app/app/widgets/expense/custom_expand_tile_expense.dart';
-import 'package:wtp_app/data/repository/expense/data_expense_repository.dart';
+import 'expense_controller.dart';
+import '../../widgets/expense/custom_expand_tile_expense.dart';
+import '../../../data/repository/expense/data_expense_repository.dart';
 
 import '../../utils/constant.dart';
 

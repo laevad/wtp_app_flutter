@@ -1,4 +1,4 @@
-import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
+import 'repository/helpers/auth/is_auth.dart';
 
 // const siteURL = 'http://192.168.210.54:8000/api';
 const yetToStart = 1;

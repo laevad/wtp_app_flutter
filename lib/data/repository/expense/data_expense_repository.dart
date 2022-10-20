@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wtp_app/domain/entities/expense.dart';
-import 'package:wtp_app/domain/entities/expense_type.dart';
-import 'package:wtp_app/domain/entities/trip_start_end.dart';
-import 'package:wtp_app/domain/repositories/expense/expense_repository.dart';
+import '../../../domain/entities/expense.dart';
+import '../../../domain/entities/expense_type.dart';
+import '../../../domain/entities/trip_start_end.dart';
+import '../../../domain/repositories/expense/expense_repository.dart';
 
 import '../../data_constants.dart';
 import '../helpers/auth/is_auth.dart';

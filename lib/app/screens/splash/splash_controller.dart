@@ -1,5 +1,5 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/app/screens/splash/splash_presenter.dart';
+import 'splash_presenter.dart';
 
 class SplashController extends Controller {
   final SplashPresenter? splashPresenter;

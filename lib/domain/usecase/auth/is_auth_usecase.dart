@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/repositories/login_details/auth_repository.dart';
+import '../../repositories/login_details/auth_repository.dart';
 
 import '../../../data/repository/auth/data_auth_token_repository.dart';
 

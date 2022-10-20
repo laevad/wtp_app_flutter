@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/entities/user.dart';
-import 'package:wtp_app/domain/repositories/login_details/user_repository.dart';
+import '../../entities/user.dart';
+import '../../repositories/login_details/user_repository.dart';
 
 class GetUserUseCase extends UseCase<GetUserUseCaseResponse, void> {
   final UserRepository userRepository;

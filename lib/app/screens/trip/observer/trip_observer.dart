@@ -1,5 +1,5 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/usecase/trip/get_all_trip_usecase.dart';
+import '../../../../domain/usecase/trip/get_all_trip_usecase.dart';
 
 import '../trip_presenter.dart';
 

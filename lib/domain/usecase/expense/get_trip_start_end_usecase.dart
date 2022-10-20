@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/entities/trip_start_end.dart';
-import 'package:wtp_app/domain/repositories/expense/expense_repository.dart';
+import '../../entities/trip_start_end.dart';
+import '../../repositories/expense/expense_repository.dart';
 
 class GetTripStartEndUseCase
     extends UseCase<GetTripStartEndUseCaseResponse, void> {

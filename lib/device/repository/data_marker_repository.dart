@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
-import 'package:wtp_app/domain/entities/map_marker.dart';
-import 'package:wtp_app/domain/repositories/direction/marker_repository.dart';
+import '../../domain/entities/map_marker.dart';
+import '../../domain/repositories/direction/marker_repository.dart';
 
 import '../../data/data_constants.dart';
 import '../../data/repository/helpers/auth/is_auth.dart';

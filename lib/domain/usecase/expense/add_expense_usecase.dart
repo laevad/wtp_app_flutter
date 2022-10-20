@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:wtp_app/domain/entities/expense.dart';
-import 'package:wtp_app/domain/repositories/expense/expense_repository.dart';
+import '../../entities/expense.dart';
+import '../../repositories/expense/expense_repository.dart';
 
 class AddExpenseUseCase
     extends UseCase<AddExpenseUseCaseResponse, AddExpenseUseCaseParams> {

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:wtp_app/app/screens/server_url/server_view.dart';
+import '../server_url/server_view.dart';
 
 import '../../../data/repository/helpers/auth/is_auth.dart';
 import '../../../domain/entities/auth_token.dart';
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
 import '../../utils/constant.dart';
 import 'login_presenter.dart';
+
 
 class LoginController extends Controller {
   LoginPresenter? loginPresenter;
@@ -25,8 +26,8 @@ class LoginController extends Controller {
 
   @override
   void initListeners() async {
-    await IsAuth.deleteKey(key: 'url');
-    await IsAuth.setToken(key: 'url', value: 'http://192.168.210.54:8000/api');
+    // await IsAuth.deleteKey(key: 'url');
+    // await IsAuth.setToken(key: 'url', value: 'http://192.168.210.114:8000/api');
     Constant.configLoading();
     loginPresenter!.getAuthTokenOnNext = (AuthToken loginDetails) async {
       _authToken = loginDetails;

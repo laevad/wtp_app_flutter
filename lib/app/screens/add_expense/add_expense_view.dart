@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wtp_app/app/screens/add_expense/add_expense_controller.dart';
+import 'add_expense_controller.dart';
 
 import '../../../data/repository/expense/data_expense_repository.dart';
 import '../../utils/constant.dart';
