@@ -1,6 +1,7 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import '../expense_presenter.dart';
+
 import '../../../../domain/usecase/expense/add_expense_usecase.dart';
+import '../expense_presenter.dart';
 
 class AddExpenseUseCaseObserver extends Observer<AddExpenseUseCaseResponse> {
   final ExpensePresenter presenter;

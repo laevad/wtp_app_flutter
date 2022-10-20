@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import '../../repositories/incentive/incentive_repository.dart';
 
 import '../../entities/incentive.dart';
+import '../../repositories/incentive/incentive_repository.dart';
 
 class GetAllIncentiveUseCase extends UseCase<GetAllIncentiveUseCaseResponse,
     GetAllIncentiveUseCaseParams> {

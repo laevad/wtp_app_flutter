@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import '../../utils/constant.dart';
 
 import '../../../data/repository/helpers/auth/is_auth.dart';
+import '../../utils/constant.dart';
 
 class ServerController extends Controller {
   final TextEditingController _urlController;

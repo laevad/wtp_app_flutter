@@ -7,15 +7,15 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
-import 'navigate_presenter.dart';
+
 import '../../../data/repository/helpers/auth/is_auth.dart';
+import '../../../device/repository/data_marker_repository.dart';
 import '../../../domain/entities/direction.dart';
 import '../../../domain/entities/map_marker.dart';
 import '../../../domain/repositories/direction/direction_repository.dart';
-
-import '../../../device/repository/data_marker_repository.dart';
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
 import '../../utils/constant.dart';
+import 'navigate_presenter.dart';
 
 class NavigateController extends Controller {
   static int num = 1;

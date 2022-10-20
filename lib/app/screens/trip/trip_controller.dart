@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'trip_presenter.dart';
 
 import '../../../domain/entities/trip.dart';
 import '../../utils/constant.dart';
 import '../navigate/navigate_view.dart';
+import 'trip_presenter.dart';
 
 enum LoadingMoreStatus { loading, stable }
 

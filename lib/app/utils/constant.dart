@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import '../screens/incentives/incentives_view.dart';
 
 import '../screens/expenses/expense_view.dart';
+import '../screens/incentives/incentives_view.dart';
 import '../screens/settings/settings_screen.dart';
 import '../screens/trip/trip_view.dart';
 

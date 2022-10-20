@@ -1,6 +1,6 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import '../../../../domain/usecase/expense/get_trip_start_end_usecase.dart';
 
+import '../../../../domain/usecase/expense/get_trip_start_end_usecase.dart';
 import '../add_expense_presenter.dart';
 
 class GetTripStartEndUseCaseObserver

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'home_controller.dart';
 
 import '../../utils/constant.dart';
+import 'home_controller.dart';
 
 class HomeView extends View {
   static String routeName = '/Home';

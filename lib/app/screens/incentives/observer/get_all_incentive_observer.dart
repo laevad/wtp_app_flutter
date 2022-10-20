@@ -1,6 +1,7 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import '../incentives_presenter.dart';
+
 import '../../../../domain/usecase/incentive/get_all_incentive_usecase.dart';
+import '../incentives_presenter.dart';
 
 class GetAllIncentiveUseCaseObserver
     extends Observer<GetAllIncentiveUseCaseResponse> {

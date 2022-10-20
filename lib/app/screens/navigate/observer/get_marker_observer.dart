@@ -1,6 +1,7 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import '../navigate_presenter.dart';
+
 import '../../../../domain/usecase/direction/get_marker_usecase.dart';
+import '../navigate_presenter.dart';
 
 class GetMarkerUseCaseObserver extends Observer<GetMarkerUseCaseResponse> {
   final NavigatePresenter presenter;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../data/repository/incentive/data_incentive_repository.dart';
 
+import '../../../data/repository/incentive/data_incentive_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/incentive/custom_expand_tile_incentive.dart';
 import 'incentives_controller.dart';

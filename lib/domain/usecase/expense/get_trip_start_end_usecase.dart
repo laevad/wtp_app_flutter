@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
 import '../../entities/trip_start_end.dart';
 import '../../repositories/expense/expense_repository.dart';
 

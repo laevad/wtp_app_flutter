@@ -1,7 +1,6 @@
 import '../../entities/expense.dart';
-import '../../entities/trip_start_end.dart';
-
 import '../../entities/expense_type.dart';
+import '../../entities/trip_start_end.dart';
 
 abstract class ExpenseRepository {
   Future<ExpenseModel> getAllIncentive(int page);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../domain/entities/incentive.dart';
 
+import '../../../domain/entities/incentive.dart';
 import '../../utils/constant.dart';
 
 class CustomExpandTileIncentive extends StatelessWidget {

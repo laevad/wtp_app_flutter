@@ -1,4 +1,5 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
 import '../../../domain/usecase/auth/logout_usecase.dart';
 
 class SettingsPresenter extends Presenter {

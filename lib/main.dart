@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'app/screens/add_expense/add_expense_view.dart';
 
 import 'app/navigator/bottom_nav/bottom_nav_view.dart';
+import 'app/screens/add_expense/add_expense_view.dart';
 import 'app/screens/edit_profile/edit_profile_view.dart';
 import 'app/screens/home/home_view.dart';
 import 'app/screens/incentives/incentives_view.dart';

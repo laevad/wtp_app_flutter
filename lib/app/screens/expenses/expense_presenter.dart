@@ -1,9 +1,9 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
 import '../../../data/repository/expense/data_expense_repository.dart';
+import '../../../domain/usecase/expense/add_expense_usecase.dart';
 import '../../../domain/usecase/expense/get_all_expense_usecase.dart';
 import '../../../domain/usecase/expense/get_expense_type_usecase.dart';
-
-import '../../../domain/usecase/expense/add_expense_usecase.dart';
 import '../../../domain/usecase/expense/get_trip_start_end_usecase.dart';
 import 'observer/add_expense_observer.dart';
 import 'observer/get_expense_observer.dart';

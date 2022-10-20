@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
 import '../../entities/user.dart';
 import '../../repositories/login_details/user_repository.dart';
 

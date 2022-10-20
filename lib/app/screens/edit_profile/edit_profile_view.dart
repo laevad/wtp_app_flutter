@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../data/repository/user/data_user_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/edit_profile/edit_custom_input.dart';
-import '../../../data/repository/user/data_user_repository.dart';
-
 import '../../widgets/global_custom/custom_button_save_changes.dart';
 import '../../widgets/global_custom/custom_image.dart';
 import 'edit_profile_controller.dart';
