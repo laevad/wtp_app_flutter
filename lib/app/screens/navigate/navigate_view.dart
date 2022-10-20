@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'navigate_controller.dart';
-import '../../widgets/global_custom/custom_appbar.dart';
-import '../../../device/repository/data_direction_repository.dart';
-import '../../../device/repository/data_marker_repository.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
+import '../../../device/repository/data_direction_repository.dart';
+import '../../../device/repository/data_marker_repository.dart';
 import '../../utils/constant.dart';
+import '../../widgets/global_custom/custom_appbar.dart';
 import '../../widgets/global_custom/custom_toggle_switch.dart';
+import 'navigate_controller.dart';
 
 class NavigateView extends View {
   static const String routeName = '/navigateView';
