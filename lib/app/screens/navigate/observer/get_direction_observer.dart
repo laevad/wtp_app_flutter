@@ -1,6 +1,7 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import '../navigate_presenter.dart';
+
 import '../../../../domain/usecase/direction/get_direction_usercase.dart';
+import '../navigate_presenter.dart';
 
 class GetDirectionUseCaseObserver
     extends Observer<GetDirectionUseCaseResponse> {

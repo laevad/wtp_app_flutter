@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'server_controller.dart';
 
 import '../../utils/constant.dart';
 import '../../widgets/edit_profile/edit_custom_input.dart';
 import '../../widgets/global_custom/custom_button_save_changes.dart';
+import 'server_controller.dart';
 
 class ServerView extends View {
   static String routeName = '/server-url';
