@@ -19,8 +19,6 @@ class SplashController extends Controller {
 
   @override
   void initListeners() {
-    splashPresenter!.isAuth();
-
     splashPresenter!.isAuthOnNext = (bool result) async {
       print("isAUTH on next");
       _isAuth = result;
@@ -34,5 +32,11 @@ class SplashController extends Controller {
       print(e);
     };
     refreshUI();
+  }
+
+  @override
+  void onInitState() {
+    splashPresenter!.isAuth();
+    super.onInitState();
   }
 }
