@@ -23,9 +23,7 @@ class TripViewState extends ViewState<TripView, TripController> {
       builder: (context, controller) {
         if (controller.trip == null || controller.tripC == null) {
           return Center(
-            child: CircularProgressIndicator(
-              color: Constant.lightColorScheme.primary,
-            ),
+            child: Container(),
           );
         }
         return Theme(
