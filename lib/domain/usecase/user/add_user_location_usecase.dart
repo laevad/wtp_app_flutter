@@ -17,6 +17,7 @@ class AddUserLocationUseCase extends UseCase<AddUserLocationUseCaseResponse,
       await repository.addLocation(
         params!.latitude,
         params.longitude,
+        params.statusId,
       );
       logger.finest('AddUserLocationUseCase successful');
       controller.close();
@@ -35,6 +36,6 @@ class AddUserLocationUseCaseResponse {
 class AddUserLocationUseCaseParams {
   final double latitude;
   final double longitude;
-
-  AddUserLocationUseCaseParams(this.latitude, this.longitude);
+  final int statusId;
+  AddUserLocationUseCaseParams(this.latitude, this.longitude, this.statusId);
 }

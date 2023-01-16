@@ -46,6 +46,10 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
 
           String status = arguments['status'];
 
+          if (status == 'completed') {
+            controller.cancelLive();
+          }
+
           // IsAuth.deleteKey(key: 'bookingId');
           // IsAuth.setToken(key: 'bookingId', value: bookingId);
           return Theme(
@@ -103,6 +107,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                         ),
                         onMapCreated:
                             (GoogleMapController mapController) async {
+                          if (status != 'completed') {}
                           controller.mapController.complete(mapController);
                           controller.getDirection(
                               sourceLocation, destinationLocation);
@@ -118,7 +123,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                       ? Align(
                           alignment: Alignment.topCenter,
                           child: AnimatedToggle(
-                            values: const ['Track off', 'Track on'],
+                            values: const ['off', 'on'],
                             onToggleCallback: (value) {
                               setState(() {
                                 controller.toggleValue = value;

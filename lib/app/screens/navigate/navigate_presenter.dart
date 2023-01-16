@@ -63,12 +63,8 @@ class NavigatePresenter extends Presenter {
   }
 
   addUserLocation(double latitude, double longitude) {
-    addUserLocationUseCase.execute(
-        AddUserLocationUseCaseObserver(this),
-        AddUserLocationUseCaseParams(
-          latitude,
-          longitude,
-        ));
+    addUserLocationUseCase.execute(AddUserLocationUseCaseObserver(this),
+        AddUserLocationUseCaseParams(latitude, longitude, 1));
   }
 
   void getDirection(LatLng origin, LatLng destination) {

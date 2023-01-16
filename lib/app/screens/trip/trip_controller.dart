@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../../../data/repository/helpers/auth/is_auth.dart';
 import '../../../domain/entities/trip.dart';
 import '../../utils/constant.dart';
 import '../navigate/navigate_view.dart';
@@ -149,18 +150,24 @@ class TripController extends Controller {
     double? toLongitude,
     String? status,
   }) {
-    // presenter.updateStatus(bookingId!, 3);
-    Navigator.pushReplacementNamed(getContext(), NavigateView.routeName,
-        arguments: {
-          'destination': destination,
-          'source': source,
-          'bookingId': bookingId,
-          'fromLatitude': fromLatitude,
-          'fromLongitude': fromLongitude,
-          'toLatitude': toLatitude,
-          'toLongitude': toLongitude,
-          'status': status,
-        });
+    print("====================================");
+
+    if (status != "completed") {
+      Navigator.pushReplacementNamed(getContext(), NavigateView.routeName,
+          arguments: {
+            'destination': destination,
+            'source': source,
+            'bookingId': bookingId,
+            'fromLatitude': fromLatitude,
+            'fromLongitude': fromLongitude,
+            'toLatitude': toLatitude,
+            'toLongitude': toLongitude,
+            'status': status,
+          });
+    }
+    if (status == "Yet to Start") {
+      presenter.updateStatus(bookingId!, 3);
+    }
   }
 
   @override

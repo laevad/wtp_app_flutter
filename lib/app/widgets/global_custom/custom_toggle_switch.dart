@@ -25,9 +25,9 @@ class AnimatedToggleState extends State<AnimatedToggle> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.50,
+      width: Get.width * 0.30,
       height: Get.width * 0.10,
-      margin: const EdgeInsets.only(top: 8),
+      margin: const EdgeInsets.only(top: 20),
       child: Stack(
         children: <Widget>[
           GestureDetector(
@@ -41,8 +41,8 @@ class AnimatedToggleState extends State<AnimatedToggle> {
               setState(() {});
             },
             child: Container(
-              width: Get.width * 0.5,
-              height: Get.width * 0.13,
+              width: Get.width * 0.4,
+              height: Get.width * 0.10,
               decoration: ShapeDecoration(
                 color: widget.backgroundColor,
                 shape: RoundedRectangleBorder(
@@ -79,7 +79,7 @@ class AnimatedToggleState extends State<AnimatedToggle> {
             alignment:
                 initialPosition ? Alignment.centerLeft : Alignment.centerRight,
             child: Container(
-              width: Get.width * 0.25,
+              width: Get.width * 0.18,
               height: Get.width * 0.10,
               decoration: ShapeDecoration(
                 color: widget.buttonColor,
