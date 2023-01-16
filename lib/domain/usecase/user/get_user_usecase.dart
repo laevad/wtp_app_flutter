@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
+import '../../../data/repository/helpers/auth/is_auth.dart';
 import '../../entities/user.dart';
 import '../../repositories/login_details/user_repository.dart';
 
@@ -18,6 +19,7 @@ class GetUserUseCase extends UseCase<GetUserUseCaseResponse, void> {
       logger.finest('GetUserUseCase successful');
     } catch (e) {
       logger.severe('GetUserUseCase unsuccessful');
+      await IsAuth.deleteAll();
       controller.addError(e);
     }
     return controller.stream;

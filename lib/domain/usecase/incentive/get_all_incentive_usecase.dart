@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
+import '../../../data/repository/helpers/auth/is_auth.dart';
 import '../../entities/incentive.dart';
 import '../../repositories/incentive/incentive_repository.dart';
 
@@ -20,6 +21,7 @@ class GetAllIncentiveUseCase extends UseCase<GetAllIncentiveUseCaseResponse,
       logger.finest("GetAllIncentiveUseCase successful");
       controller.close();
     } catch (e) {
+      await IsAuth.deleteAll();
       controller.addError(e);
       logger.severe("GetAllIncentiveUseCase unsuccessful");
     }

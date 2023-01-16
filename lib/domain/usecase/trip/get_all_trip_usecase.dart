@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import '../../../data/repository/helpers/auth/is_auth.dart';
 
 import '../../entities/trip.dart';
 import '../../repositories/trip/trip_repository.dart';
@@ -19,6 +20,7 @@ class GetAllTripUseCase
       logger.finest('GetAllTripUseCase success');
       controller.close();
     } catch (e) {
+      await IsAuth.deleteAll();
       logger.severe('GetAllTripUseCase error');
       controller.addError(e);
     }

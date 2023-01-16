@@ -78,6 +78,7 @@ class TripController extends Controller {
     presenter.getTripOnError = (e) {
       print("trip on error!!! ${e.toString()}");
       EasyLoading.dismiss();
+      refreshUI();
     };
     presenter.getTripOnComplete = () async {
       _scrollController.addListener(() {
