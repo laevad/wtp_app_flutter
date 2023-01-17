@@ -8,6 +8,8 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../domain/entities/user.dart';
+import '../../navigator/bottom_nav/bottom_nav_view.dart';
+import '../../utils/constant.dart';
 import 'edit_profile_presenter.dart';
 
 class EditProfileController extends Controller {
@@ -46,7 +48,9 @@ class EditProfileController extends Controller {
       _avatarController!.text = user.avatar.toString();
       _avatarUrlController!.text = user.avatarUrl.toString();
       debugPrint("get user on next");
-      refreshUI();
+      if (!isSuccess) {
+        refreshUI();
+      }
     };
     presenter.getUserOnError = (e) {
       debugPrint("get user on error: ${e.toString()}");
@@ -54,7 +58,7 @@ class EditProfileController extends Controller {
     presenter.getUserOnComplete = () async {
       debugPrint("get user on complete");
       EasyLoading.dismiss();
-      refreshUI();
+      // refreshUI();
     };
 
     //  ========================== update profile
@@ -70,18 +74,17 @@ class EditProfileController extends Controller {
       if (user.statusCode == 200) {
         isSuccess = true;
       }
-      refreshUI();
     };
     presenter.getUpdateUserOnComplete = () async {
       print("complete on update profile");
-      EasyLoading.dismiss();
+
       if (isSuccess) {
-        await EasyLoading.showSuccess('Profile updated successfully');
+        EasyLoading.showSuccess('Profile updated successfully');
         Future.delayed(const Duration(milliseconds: 2250)).then((value) {
-          Navigator.of(getContext()).pop();
+          Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
         });
       }
-      refreshUI();
+
       EasyLoading.dismiss();
     };
   }
@@ -124,30 +127,30 @@ class EditProfileController extends Controller {
         conPassPassController!.text,
         '');
     //unused
-    // if (_image != null) {
-    //   await presenter.updateProfile(
-    //       _nameController!.text,
-    //       _emailController!.text,
-    //       currPassController!.text,
-    //       newPassController!.text,
-    //       conPassPassController!.text,
-    //       _image!.path.toString());
-    // } else {
-    //   await presenter.updateProfile(
-    //       _nameController!.text,
-    //       _emailController!.text,
-    //       currPassController!.text,
-    //       newPassController!.text,
-    //       conPassPassController!.text,
-    //       '');
-    // }
+    if (_image != null) {
+      await presenter.updateProfile(
+          _nameController!.text,
+          _emailController!.text,
+          currPassController!.text,
+          newPassController!.text,
+          conPassPassController!.text,
+          _image!.path.toString());
+    } else {
+      await presenter.updateProfile(
+          _nameController!.text,
+          _emailController!.text,
+          currPassController!.text,
+          newPassController!.text,
+          conPassPassController!.text,
+          '');
+    }
   }
 
   @override
   void onDisposed() {
     presenter.dispose();
     _nameController!.dispose();
-    _avatarUrlController!.dispose();
+
     _avatarController!.dispose();
     _emailController!.dispose();
     super.onDisposed();

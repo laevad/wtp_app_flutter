@@ -26,12 +26,23 @@ class DataAuthRepository extends AuthRepository {
       );
     }
     if (response.statusCode == 200) {
+      print("&&&&&&&&&&&&&&&&&&&&&&");
+      print(response.body);
       AuthToken authToken =
           AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
-      await IsAuth.setToken(key: 'token', value: authToken.token!);
-      await IsAuth.setToken(key: 'id', value: authToken.id!);
+      /*check status_id*/
+      if (authToken.statusId == 1) {
+        await IsAuth.setToken(key: 'token', value: authToken.token!);
+        await IsAuth.setToken(key: 'id', value: authToken.id!);
 
-      return AuthToken.fromJson(jsonDecode(response.body), response.statusCode);
+        return AuthToken.fromJson(
+            jsonDecode(response.body), response.statusCode);
+      }
+
+      return AuthToken.fromJsonErrorMsg(
+        jsonDecode({"error": "Your account is not active"} as dynamic),
+        401,
+      );
     } else {
       throw Exception;
     }

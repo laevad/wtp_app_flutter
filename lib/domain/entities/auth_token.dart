@@ -5,6 +5,7 @@ class AuthToken {
   int? statusCode;
   String? invalidCred;
   String? id;
+  int? statusId;
   AuthToken({
     this.token,
     this.emailMsg,
@@ -12,13 +13,15 @@ class AuthToken {
     this.statusCode,
     this.invalidCred,
     this.id,
+    this.statusId,
   });
 
   factory AuthToken.fromJson(Map<String, dynamic> response, int statusCode) {
     return AuthToken(
         token: response['access_token'],
         id: response['id'],
-        statusCode: statusCode);
+        statusCode: statusCode,
+        statusId: response['status_id']);
   }
 
   factory AuthToken.fromJsonErrorMsg(
