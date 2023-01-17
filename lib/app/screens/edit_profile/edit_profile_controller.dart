@@ -17,7 +17,9 @@ class EditProfileController extends Controller {
   User? _user;
   File? _image;
   bool isSuccess = false;
+
   User? get user => _user;
+
   File? get image => _image;
 
   final TextEditingController? _nameController = TextEditingController();
@@ -29,8 +31,11 @@ class EditProfileController extends Controller {
   TextEditingController? conPassPassController = TextEditingController();
 
   TextEditingController? get nameController => _nameController;
+
   TextEditingController? get emailController => _emailController;
+
   TextEditingController? get avatarController => _avatarController;
+
   TextEditingController? get avatarUrlController => _avatarUrlController;
 
   EditProfileController(userRepository)
@@ -39,6 +44,7 @@ class EditProfileController extends Controller {
         newPassController = TextEditingController(),
         conPassPassController = TextEditingController(),
         super();
+
   @override
   void initListeners() {
     presenter.getUser();
@@ -126,24 +132,27 @@ class EditProfileController extends Controller {
         newPassController!.text,
         conPassPassController!.text,
         '');
+    EasyLoading.showSuccess('Profile updated successfully');
+    Future.delayed(const Duration(milliseconds: 2250)).then((value) {
+      Navigator.pushReplacementNamed(getContext(), BottomNavView.routeName);
+    });
     //unused
-    if (_image != null) {
-      await presenter.updateProfile(
-          _nameController!.text,
-          _emailController!.text,
-          currPassController!.text,
-          newPassController!.text,
-          conPassPassController!.text,
-          _image!.path.toString());
-    } else {
-      await presenter.updateProfile(
-          _nameController!.text,
-          _emailController!.text,
-          currPassController!.text,
-          newPassController!.text,
-          conPassPassController!.text,
-          '');
-    }
+    // if (_image != null) {
+    //   await presenter.updateProfile(
+    //       _nameController!.text,
+    //       _emailController!.text,
+    //       currPassController!.text,
+    //       newPassController!.text,
+    //       conPassPassController!.text,
+    //       _image!.path.toString());
+    // } else {
+    //   await presenter.updateProfile(
+    //       _nameController!.text,
+    //       _emailController!.text,
+    //       currPassController!.text,
+    //       newPassController!.text,
+    //       conPassPassController!.text,
+    //       '');
   }
 
   @override
