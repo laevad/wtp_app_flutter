@@ -166,7 +166,7 @@ class TripController extends Controller {
             'status': status,
           });
     }
-    if (status == "Yet to Start") {
+    if (status == "Yet to Start" || status == "Ongoing") {
       presenter.updateStatus(bookingId!, 3);
     }
   }
