@@ -63,7 +63,7 @@ class NavRouteWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              destination.toString(),
+                              source.toString(),
                               softWrap: true,
                               maxLines: 3,
                               style: TextStyle(
@@ -95,7 +95,7 @@ class NavRouteWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              source.toString(),
+                              destination.toString(),
                               softWrap: true,
                               maxLines: 4,
                               style: TextStyle(
