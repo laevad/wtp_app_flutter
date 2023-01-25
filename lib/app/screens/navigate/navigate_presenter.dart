@@ -82,7 +82,7 @@ class NavigatePresenter extends Presenter {
         AddMarkerUseCaseParams(bookingId, latitude, longitude));
   }
 
-  void getMapMarker(String bookingId) {
+  getMapMarker(String bookingId) {
     return getMarkerUseCase.execute(
       GetMarkerUseCaseObserver(this),
       GetMarkerUseCaseParams(bookingId),

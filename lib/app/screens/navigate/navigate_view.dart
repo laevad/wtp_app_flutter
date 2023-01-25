@@ -204,27 +204,30 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
                           alignment: Alignment.bottomCenter,
                           child: Container(
                             margin: const EdgeInsets.only(bottom: 12),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.red),
-                              ),
-                              onPressed: () => controller.backToHome(
-                                  bookingId: arguments['bookingId'],
-                                  statusId: 2),
-                              // onPressed: () => {},
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
-                                child: Text(
-                                  "Done",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: controller.isMark
+                                ? ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(Colors.red),
+                                    ),
+                                    onPressed: () => controller.backToHome(
+                                        bookingId: arguments['bookingId'],
+                                        statusId: 2),
+                                    // onPressed: () => {},
+                                    child: const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                      child: Text(
+                                        "Done",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox(),
                           ),
                         )
                       : const SizedBox(),

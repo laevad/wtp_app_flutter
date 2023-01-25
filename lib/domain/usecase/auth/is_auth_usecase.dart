@@ -15,7 +15,7 @@ class IsAuthUseCase extends UseCase<IsAuthUseCaseResponse, void> {
     final controller = StreamController<IsAuthUseCaseResponse>();
     try {
       await IsAuth.setToken(
-          key: 'url', value: "http://192.168.88.110:8000/api");
+          key: 'url', value: "https://wtp.web-wtp.online/api");
       bool isAuth = await DataAuthRepository().isAuthenticated();
       controller.add(IsAuthUseCaseResponse(isAuth));
       logger.finest('Is Authenticated successful.');

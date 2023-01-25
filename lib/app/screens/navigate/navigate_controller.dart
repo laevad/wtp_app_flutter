@@ -59,6 +59,9 @@ class NavigateController extends Controller {
   late final Directions _directions;
   Directions? get directions => _directions;
 
+  /*bool is mark*/
+  bool isMark = false;
+
   /* list of markers from server */
   List<MapMarker>? _mapMarker;
   List<MapMarker>? get mapMarker => _mapMarker;
@@ -131,6 +134,10 @@ class NavigateController extends Controller {
     };
     presenter.getMarkerOnNext = (MapMarkerModel marker) {
       _mapMarker = marker.mapMarker;
+
+      if (!marker.mapMarker!.isEmpty) {
+        isMark = true;
+      }
       if (_mapMarker != null) {
         for (int i = 0; i < _mapMarker!.length; i++) {
           markers.add(Marker(
@@ -162,7 +169,7 @@ class NavigateController extends Controller {
   void onInitState() async {
     _requestPermission();
     goToCurrentLocation();
-
+    isMark = false;
     polylinePoints = PolylinePoints();
     super.onInitState();
   }
@@ -228,6 +235,7 @@ class NavigateController extends Controller {
   }
 
   void addMarker() {
+    isMark = true;
     markers.add(Marker(
       markerId: MarkerId("${num++}"),
       position: currentLatLng,
@@ -292,7 +300,8 @@ class NavigateController extends Controller {
 
   /* get marker */
   void getMarker(String bookingId) {
-    presenter.getMapMarker(bookingId);
+    var a = presenter.getMapMarker(bookingId);
+    print(a);
   }
 
   Future<void> updateStatus() async {
