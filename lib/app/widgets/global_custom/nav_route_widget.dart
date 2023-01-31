@@ -8,6 +8,7 @@ class NavRouteWidget extends StatelessWidget {
   final String? btnText;
   final Function? onPressed;
   final String? status;
+  final String? id;
   const NavRouteWidget({
     Key? key,
     this.source,
@@ -15,6 +16,7 @@ class NavRouteWidget extends StatelessWidget {
     this.btnText,
     this.onPressed,
     this.status,
+    this.id,
   }) : super(key: key);
 
   @override

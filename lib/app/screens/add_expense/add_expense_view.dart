@@ -111,7 +111,7 @@ class AddExpenseViewState
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  "${e.start}",
+                                                  "${e.id?.split("-")[0]}",
                                                   softWrap: true,
                                                   maxLines: 2,
                                                   overflow:
@@ -121,26 +121,26 @@ class AddExpenseViewState
                                                   ),
                                                 ),
                                               ),
-                                              Text(
-                                                " ---   ",
-                                                style: TextStyle(
-                                                  color: Constant
-                                                      .lightColorScheme.primary,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  "${e.end}",
-                                                  softWrap: true,
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
+                                              // Text(
+                                              //   " ---   ",
+                                              //   style: TextStyle(
+                                              //     color: Constant
+                                              //         .lightColorScheme.primary,
+                                              //     fontWeight: FontWeight.bold,
+                                              //   ),
+                                              // ),
+                                              // Expanded(
+                                              //   child: Text(
+                                              //     "${e.end}",
+                                              //     softWrap: true,
+                                              //     maxLines: 2,
+                                              //     overflow:
+                                              //         TextOverflow.ellipsis,
+                                              //     style: const TextStyle(
+                                              //       fontWeight: FontWeight.w500,
+                                              //     ),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         );

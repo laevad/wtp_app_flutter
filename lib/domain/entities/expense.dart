@@ -1,5 +1,6 @@
 class Expense {
   final String? date;
+  final String? id;
   final double? amount;
   final String? note;
   final String? expenseType;
@@ -13,6 +14,7 @@ class Expense {
   final String? bookingError;
 
   Expense({
+    this.id,
     this.date,
     this.amount,
     this.note,
@@ -28,6 +30,7 @@ class Expense {
 
   factory Expense.fromJson(Map<String, dynamic> json) {
     return Expense(
+      id: json['id'],
       date: json['date'],
       amount: json['amount'].runtimeType == int
           ? (json['amount'] as int).toDouble()

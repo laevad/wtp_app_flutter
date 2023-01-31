@@ -9,7 +9,7 @@ class CustomTextWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width / 2,
+      width: MediaQuery.of(context).size.width / 3,
       child: Padding(
         padding: const EdgeInsets.only(left: 5),
         child: Text(

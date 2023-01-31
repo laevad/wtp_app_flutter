@@ -37,10 +37,17 @@ class TripCustomExpandTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      backgroundColor:
-                          Constant.lightColorScheme.onPrimaryContainer,
-                      child: Text(index.toString()),
+                    Text(
+                      '${trip!.id?.split("-")[0]}',
+                      style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 14,
+                          color: Constant.lightColorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.bold),
+                      softWrap: true,
+                    ),
+                    Container(
+                      child: Text(' ---'),
                     ),
                     CustomTextWrap(text: trip!.tripStatus!),
                   ],
@@ -67,6 +74,7 @@ class TripCustomExpandTile extends StatelessWidget {
                     toLatitude: trip!.toLatitude,
                     toLongitude: trip!.toLongitude,
                     status: trip!.tripStatus),
+                id: trip!.id,
                 status: trip!.tripStatus,
                 btnText: 'Start Navigate',
                 destination: trip!.tripStart!,
