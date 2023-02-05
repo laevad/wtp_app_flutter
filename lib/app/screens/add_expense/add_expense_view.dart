@@ -1,6 +1,13 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../data/repository/expense/data_expense_repository.dart';
 import '../../utils/constant.dart';
@@ -16,7 +23,80 @@ class AddExpenseView extends View {
 
 class AddExpenseViewState
     extends ViewState<AddExpenseView, AddExpenseController> {
+  late var args;
+  late File? img;
+  /*camera*/
+  late CameraController cameraController;
   AddExpenseViewState() : super(AddExpenseController(DataExpenseRepository()));
+
+  @override
+  void didChangeDependencies() {
+    args = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{})
+        as Map;
+    super.didChangeDependencies();
+  }
+
+  void startCamera(int direction) async {
+    cameraController = CameraController(
+      args['camera']![direction],
+      ResolutionPreset.max,
+      enableAudio: false,
+    );
+    cameraController.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    cameraController.dispose();
+    super.dispose();
+  }
+
+  Future _pickImage(ImageSource source) async {
+    try {
+      EasyLoading.show(status: 'loading...');
+
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) {
+        EasyLoading.dismiss();
+
+        return;
+      }
+      EasyLoading.show(status: 'loading...');
+      File? img = File(image.path);
+      img = await _cropImage(imageFile: img);
+
+      if (img == null) {
+        EasyLoading.dismiss();
+        return;
+      } else {
+        setState(() {
+          EasyLoading.dismiss();
+          // Navigator.pushNamed(context, AddExpenseView.routeName,
+          //     arguments: {'image_path': img?.path, 'image': img});
+        });
+      }
+    } on PlatformException catch (e) {
+      print("================*********=========================");
+      print(e);
+      EasyLoading.dismiss();
+      Navigator.of(context).pop();
+    }
+  }
+
+  Future<File?> _cropImage({required File imageFile}) async {
+    CroppedFile? croppedImage =
+        await ImageCropper().cropImage(aspectRatioPresets: [
+      CropAspectRatioPreset.square,
+      CropAspectRatioPreset.original,
+    ], sourcePath: imageFile.path);
+    if (croppedImage == null) return null;
+    return File(croppedImage.path);
+  }
 
   @override
   // TODO: implement view
@@ -59,9 +139,12 @@ class AddExpenseViewState
                                   margin: const EdgeInsets.only(bottom: 15),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        width: 1, color: Colors.grey),
+                                      width: 1,
+                                      color: Colors.grey,
+                                    ),
                                     borderRadius: const BorderRadius.all(
-                                        Radius.circular(5)),
+                                      Radius.circular(5),
+                                    ),
                                   ),
                                   child: DropdownButton(
                                     underline: const SizedBox(),
@@ -93,9 +176,12 @@ class AddExpenseViewState
                                   margin: const EdgeInsets.only(bottom: 15),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                        width: 1, color: Colors.grey),
+                                      width: 1,
+                                      color: Colors.grey,
+                                    ),
                                     borderRadius: const BorderRadius.all(
-                                        Radius.circular(5)),
+                                      Radius.circular(5),
+                                    ),
                                   ),
                                   child: DropdownButton(
                                     underline: const SizedBox(),
@@ -121,26 +207,6 @@ class AddExpenseViewState
                                                   ),
                                                 ),
                                               ),
-                                              // Text(
-                                              //   " ---   ",
-                                              //   style: TextStyle(
-                                              //     color: Constant
-                                              //         .lightColorScheme.primary,
-                                              //     fontWeight: FontWeight.bold,
-                                              //   ),
-                                              // ),
-                                              // Expanded(
-                                              //   child: Text(
-                                              //     "${e.end}",
-                                              //     softWrap: true,
-                                              //     maxLines: 2,
-                                              //     overflow:
-                                              //         TextOverflow.ellipsis,
-                                              //     style: const TextStyle(
-                                              //       fontWeight: FontWeight.w500,
-                                              //     ),
-                                              //   ),
-                                              // ),
                                             ],
                                           ),
                                         );
@@ -171,7 +237,9 @@ class AddExpenseViewState
                                               .toString(),
                                       border: const OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Colors.red, width: 1.0),
+                                          color: Colors.red,
+                                          width: 1.0,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -190,7 +258,9 @@ class AddExpenseViewState
                                       hintText: 'Description',
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Colors.red, width: 5.0),
+                                          color: Colors.red,
+                                          width: 5.0,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -215,6 +285,40 @@ class AddExpenseViewState
                           ),
                         ),
                       ),
+                /*floating camera ang image picker*/
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.18,
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: const Icon(Icons.camera_alt),
+                                title: const Text('Camera'),
+                                onTap: () {
+                                  _pickImage(ImageSource.camera);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.image),
+                                title: const Text('Gallery'),
+                                onTap: () {
+                                  _pickImage(ImageSource.gallery);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: const Icon(Icons.add_a_photo),
+                ),
               ),
             ),
           );

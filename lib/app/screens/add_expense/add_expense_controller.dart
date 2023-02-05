@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -17,6 +18,7 @@ class AddExpenseController extends Controller {
   int? statusCode;
   String? _selectedExpenseType;
   String? _selectedTrip;
+
   //text controller
   TextEditingController descriptionTextController = TextEditingController();
   TextEditingController amountTextController = TextEditingController();
@@ -32,6 +34,7 @@ class AddExpenseController extends Controller {
 
   AddExpenseController(DataExpenseRepository repository)
       : presenter = AddExpensePresenter(repository);
+
   @override
   void initListeners() {
     /* ====== */

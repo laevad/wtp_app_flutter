@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -144,13 +145,16 @@ class ExpenseController extends Controller {
     super.onDisposed();
   }
 
-  void addExpenseView() {
-    Navigator.pushNamed(getContext(), AddExpenseView.routeName).then((value) {
-      EasyLoading.show(status: "Loading..");
-      _expense = [];
-      _amount = 0;
-      presenter.getExpense(1);
-      _page = 1;
+  void addExpenseView() async {
+    await availableCameras().then((value) {
+      return Navigator.pushNamed(getContext(), AddExpenseView.routeName,
+          arguments: {'camera': value, 'test': 'test'}).then((value) {
+        EasyLoading.show(status: "Loading..");
+        _expense = [];
+        _amount = 0;
+        presenter.getExpense(1);
+        _page = 1;
+      });
     });
   }
 }
