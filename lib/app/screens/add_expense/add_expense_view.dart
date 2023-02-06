@@ -24,7 +24,7 @@ class AddExpenseView extends View {
 class AddExpenseViewState
     extends ViewState<AddExpenseView, AddExpenseController> {
   late var args;
-  late File? img;
+  File? img;
   /*camera*/
   late CameraController cameraController;
   AddExpenseViewState() : super(AddExpenseController(DataExpenseRepository()));
@@ -34,26 +34,6 @@ class AddExpenseViewState
     args = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{})
         as Map;
     super.didChangeDependencies();
-  }
-
-  void startCamera(int direction) async {
-    cameraController = CameraController(
-      args['camera']![direction],
-      ResolutionPreset.max,
-      enableAudio: false,
-    );
-    cameraController.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    cameraController.dispose();
-    super.dispose();
   }
 
   Future _pickImage(ImageSource source) async {
@@ -67,9 +47,10 @@ class AddExpenseViewState
         return;
       }
       EasyLoading.show(status: 'loading...');
-      File? img = File(image.path);
-      img = await _cropImage(imageFile: img);
-
+      img = File(image.path);
+      img = await _cropImage(imageFile: img!);
+      print("===============================");
+      print(img?.path);
       if (img == null) {
         EasyLoading.dismiss();
         return;
@@ -281,6 +262,19 @@ class AddExpenseViewState
                                       )),
                                 ),
                               ),
+                              /*show the cropped image*/
+                              if (img != null)
+                                Container(
+                                  margin: const EdgeInsets.only(top: 20),
+                                  height: 200,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: FileImage(img!),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                             ],
                           ),
                         ),
