@@ -18,6 +18,7 @@ class AddExpenseController extends Controller {
   int? statusCode;
   String? _selectedExpenseType;
   String? _selectedTrip;
+  String? _image_path;
 
   //text controller
   TextEditingController descriptionTextController = TextEditingController();
@@ -31,6 +32,7 @@ class AddExpenseController extends Controller {
 
   set setSelectedExpenseType(String val) => _selectedExpenseType = val;
   set setSelectedTrip(String val) => _selectedTrip = val;
+  set setImagePath(String val) => _image_path = val;
 
   AddExpenseController(DataExpenseRepository repository)
       : presenter = AddExpensePresenter(repository);
@@ -88,6 +90,7 @@ class AddExpenseController extends Controller {
           ScaffoldMessenger.of(getContext()).showSnackBar(
               SnackBar(content: Text("${_expenseError!.amountError}")));
         }
+        /*image_path_error*/
       }
       if (statusCode == 200) {
         EasyLoading.dismiss();
@@ -118,11 +121,20 @@ class AddExpenseController extends Controller {
   }
 
   void addExpense() async {
-    EasyLoading.show(status: "Loading..");
-    await presenter.addExpense(
+    if (_image_path == null || _image_path == "") {
+      ScaffoldMessenger.of(getContext()).hideCurrentSnackBar();
+      ScaffoldMessenger.of(getContext())
+          .showSnackBar(SnackBar(content: Text("Image is required!")));
+    } else {
+      EasyLoading.show(status: "Loading..");
+      await presenter.addExpense(
         _selectedExpenseType.toString(),
         _selectedTrip.toString(),
         amountTextController.text,
-        descriptionTextController.text);
+        descriptionTextController.text,
+        _image_path.toString(),
+      );
+    }
+    EasyLoading.dismiss();
   }
 }

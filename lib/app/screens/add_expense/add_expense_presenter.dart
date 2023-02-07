@@ -46,8 +46,10 @@ class AddExpensePresenter extends Presenter {
   }
 
   addExpense(String expenseTypeId, String bookingId, String amount,
-      String description) {
-    addExpenseUseCase.execute(AddExpenseUseCaseObserver(this),
-        AddExpenseUseCaseParams(expenseTypeId, bookingId, amount, description));
+      String description, String image_path) {
+    addExpenseUseCase.execute(
+        AddExpenseUseCaseObserver(this),
+        AddExpenseUseCaseParams(
+            expenseTypeId, bookingId, amount, description, image_path));
   }
 }

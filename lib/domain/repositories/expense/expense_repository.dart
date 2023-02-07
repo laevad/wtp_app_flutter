@@ -11,5 +11,6 @@ abstract class ExpenseRepository {
     String bookingId,
     String amount,
     String description,
+    String image_path,
   );
 }

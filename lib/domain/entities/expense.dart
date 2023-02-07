@@ -7,17 +7,21 @@ class Expense {
   final String? tripStart;
   final String? tripEnd;
   final String? bookingId;
+  /*image_path*/
+  final String? imagePath;
   /* error */
   final String? expenseTypeError;
   final String? amountError;
   final String? descriptionError;
   final String? bookingError;
+  final String? imagePathError;
 
   Expense({
     this.id,
     this.date,
     this.amount,
     this.note,
+    this.imagePath,
     this.expenseType,
     this.tripStart,
     this.tripEnd,
@@ -26,6 +30,7 @@ class Expense {
     this.amountError,
     this.descriptionError,
     this.bookingError,
+    this.imagePathError,
   });
 
   factory Expense.fromJson(Map<String, dynamic> json) {
@@ -38,6 +43,7 @@ class Expense {
       note: json['note'],
       expenseType: json['expense_type'],
       bookingId: json['booking_id'],
+      imagePath: json['image_path'],
       tripStart: json['trip_start'],
       tripEnd: json['trip_end'],
     );
@@ -47,6 +53,8 @@ class Expense {
       amountError: json['amount'],
       descriptionError: json['description'],
       expenseTypeError: json['expense_type_id'],
+      /*imageError*/
+      imagePathError: json['image_path'],
       bookingError: json['booking_id'],
     );
   }

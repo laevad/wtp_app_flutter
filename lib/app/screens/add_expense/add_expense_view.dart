@@ -83,6 +83,9 @@ class AddExpenseViewState
   // TODO: implement view
   Widget get view => ControlledWidgetBuilder<AddExpenseController>(
         builder: (context, controller) {
+          if (img != null) {
+            controller.setImagePath = img!.path;
+          }
           return Theme(
             data: ThemeData(
                 colorScheme: Constant.lightColorScheme,

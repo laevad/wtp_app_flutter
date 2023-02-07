@@ -49,24 +49,34 @@ class DataExpenseRepository extends ExpenseRepository {
 
   @override
   Future<ExpenseModel> addExpense(String expenseTypeId, String bookingId,
-      String amount, String description) async {
-    // print("PRINT TST: $expenseTypeId");
+      String amount, String description, String image_path) async {
+    print("image path=====================$image_path");
+    print("PRINT TST: $expenseTypeId");
     String url = "${await IsAuth.getData('url')}/expense/add-expense";
 
-    Map<String, dynamic> body = {
+    Map<String, String> body = {
       "expense_type_id":
-          expenseTypeId != "null" ? int.parse(expenseTypeId) : "",
+          expenseTypeId != "null" ? int.parse(expenseTypeId).toString() : "",
       "amount": amount != "null"
           ? amount.isNotEmpty
-              ? double.parse(amount)
+              ? double.parse(amount).toString()
               : ""
           : "",
       "description": description == "null" ? "" : description,
       "booking_id": bookingId == "null" ? "" : bookingId,
     };
 
-    var response = await http.post(Uri.parse(url),
-        headers: await getHeader1(), body: jsonEncode(body));
+    // var response = await http.post(Uri.parse(url),
+    //     headers: await getHeader1(), body: jsonEncode(body));
+
+    var request = http.MultipartRequest('POST', Uri.parse(url))
+      ..headers.addAll(await getHeader1())
+      ..fields.addAll(body)
+      ..files.add(await http.MultipartFile.fromPath('image_path', image_path));
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    final result = await jsonDecode(response.body) as Map<String, dynamic>;
+    print(result);
     print(response.body);
     if (response.statusCode == 200 || response.statusCode == 422) {
       return ExpenseModel.fromJsonError(
