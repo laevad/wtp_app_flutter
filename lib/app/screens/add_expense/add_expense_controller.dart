@@ -135,6 +135,5 @@ class AddExpenseController extends Controller {
         _image_path.toString(),
       );
     }
-    EasyLoading.dismiss();
   }
 }
