@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
 
 import '../../../domain/entities/expense.dart';
 import '../../utils/constant.dart';
@@ -11,6 +12,8 @@ class CustomExpandTileExpense extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("====================");
+    print(Constant.urlImage);
     return Card(
       child: ExpansionTile(
         collapsedTextColor: Colors.red,
@@ -47,6 +50,18 @@ class CustomExpandTileExpense extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+          ),
+          /*image_path circle*/
+          ListTile(
+            title: expense!.imagePath != null
+                ? CircleAvatar(
+                    radius: 60,
+                    backgroundImage: NetworkImage(
+                      /*geturl*/
+                      Constant.urlImage + 'storage/' + expense!.imagePath!,
+                    ),
+                  )
+                : SizedBox(),
           ),
         ],
       ),
