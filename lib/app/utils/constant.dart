@@ -75,9 +75,9 @@ class Constant {
 
   static int get selectedIndex => _selectedIndex;
 
-  static List<GButton> get icons => _icons;
-
   static set setSelectedIndex(int selected) => _selectedIndex = selected;
+
+  static List<GButton> get icons => _icons;
 
   static List<Widget> get pages => _pages;
 
