@@ -8,7 +8,7 @@ class Trip {
   String? endDate;
   String? tripStatus;
   int? statusId;
-  int? totalDistance;
+  double? totalDistance;
   String? driver;
   String? createdAt;
   double? fromLatitude;
