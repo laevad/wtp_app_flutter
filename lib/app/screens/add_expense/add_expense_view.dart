@@ -175,13 +175,13 @@ class AddExpenseViewState
                                     items: controller.tripStartEnd!.map(
                                       (e) {
                                         return DropdownMenuItem(
-                                          alignment: Alignment.topCenter,
+                                          alignment: Alignment.center,
                                           value: e.id,
                                           child: Row(
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  "${e.id?.split("-")[0]}",
+                                                  "${e.id?.split("-")[0]} - ${e.dateCompleted}",
                                                   softWrap: true,
                                                   maxLines: 2,
                                                   overflow:

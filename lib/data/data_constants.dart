@@ -1,6 +1,6 @@
 import 'repository/helpers/auth/is_auth.dart';
 
-// const siteURL = 'http://192.168.210.54:8000/api';
+// const siteURL = 'http://192.168.88.110:8000/api';
 const yetToStart = 1;
 const complete = 2;
 const ongoing = 3;

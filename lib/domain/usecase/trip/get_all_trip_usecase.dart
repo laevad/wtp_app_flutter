@@ -14,10 +14,10 @@ class GetAllTripUseCase
   @override
   Future<Stream<GetAllTripUseCaseResponse?>> buildUseCaseStream(params) async {
     final controller = StreamController<GetAllTripUseCaseResponse>();
+    final trip = await repository.getAllTrip(params!.page);
+    controller.add(GetAllTripUseCaseResponse(trip));
+    logger.finest('GetAllTripUseCase success');
     try {
-      final trip = await repository.getAllTrip(params!.page);
-      controller.add(GetAllTripUseCaseResponse(trip));
-      logger.finest('GetAllTripUseCase success');
       controller.close();
     } catch (e) {
       await IsAuth.deleteAll();
