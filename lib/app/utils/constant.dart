@@ -105,5 +105,5 @@ class Constant {
           bodyColor: const Color(0xFF383838)),
       useMaterial3: true);
 
-  static String urlImage = 'https://wtp.web-wtp.online/';
+  static String urlImage = 'https://wtp-demo.online/';
 }

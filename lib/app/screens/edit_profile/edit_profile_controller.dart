@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../domain/entities/user.dart';
 import '../../navigator/bottom_nav/bottom_nav_view.dart';
-import '../../utils/constant.dart';
 import 'edit_profile_presenter.dart';
 
 class EditProfileController extends Controller {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wtp_app/data/repository/helpers/auth/is_auth.dart';
 
 import '../../../domain/entities/expense.dart';
 import '../../utils/constant.dart';
@@ -57,8 +56,8 @@ class CustomExpandTileExpense extends StatelessWidget {
                 ? CircleAvatar(
                     radius: 60,
                     backgroundImage: NetworkImage(
-                      /*geturl*/
-                      Constant.urlImage + 'storage/' + expense!.imagePath!,
+                      /*get url*/
+                      Constant.urlImage + '' + expense!.imagePath!,
                     ),
                   )
                 : SizedBox(),

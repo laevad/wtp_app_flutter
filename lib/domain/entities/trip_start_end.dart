@@ -16,7 +16,7 @@ class TripStartEnd {
       id: json['id'],
       start: json['trip_start'],
       end: json['trip_end'],
-      dateCompleted: json['date_completed'],
+      dateCompleted: json['date_completed'] ?? '',
     );
   }
 }

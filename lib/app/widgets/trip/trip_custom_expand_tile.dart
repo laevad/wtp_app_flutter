@@ -4,7 +4,6 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import '../../../domain/entities/trip.dart';
 import '../../screens/trip/trip_controller.dart';
 import '../../utils/constant.dart';
-import '../global_custom/custom_text_softwrap.dart';
 import '../global_custom/nav_route_widget.dart';
 
 class TripCustomExpandTile extends StatelessWidget {
@@ -22,6 +21,7 @@ class TripCustomExpandTile extends StatelessWidget {
       child: ExpansionTile(
         // initiallyExpanded: true,
         title: Container(
+          alignment: Alignment.center,
           width: 50,
           height: 50,
           padding: const EdgeInsets.only(right: 5),
@@ -31,69 +31,73 @@ class TripCustomExpandTile extends StatelessWidget {
               Radius.circular(10),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Row(
-                  children: [
-                    Text(
-                      '${trip!.id?.split("-")[0]}' + '  ',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Constant.lightColorScheme.onSurfaceVariant,
-                      ),
-                      softWrap: true,
-                    ),
-                    Column(
-                      children: [
-                        trip!.tripStatus == 'Completed'
-                            ? Text(
-                                trip!.dateCompleted!,
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 14,
-                                  color: Constant
-                                      .lightColorScheme.onSurfaceVariant,
-                                ),
-                                softWrap: true,
-                              )
-                            : Text(
-                                trip!.startDate! + ' - ' + trip!.endDate!,
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 14,
-                                  color: Constant
-                                      .lightColorScheme.onSurfaceVariant,
-                                ),
-                                softWrap: true,
-                              ),
-                        Text(
-                          trip!.tripStatus!,
-                          style: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            fontSize: 14,
-                            color: Constant.lightColorScheme.onSurfaceVariant,
-                          ),
-                          softWrap: true,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    children: [
+                      Text(
+                        '${trip!.id?.split("-")[0]}' + '  ',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Constant.lightColorScheme.onSurfaceVariant,
                         ),
-                      ],
-                    ),
-                    Container(
-                      child: Text('  '),
-                    ),
-                    // CustomTextWrap(text: trip!.tripStatus!),
-                  ],
+                        softWrap: true,
+                      ),
+                      Column(
+                        children: [
+                          trip!.tripStatus == 'Completed' ||
+                                  trip!.tripStatus == null
+                              ? Text(
+                                  trip!.dateCompleted! ?? 'N/A',
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontSize: 14,
+                                    color: Constant
+                                        .lightColorScheme.onSurfaceVariant,
+                                  ),
+                                  softWrap: true,
+                                )
+                              : Text(
+                                  trip!.startDate! + ' - ' + trip!.endDate!,
+                                  style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    fontSize: 14,
+                                    color: Constant
+                                        .lightColorScheme.onSurfaceVariant,
+                                  ),
+                                  softWrap: true,
+                                ),
+                          Text(
+                            trip!.tripStatus!,
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              fontSize: 14,
+                              color: Constant.lightColorScheme.onSurfaceVariant,
+                            ),
+                            softWrap: true,
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: Text('  '),
+                      ),
+                      // CustomTextWrap(text: trip!.tripStatus!),
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                "${trip!.totalDistance!.toStringAsFixed(2)}km",
-                style: TextStyle(
-                  color: Constant.lightColorScheme.onSurfaceVariant,
+                Text(
+                  "${trip!.totalDistance!.toStringAsFixed(2)}km",
+                  style: TextStyle(
+                    color: Constant.lightColorScheme.onSurfaceVariant,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         children: [
