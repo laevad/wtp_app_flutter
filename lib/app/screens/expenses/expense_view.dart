@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
 
 import '../../../data/repository/expense/data_expense_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/expense/custom_expand_tile_expense.dart';
 import 'expense_controller.dart';
 
-class ExpenseView extends View {
+class ExpenseView extends clean_architecture.View {
   const ExpenseView({Key? key}) : super(key: key);
 
   @override
   ExpenseViewState createState() => ExpenseViewState();
 }
 
-class ExpenseViewState extends ViewState<ExpenseView, ExpenseController> {
+class ExpenseViewState extends clean_architecture.ViewState<ExpenseView, ExpenseController> {
   ExpenseViewState() : super(ExpenseController(DataExpenseRepository()));
 
   @override
-  // TODO: implement view
-  Widget get view => ControlledWidgetBuilder<ExpenseController>(
+  Widget get view => clean_architecture.ControlledWidgetBuilder<ExpenseController>(
         builder: (context, controller) {
           if (controller.expense == null) {
             return Center(

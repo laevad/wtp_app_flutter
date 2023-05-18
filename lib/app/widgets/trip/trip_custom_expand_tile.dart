@@ -53,7 +53,7 @@ class TripCustomExpandTile extends StatelessWidget {
                           trip!.tripStatus == 'Completed' ||
                                   trip!.tripStatus == null
                               ? Text(
-                                  trip!.dateCompleted! ?? 'N/A',
+                                  trip!.dateCompleted! + '  ',
                                   style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
                                     fontSize: 14,

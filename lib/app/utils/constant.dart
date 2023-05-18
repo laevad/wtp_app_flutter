@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../screens/expenses/expense_view.dart';
@@ -100,9 +99,7 @@ class Constant {
 
   static ThemeData themeData = ThemeData(
       colorScheme: Constant.lightColorScheme,
-      textTheme: GoogleFonts.openSansTextTheme().apply(
-          displayColor: const Color(0xFF383838),
-          bodyColor: const Color(0xFF383838)),
+      primaryColor: Constant.lightColorScheme.primary,
       useMaterial3: true);
 
   static String urlImage = 'https://wtp-demo.online/';

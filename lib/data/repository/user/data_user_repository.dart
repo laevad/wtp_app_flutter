@@ -42,7 +42,6 @@ class DataUserRepository extends UserRepository {
         return User.fromJsonUpdate(
             jsonDecode(await response.stream.bytesToString()),
             response.statusCode);
-        throw Error();
       }
       return User.fromJsonUpdate(
           jsonDecode(await response.stream.bytesToString()),

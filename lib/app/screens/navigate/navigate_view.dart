@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../data/repository/user/data_user_location_repository.dart';
@@ -10,7 +10,7 @@ import '../../widgets/global_custom/custom_appbar.dart';
 import '../../widgets/global_custom/custom_toggle_switch.dart';
 import 'navigate_controller.dart';
 
-class NavigateView extends View {
+class NavigateView extends clean_architecture.View {
   static const String routeName = '/navigateView';
   const NavigateView({Key? key}) : super(key: key);
 
@@ -18,7 +18,7 @@ class NavigateView extends View {
   NavigateViewState createState() => NavigateViewState();
 }
 
-class NavigateViewState extends ViewState<NavigateView, NavigateController> {
+class NavigateViewState extends clean_architecture.ViewState<NavigateView, NavigateController> {
   NavigateViewState()
       : super(NavigateController(
           DataUserLocationRepository(),
@@ -27,7 +27,7 @@ class NavigateViewState extends ViewState<NavigateView, NavigateController> {
         ));
 
   @override
-  Widget get view => ControlledWidgetBuilder<NavigateController>(
+  Widget get view => clean_architecture.ControlledWidgetBuilder<NavigateController>(
         builder: (context, controller) {
           final arguments = (ModalRoute.of(context)?.settings.arguments ??
               <String, dynamic>{}) as Map;

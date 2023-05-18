@@ -16,7 +16,6 @@ class ExpenseController extends Controller {
   List<ExpenseType>? _expenseType;
   List<TripStartEnd>? _tripStartEnd;
 
-  Expense? _expenseError;
 
   int? _lastPage;
   int? _statusCode;
@@ -122,7 +121,6 @@ class ExpenseController extends Controller {
     };
     /* ---------------------------------------------------------------------- */
     presenter.addExpenseOnNext = (ExpenseModel expenseModel) {
-      _expenseError = expenseModel.errors;
       _statusCode = expenseModel.statusCode;
       print(expenseModel.statusCode);
       print("add expense on next");
