@@ -18,7 +18,7 @@ class DataDirectionRepository extends DirectionRepository {
         "origin=${origin.latitude},${origin.longitude}"
         "&"
         "destination=${destination.latitude},${destination.longitude}"
-        "&key=AIzaSyAzra1o8YI_Wiurg5N_qB1BGA4BffCPN94",
+        "&key=AIzaSyAuP2xRkKoSs-46LTPmJklTqcLakm1TP30",
       ),
     );
     // Check if response is successful
