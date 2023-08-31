@@ -15,7 +15,8 @@ class IsAuthUseCase extends UseCase<IsAuthUseCaseResponse, void> {
     final controller = StreamController<IsAuthUseCaseResponse>();
     try {
       // await IsAuth.setToken(key: 'url', value: "https://wtp.web-wtp.online/api");
-      await IsAuth.setToken(key: 'url', value: "http://192.168.88.110:8000/api");
+      await IsAuth.setToken(
+          key: 'url', value: "https://flounder-saved-hog.ngrok-free.app/api");
       // await IsAuth.setToken(key: 'url', value: "http://192.168.88.110:8000/api");
       // await IsAuth.setToken(key: 'url', value: "http://192.168.88.110:8000/api");
       bool isAuth = await DataAuthRepository().isAuthenticated();
