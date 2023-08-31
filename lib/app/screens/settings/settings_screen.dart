@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../utils/constant.dart';
 import '../../widgets/profile/button_tile_widget.dart';
 import 'settings_controller.dart';
 
-class SettingsScreen extends clean_architecture.View {
+class SettingsScreen extends CleanView {
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
 }
 
-class ProfileScreenState extends clean_architecture.ViewState<SettingsScreen, SettingsController> {
+class ProfileScreenState
+    extends CleanViewState<SettingsScreen, SettingsController> {
   ProfileScreenState() : super(SettingsController());
 
   @override
@@ -40,7 +41,7 @@ class ProfileScreenState extends clean_architecture.ViewState<SettingsScreen, Se
         ),
       ),
       body: SafeArea(
-        child: clean_architecture.ControlledWidgetBuilder<SettingsController>(
+        child: ControlledWidgetBuilder<SettingsController>(
             builder: (context, controller) {
           return Padding(
             padding: const EdgeInsets.all(15.0),

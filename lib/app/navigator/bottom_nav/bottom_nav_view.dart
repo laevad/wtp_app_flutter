@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
 
 import '../../utils/constant.dart';
 import 'bottom_nav_controller.dart';
 
-class BottomNavView extends clean_architecture.View {
+class BottomNavView extends CleanView {
   static String routeName = '/bottom-nav-view';
   const BottomNavView({Key? key}) : super(key: key);
 
@@ -14,12 +13,12 @@ class BottomNavView extends clean_architecture.View {
   BottomNavViewState createState() => BottomNavViewState();
 }
 
-class BottomNavViewState extends clean_architecture.ViewState<BottomNavView, HomeController> {
+class BottomNavViewState extends CleanViewState<BottomNavView, HomeController> {
   BottomNavViewState() : super(HomeController());
 
   @override
   Widget get view {
-    return clean_architecture.ControlledWidgetBuilder<HomeController>(
+    return ControlledWidgetBuilder<HomeController>(
       builder: (context, controller) {
         return Scaffold(
           body: PageView(
@@ -46,8 +45,7 @@ class BottomNavViewState extends clean_architecture.ViewState<BottomNavView, Hom
               ),
             ),
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: GNav(
                 selectedIndex: controller.selectedIndex,
                 onTabChange: (index) {

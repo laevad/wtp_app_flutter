@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../../data/repository/user/data_user_repository.dart';
 import '../../utils/constant.dart';
@@ -8,7 +8,7 @@ import '../../widgets/global_custom/custom_button_save_changes.dart';
 import '../../widgets/global_custom/custom_image.dart';
 import 'edit_profile_controller.dart';
 
-class EditProfileView extends clean_architecture.View {
+class EditProfileView extends CleanView {
   static String routeName = "/editProfile";
   const EditProfileView({Key? key}) : super(key: key);
 
@@ -17,12 +17,12 @@ class EditProfileView extends clean_architecture.View {
 }
 
 class EditProfileViewState
-    extends clean_architecture.ViewState<EditProfileView, EditProfileController> {
+    extends CleanViewState<EditProfileView, EditProfileController> {
   EditProfileViewState() : super(EditProfileController(DataUserRepository()));
 
   @override
   Widget get view {
-    return clean_architecture.ControlledWidgetBuilder<EditProfileController>(
+    return ControlledWidgetBuilder<EditProfileController>(
       builder: (context, controller) {
         return GestureDetector(
           onTap: () {

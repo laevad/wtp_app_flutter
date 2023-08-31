@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../../data/repository/auth/data_auth_token_repository.dart';
@@ -9,7 +9,7 @@ import '../../utils/constant.dart';
 import '../login/login_screen.dart';
 import 'splash_controller.dart';
 
-class SplashView extends clean_architecture.View {
+class SplashView extends CleanView {
   static String routeName = '/splash';
   const SplashView({Key? key}) : super(key: key);
 
@@ -17,11 +17,11 @@ class SplashView extends clean_architecture.View {
   SplashViewState createState() => SplashViewState();
 }
 
-class SplashViewState extends clean_architecture.ViewState<SplashView, SplashController> {
+class SplashViewState extends CleanViewState<SplashView, SplashController> {
   SplashViewState() : super(SplashController(DataAuthRepository()));
 
   @override
-  Widget get view => clean_architecture.ControlledWidgetBuilder<SplashController>(
+  Widget get view => ControlledWidgetBuilder<SplashController>(
         builder: (context, controller) {
           return AnimatedSplashScreen.withScreenFunction(
             splash: 'assets/images/logo.png',

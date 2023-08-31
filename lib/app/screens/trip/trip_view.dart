@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../../data/repository/trip/data_trip_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/trip/trip_custom_expand_tile.dart';
 import 'trip_controller.dart';
 
-class TripView extends clean_architecture.View {
+class TripView extends CleanView {
   static String routeName = '/my-trip';
   const TripView({Key? key}) : super(key: key);
 
@@ -14,12 +14,12 @@ class TripView extends clean_architecture.View {
   TripViewState createState() => TripViewState();
 }
 
-class TripViewState extends clean_architecture.ViewState<TripView, TripController> {
+class TripViewState extends CleanViewState<TripView, TripController> {
   TripViewState() : super(TripController(DataTripRepository()));
 
   @override
   Widget get view {
-    return clean_architecture.ControlledWidgetBuilder<TripController>(
+    return ControlledWidgetBuilder<TripController>(
       builder: (context, controller) {
         if (controller.trip == null || controller.tripC == null) {
           return Center(

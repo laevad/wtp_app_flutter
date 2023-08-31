@@ -43,6 +43,7 @@ dependencies:
   flutter_clean_architecture:
     git:
       url: https://github.com/laevad/flutter_clean_architecture.git
+      ref: 5.0.4-dev.0
   google_nav_bar: ^5.0.6
   dotted_line: ^3.1.0
   flutter_secure_storage: ^6.0.0

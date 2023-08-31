@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../../data/repository/incentive/data_incentive_repository.dart';
 import '../../utils/constant.dart';
 import '../../widgets/incentive/custom_expand_tile_incentive.dart';
 import 'incentives_controller.dart';
 
-class IncentivesView extends clean_architecture.View {
+class IncentivesView extends CleanView {
   static String routeName = '/history';
   const IncentivesView({Key? key}) : super(key: key);
 
@@ -15,7 +15,7 @@ class IncentivesView extends clean_architecture.View {
 }
 
 class IncentivesViewState
-    extends clean_architecture.ViewState<IncentivesView, IncentivesController> {
+    extends CleanViewState<IncentivesView, IncentivesController> {
   IncentivesViewState()
       : super(IncentivesController(
           DataIncentiveRepository(),
@@ -23,7 +23,7 @@ class IncentivesViewState
 
   @override
   Widget get view {
-    return clean_architecture.ControlledWidgetBuilder<IncentivesController>(
+    return ControlledWidgetBuilder<IncentivesController>(
       builder: (context, controller) {
         if (controller.incentive == null) {
           return Center(

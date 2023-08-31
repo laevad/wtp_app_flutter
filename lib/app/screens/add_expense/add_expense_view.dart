@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +12,7 @@ import '../../../data/repository/expense/data_expense_repository.dart';
 import '../../utils/constant.dart';
 import 'add_expense_controller.dart';
 
-class AddExpenseView extends clean_architecture.View {
+class AddExpenseView extends CleanView {
   static String routeName = '/add-expense';
   const AddExpenseView({Key? key}) : super(key: key);
 
@@ -21,7 +21,7 @@ class AddExpenseView extends clean_architecture.View {
 }
 
 class AddExpenseViewState
-    extends clean_architecture.ViewState<AddExpenseView, AddExpenseController> {
+    extends CleanViewState<AddExpenseView, AddExpenseController> {
   late var args;
   File? img;
   /*camera*/
@@ -79,7 +79,7 @@ class AddExpenseViewState
   }
 
   @override
-  Widget get view => clean_architecture.ControlledWidgetBuilder<AddExpenseController>(
+  Widget get view => ControlledWidgetBuilder<AddExpenseController>(
         builder: (context, controller) {
           if (img != null) {
             controller.setImagePath = img!.path;
@@ -109,8 +109,8 @@ class AddExpenseViewState
                             SizedBox(
                               width: double.infinity,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 margin: const EdgeInsets.only(bottom: 15),
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -146,8 +146,8 @@ class AddExpenseViewState
                             SizedBox(
                               width: double.infinity,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 margin: const EdgeInsets.only(bottom: 15),
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -175,8 +175,7 @@ class AddExpenseViewState
                                                 "${e.id?.split("-")[0]} - ${e.dateCompleted}",
                                                 softWrap: true,
                                                 maxLines: 2,
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                 ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import '../../utils/constant.dart';
 import '../../widgets/edit_profile/edit_custom_input.dart';
 import '../../widgets/global_custom/custom_button_save_changes.dart';
 import 'server_controller.dart';
 
-class ServerView extends clean_architecture.View {
+class ServerView extends CleanView {
   static String routeName = '/server-url';
   const ServerView({Key? key}) : super(key: key);
 
@@ -14,11 +14,11 @@ class ServerView extends clean_architecture.View {
   ServerViewState createState() => ServerViewState();
 }
 
-class ServerViewState extends clean_architecture.ViewState<ServerView, ServerController> {
+class ServerViewState extends CleanViewState<ServerView, ServerController> {
   ServerViewState() : super(ServerController());
 
   @override
-  Widget get view => clean_architecture.ControlledWidgetBuilder<ServerController>(
+  Widget get view => ControlledWidgetBuilder<ServerController>(
         builder: (context, controller) {
           return Scaffold(
             key: globalKey,
@@ -42,8 +42,7 @@ class ServerViewState extends clean_architecture.ViewState<ServerView, ServerCon
               elevation: 1,
             ),
             body: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
               child: Column(
                 children: [
                   EditCustomInput(

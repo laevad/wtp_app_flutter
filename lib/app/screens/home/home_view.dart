@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart' as clean_architecture;
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'home_controller.dart';
 
-class HomeView extends clean_architecture.View {
+class HomeView extends CleanView {
   static String routeName = '/Home';
   const HomeView({Key? key}) : super(key: key);
 
@@ -13,11 +13,11 @@ class HomeView extends clean_architecture.View {
   State<HomeView> createState() => HomeViewState();
 }
 
-class HomeViewState extends clean_architecture.ViewState<HomeView, HomeController> {
+class HomeViewState extends CleanViewState<HomeView, HomeController> {
   HomeViewState() : super(HomeController());
 
   @override
-  Widget get view => clean_architecture.ControlledWidgetBuilder<HomeController>(
+  Widget get view => ControlledWidgetBuilder<HomeController>(
         builder: (context, controller) {
           return Scaffold(
             key: globalKey,
